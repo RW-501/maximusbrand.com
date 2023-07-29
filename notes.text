@@ -391,3 +391,5 @@ Here's the suggested approach:
 
 
 
+<!-- products.html -->
+<button onclick="showPopup('This is a popup with some content.')">Show Popup</button>
