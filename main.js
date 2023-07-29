@@ -520,3 +520,39 @@ function slideOut(xxx,zzz) {
 }
 
 
+// Reusable popup function
+function showPopup(content) {
+  // Create the overlay div
+  var overlay = document.createElement('div');
+  overlay.setAttribute('id', 'popup-overlay');
+
+  // Create the popup container
+  var popupContainer = document.createElement('div');
+  popupContainer.setAttribute('id', 'popup-container');
+
+  // Create the popup content
+  var popupContent = document.createElement('div');
+  popupContent.setAttribute('id', 'popup-content');
+  popupContent.innerHTML = content;
+
+  // Append the content to the popup container
+  popupContainer.appendChild(popupContent);
+
+  // Append the popup container to the overlay
+  overlay.appendChild(popupContainer);
+
+  // Append the overlay to the body
+  document.body.appendChild(overlay);
+
+  // Close the popup when clicking outside the content
+  overlay.addEventListener('click', function (event) {
+    if (event.target === overlay) {
+      closePopup();
+    }
+  });
+
+  // Function to close the popup
+  function closePopup() {
+    document.body.removeChild(overlay);
+  }
+}
