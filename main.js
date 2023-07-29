@@ -556,3 +556,51 @@ function showPopup(content) {
     document.body.removeChild(overlay);
   }
 }
+
+
+
+
+
+
+
+
+// Function to show global error message
+function showErrorBar(message, errorCode) {
+  const errorBar = document.getElementById('error-bar');
+  if (!errorBar) {
+    // Create the error bar if it doesn't exist
+    const errorBarDiv = document.createElement('div');
+    errorBarDiv.setAttribute('id', 'error-bar');
+    document.body.appendChild(errorBarDiv);
+  }
+
+  const errorBarContent = document.createElement('div');
+  errorBarContent.setAttribute('id', 'error-bar-content');
+
+  const errorMessage = document.createElement('span');
+  errorMessage.textContent = message;
+
+  const errorCodeSpan = document.createElement('span');
+  errorCodeSpan.textContent = `Error Code: ${errorCode}`;
+
+  const closeButton = document.createElement('button');
+  closeButton.textContent = 'Close';
+  closeButton.onclick = function () {
+    hideErrorBar();
+  };
+
+  errorBarContent.appendChild(errorMessage);
+  errorBarContent.appendChild(errorCodeSpan);
+  errorBarContent.appendChild(closeButton);
+
+  errorBar.innerHTML = ''; // Clear previous content
+  errorBar.appendChild(errorBarContent);
+}
+
+// Function to hide global error message bar
+function hideErrorBar() {
+  const errorBar = document.getElementById('error-bar');
+  if (errorBar) {
+    errorBar.style.display = 'none';
+  }
+}
