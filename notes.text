@@ -71,4 +71,46 @@ Sure! Let's rewrite the website setup logic to incorporate Firebase Firestore fo
    - Back to Top button (optional)
    - Footer with contact information and social media links
 
-By using Firebase Firestore for the database connection, your website can leverage the power of cloud-based data storage and real-time synchronization, allowing seamless interactions with users while maintaining a modern and stylish interface.
+
+
+
+
+To ensure that your website loads smoothly and provides a seamless user experience, it's a good practice to implement the loading screen, overlay, image resolution, and slide-in/slide-out transitions across all pages. You can achieve this by adding the necessary JavaScript code from `main.js` to each page where these functionalities are needed.
+
+Here's the suggested approach:
+
+1. `main.js`: Keep all the common functions and configurations in `main.js`, including the loading screen, overlay, image resolution, and slide-in/slide-out transitions.
+
+2. `index.html` (Home Page):
+   - Include a reference to `main.js` at the end of the `body` tag.
+   - In the `script` section of `index.html`, call the `loadScreenFunc()` to show the loading screen and overlay.
+   - Inside the `window.onload` function, call `removeOverlayWithTimer()` to remove the loading screen after the page has finished loading.
+
+3. `products.html` (Product Catalog Page):
+   - Include a reference to `main.js` at the end of the `body` tag.
+   - In the `script` section of `products.html`, call the `loadScreenFunc()` to show the loading screen and overlay.
+   - Inside the `window.onload` function, call `removeOverlayWithTimer()` to remove the loading screen after the page has finished loading.
+   - Implement the image resolution conversion for images on this page using the `convertImagesToLowResolution()` function.
+
+4. `product.html` (Product Detail Page):
+   - Include a reference to `main.js` at the end of the `body` tag.
+   - In the `script` section of `product.html`, call the `loadScreenFunc()` to show the loading screen and overlay.
+   - Inside the `window.onload` function, call `removeOverlayWithTimer()` to remove the loading screen after the page has finished loading.
+   - Implement the image resolution conversion for images on this page using the `convertImagesToLowResolution()` function.
+
+5. `cart.html` (Cart Page):
+   - Include a reference to `main.js` at the end of the `body` tag.
+   - In the `script` section of `cart.html`, call the `loadScreenFunc()` to show the loading screen and overlay.
+   - Inside the `window.onload` function, call `removeOverlayWithTimer()` to remove the loading screen after the page has finished loading.
+   - Implement the image resolution conversion for images on this page using the `convertImagesToLowResolution()` function.
+
+6. `checkout.html` (Checkout Page):
+   - Include a reference to `main.js` at the end of the `body` tag.
+   - In the `script` section of `checkout.html`, call the `loadScreenFunc()` to show the loading screen and overlay.
+   - Inside the `window.onload` function, call `removeOverlayWithTimer()` to remove the loading screen after the page has finished loading.
+   - Implement the image resolution conversion for images on this page using the `convertImagesToLowResolution()` function.
+
+7. Other Pages (e.g., `gallery.html`, `contact.html`, `blog.html`, etc.):
+   - Follow a similar pattern as the previous pages. Include a reference to `main.js`, call `loadScreenFunc()`, and use the necessary functions for image resolution and transitions.
+
+By incorporating these functions and techniques on each page, you can ensure a consistent user experience throughout your website, with the loading screen, overlay, image resolution optimization, and slide-in/slide-out transitions applied wherever needed.
