@@ -393,3 +393,16 @@ Here's the suggested approach:
 
 <!-- products.html -->
 <button onclick="showPopup('This is a popup with some content.')">Show Popup</button>
+
+
+
+// An example where an error occurs
+function fetchDataFromServer() {
+  // Simulate an error
+  const errorMessage = "Failed to fetch data from the server.";
+  const errorCode = 500;
+
+  // Show the error message in the global error bar
+  showErrorBar(errorMessage, errorCode);
+}
+
