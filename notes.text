@@ -364,4 +364,30 @@ Here's the suggested approach:
 7. Other Pages (e.g., `gallery.html`, `contact.html`, `blog.html`, etc.):
    - Follow a similar pattern as the previous pages. Include a reference to `main.js`, call `loadScreenFunc()`, and use the necessary functions for image resolution and transitions.
 
-By incorporating these functions and techniques on each page, you can ensure a consistent user experience throughout your website, with the loading screen, overlay, image resolution optimization, and slide-in/slide-out transitions applied wherever needed.
+
+
+
+<!-- index.html -->
+<header id="navbar"></header>
+<script>
+  fetch('partials/navbar.html')
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById('navbar').innerHTML = data;
+    });
+</script>
+
+
+
+<!-- index.html -->
+<footer id="footer"></footer>
+<script>
+  fetch('partials/footer.html')
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
+
+
+
