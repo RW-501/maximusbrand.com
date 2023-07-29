@@ -74,3 +74,48 @@ footer a {
 #popup-content {
   /* Customize the popup content styles here */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Global Error Message Bar Styles */
+
+#error-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ff0000; /* Red background color for the error bar */
+  color: #ffffff; /* White text color for the error message */
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#error-bar-content {
+  display: flex;
+  align-items: center;
+}
+
+#error-bar span {
+  margin-right: 10px;
+}
+
+#error-bar button {
+  background-color: transparent;
+  border: none;
+  color: #ffffff; /* White text color for the close button */
+  cursor: pointer;
+}
