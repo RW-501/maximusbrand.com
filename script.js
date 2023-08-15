@@ -166,13 +166,12 @@ productsData.sort(compareProducts);
         modal.style.display = "block";
 
         closeButton.addEventListener("click", closeModal);
-    }
-
+ 
         function closeModal() {
             modal.style.display = "none";
             closeButton.removeEventListener("click", closeModal);
         }
-
+   }
 
     
 });
