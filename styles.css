@@ -64,11 +64,14 @@ nav {
 
 /* About Section Styling */
 #aboutText {
-    max-width: 800px;
-    margin: 0 auto;
+max-width: 800px;
+    margin: 10% auto;
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #777;
+    color: #cbcbcb;
+    background-color: #565656;
+    padding: 2%;
+    border-radius: 10px;
 }
 
 /* Products Section Styling */
@@ -138,7 +141,7 @@ nav {
 .image-card img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
 }
 
 /* Footer Styling */
