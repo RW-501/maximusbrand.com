@@ -127,6 +127,8 @@ nav {
     overflow: hidden;
     transition: transform 0.2s ease;
         writing-mode: vertical-rl;
+        background-color: #393939d9;
+
 }
 
 .image-card:hover {
