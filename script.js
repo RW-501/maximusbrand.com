@@ -304,6 +304,7 @@ function openProductPopup(product) {
 
    const miniGallery = modalContent.querySelector("#miniGallery");
 
+    if(product){
     // Add additional images to the mini-gallery
     product.images.forEach(imageUrl => {
         const miniImage = document.createElement("img");
@@ -311,7 +312,7 @@ function openProductPopup(product) {
         miniImage.alt = "Product Image";
         miniGallery.appendChild(miniImage);
     });
-
+    }
 
 
     
@@ -319,20 +320,22 @@ function openProductPopup(product) {
     const ctaButton = modalContent.querySelector(".cta-button");
     ctaButton.addEventListener("click", () => {
         // Implement your add to cart logic here
-        console.log("Added to cart:", product);
+      //  console.log("Added to cart:", product);
     });
 
-    // Close the modal when the close button is clicked
+  
+
+
+  // Close the modal when the close button is clicked
     const closeButton = modal.querySelector(".close-button");
     closeButton.addEventListener("click", () => {
         modal.style.display = "none";
+                console.log("close");
+
         ctaButton.removeEventListener("click", () => {});
     });
-}
-
-
  
-
+}
     // Sample JSON data for about section
     const aboutText = "Maximus Brand, a dynamic Clothing and Accessories subsidiary of TechNoob, is committed to offering high-quality and fashionable products that cater to the unique fashion sense of our customers. From casual wear to formal attire, we offer a wide range of clothing and accessories suitable for any occasion. Stay up-to-date with our latest collections and releases by visiting our website, MaximusBrand.com. Experience the epitome of style and comfort with Maximus Brand.";
 
@@ -353,10 +356,13 @@ function openProductPopup(product) {
         closeButton.addEventListener("click", closeModal);
  
         function closeModal() {
+                            console.log("close");
+
             modal.style.display = "none";
             closeButton.removeEventListener("click", closeModal);
         }
-   }
+
+
 
     
 });
