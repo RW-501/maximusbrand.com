@@ -156,6 +156,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Rest of your code...
 });
+    function openModal(imageUrl, index) {
+        const modal = document.getElementById("imageModal");
+        const modalImage = document.getElementById("modalImage");
+        const closeButton = document.querySelector(".close-button");
 
+        modalImage.src = imageUrl;
+        modal.style.display = "block";
+
+        closeButton.addEventListener("click", closeModal);
+
+        function closeModal() {
+            modal.style.display = "none";
+            closeButton.removeEventListener("click", closeModal);
+        }
+    }
    
 });
