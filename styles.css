@@ -68,6 +68,28 @@ nav {
     padding: 60px 0;
     text-align: center;
 }
+/* Styling for Sort Buttons */
+.sort-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sort-buttons button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sort-buttons button:hover {
+    background-color: #b30000;
+}
 
 /* About Section Styling */
 #aboutText {
