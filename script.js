@@ -226,13 +226,13 @@ function truncateString(str, maxLength) {
     }
     return str;
 }
+    productsData.sort(randomLikeSort);
 
 // Function to render the product grid
 function renderProductGrid() {
     const productGrid = document.getElementById("productGrid");
     productGrid.innerHTML = "";
 
-    productsData.sort(randomLikeSort);
 
     productsData.forEach((product, index) => {
         const truncatedDescription = truncateString(product.description, 80);
