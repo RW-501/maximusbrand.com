@@ -47,8 +47,6 @@ function randomLikeSort(a, b) {
 
 
 
-    
-document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for gallery images (replace with your actual image URLs)
     const imageGalleryData = [
         "/gallery/16.jpg",
@@ -145,8 +143,8 @@ productsData.sort(compareProducts);
         // Implement your popup logic here
         console.log("Open product popup:", product);
     }
-});
 
+ 
 
 document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for about section
@@ -159,3 +157,5 @@ document.addEventListener("DOMContentLoaded", () => {
     // Rest of your code...
 });
 
+   
+});
