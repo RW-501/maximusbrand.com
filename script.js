@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
      
         // Add more image URLs here
     ];
-     const  imageGalleryData.sort(imageGalleryDataArray);
+     const  imageGalleryData.sort(randomLikeSort);
 
     const imageGalleryHome = document.getElementById("imageGalleryHome");
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "/gallery/30.jpg",
 
     ];
-     const  imageGalleryData.sort(galleryDataArray);
+     const  imageGalleryData.sort(randomLikeSort);
 
     const imageGallery = document.getElementById("imageGallery");
 
