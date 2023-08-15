@@ -148,7 +148,6 @@ productsData.sort(compareProducts);
 
  
 
-document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for about section
     const aboutText = "Maximus Brand, a dynamic Clothing and Accessories subsidiary of TechNoob, is committed to offering high-quality and fashionable products that cater to the unique fashion sense of our customers. From casual wear to formal attire, we offer a wide range of clothing and accessories suitable for any occasion. Stay up-to-date with our latest collections and releases by visiting our website, MaximusBrand.com. Experience the epitome of style and comfort with Maximus Brand.";
 
@@ -157,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     aboutParagraph.textContent = aboutText;
 
     // Rest of your code...
-});
+
     function openModal(imageUrl, index) {
         const modal = document.getElementById("imageModal");
         const modalImage = document.getElementById("modalImage");
@@ -167,11 +166,13 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "block";
 
         closeButton.addEventListener("click", closeModal);
+    }
 
         function closeModal() {
             modal.style.display = "none";
             closeButton.removeEventListener("click", closeModal);
         }
-    }
-   
+
+
+    
 });
