@@ -126,6 +126,7 @@ nav {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.2s ease;
+        writing-mode: vertical-rl;
 }
 
 .image-card:hover {
