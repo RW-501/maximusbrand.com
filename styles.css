@@ -101,7 +101,7 @@ nav {
     background-color: #565656;
     padding: 2%;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px -2px 6px 0px rgb(35 22 22 / 76%);
 }
 
 /* Products Section Styling */
@@ -223,7 +223,17 @@ footer {
     color: white;
     cursor: pointer;
 }
-.details-price{ font-weight: 800; background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; }
+.details-price {
+    font-weight: 900;
+    background-color: red;
+    color: #4b4c4d!important;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 2.0em !important;
+}
+
+
 /* Product Detail Modal Styling */
 #productDetailModal {
     display: none;
@@ -245,6 +255,12 @@ footer {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
+    box-shadow: 0px -2px 6px 0px rgb(35 22 22 / 76%);
+}
+.product-detail H3{
+    font-size: 2.0em !important;
+    font-weight: 900;
+
 }
 
 .product-detail img {
