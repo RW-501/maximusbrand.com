@@ -2,8 +2,12 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for gallery images (replace with your actual image URLs)
+    // Function to achieve a random-like sort using the sort() method
+function randomLikeSort(a, b) {
+    return Math.random() - 0.5; // Returns a random number between -0.5 and 0.5
+}
 
-    const imageGalleryData = [
+    const imageGalleryHomeData = [
         "/gallery/1.jpg",
         "/gallery/2.jpg",
         "/gallery/3.jpg",
@@ -23,17 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add more image URLs here
     ];
 
-    // Function to achieve a random-like sort using the sort() method
-function randomLikeSort(a, b) {
-    return Math.random() - 0.5; // Returns a random number between -0.5 and 0.5
-}
 
 
-       imageGalleryData.sort(randomLikeSort);
+       imageGalleryHomeData.sort(randomLikeSort);
 
     const imageGalleryHome = document.getElementById("imageGalleryHome");
 
-    imageGalleryData.forEach(imageHomeUrl => {
+    imageGalleryHomeData.forEach(imageHomeUrl => {
         const imageHomeCard = document.createElement("div");
         imageHomeCard.classList.add("image-card");
 
