@@ -1,8 +1,3 @@
-// Function to achieve a random-like sort using the sort() method
-function randomLikeSort(a, b) {
-    return Math.random() - 0.5; // Returns a random number between -0.5 and 0.5
-}
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
      
         // Add more image URLs here
     ];
+
+    // Function to achieve a random-like sort using the sort() method
+function randomLikeSort(a, b) {
+    return Math.random() - 0.5; // Returns a random number between -0.5 and 0.5
+}
+
+
        imageGalleryData.sort(randomLikeSort);
 
     const imageGalleryHome = document.getElementById("imageGalleryHome");
