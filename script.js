@@ -353,16 +353,22 @@ function openProductPopup(product) {
         modalImage.src = imageUrl;
         modal.style.display = "block";
 
-        closeButton.addEventListener("click", closeModal);
- 
-        function closeModal() {
-                            console.log("close");
+  // Close the modal when the close button is clicked
+    const closeButton = modal.querySelector(".close-button");
+    closeButton.addEventListener("click", () => {
+        modal.style.display = "none";
+                console.log("close");
 
-            modal.style.display = "none";
-            closeButton.removeEventListener("click", closeModal);
-        }
+        closeButton.removeEventListener("click", () => {});
+    });
 
     }
+
+
+}
+
+
+
 
     
 });
