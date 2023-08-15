@@ -147,7 +147,7 @@ function randomLikeSort(a, b) {
              {
             name: "Leather French Beret  ",
             image: "https://i.etsystatic.com/23152276/r/il/dfd3a1/5141968318/il_794xN.5141968318_csx9.jpg",
-            description: "The adjustable drawstring tie closure allows you to customize the circumference of the beret, accommodating head sizes from 21.6" to 22.4" (55-57cm).",
+            description: "The adjustable drawstring tie closure allows you to customize the circumference of the beret, accommodating head sizes from 21.6 to 22.4 (55-57cm).",
             price: "$15.99",
             url:"https://www.etsy.com/listing/1534856951/retro-elegance-pu-leather-french-beret?click_key=02cfe612252d66990a6fd1230b8f7d041f913540%3A1534856951&click_sum=fe5038a0&ref=shop_home_active_5",
             images: [
