@@ -362,7 +362,7 @@ function openProductPopup(product) {
             closeButton.removeEventListener("click", closeModal);
         }
 
-
+    }
 
     
 });
