@@ -35,7 +35,7 @@ function randomLikeSort(a, b) {
 
     imageGalleryData.forEach(imageHomeUrl => {
         const imageHomeCard = document.createElement("div");
-        imageCard.classList.add("image-card");
+        imageHomeCard.classList.add("image-card");
 
         const imageHome = document.createElement("img");
         imageHome.src = imageHomeUrl;
