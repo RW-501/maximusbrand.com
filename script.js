@@ -348,13 +348,12 @@ function openProductPopup(product) {
     function openModal(imageUrl, index) {
         const modal = document.getElementById("imageModal");
         const modalImage = document.getElementById("modalImage");
-        const closeButton = document.querySelector(".close-button");
+        let closeButton = document.querySelector(".close-button");
 
         modalImage.src = imageUrl;
         modal.style.display = "block";
 
-  // Close the modal when the close button is clicked
-    let closeButton = modal.querySelector(".close-button");
+
     closeButton.addEventListener("click", () => {
         modal.style.display = "none";
                 console.log("close");
