@@ -160,8 +160,8 @@ body {
     font-size: 2.5rem;
     text-transform: uppercase;
     letter-spacing: 3px;
-    font-weight: bold;
     transition: color 0.3s ease;
+        font-weight: 900;
 }
 
 .header-logo:hover {
@@ -183,6 +183,7 @@ body {
     font-size: 2rem;
     margin-bottom: 20px;
     color: red;
+        font-weight: 900;
 }
 
 .content {
