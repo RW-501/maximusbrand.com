@@ -336,11 +336,26 @@ function openProductPopup(index) {
 }
 
     // Sample JSON data for about section
-    const aboutText = "Maximus Brand, a dynamic Clothing and Accessories subsidiary of TechNoob, is committed to offering high-quality and fashionable products that cater to the unique fashion sense of our customers. From casual wear to formal attire, we offer a wide range of clothing and accessories suitable for any occasion. Stay up-to-date with our latest collections and releases by visiting our website, MaximusBrand.com. Experience the epitome of style and comfort with Maximus Brand.";
+// Function to simulate typewriter effect
+function typeWriterEffect(element, text, speed) {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+        }
+    }, speed);
+}
 
-    // Populate About Us text using JSON
-    const aboutParagraph = document.getElementById("aboutText");
-    aboutParagraph.textContent = aboutText;
+// About text content
+const aboutText = "Maximus Brand, a dynamic Clothing and Accessories subsidiary of TechNoob, is committed to offering high-quality and fashionable products that cater to the unique fashion sense of our customers. From casual wear to formal attire, we offer a wide range of clothing and accessories suitable for any occasion. Stay up-to-date with our latest collections and releases by visiting our website, MaximusBrand.com. Experience the epitome of style and comfort with Maximus Brand.";
+
+// Populate About Us text using typewriter effect
+const aboutParagraph = document.getElementById("aboutText");
+typeWriterEffect(aboutParagraph, aboutText, 50);
+
 
     // Rest of your code...
 
