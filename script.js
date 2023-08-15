@@ -8,7 +8,7 @@ function randomLikeSort(a, b) {
 document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for gallery images (replace with your actual image URLs)
 
-    const imageGalleryDataArray = [
+    const imageGalleryData = [
         "/gallery/1.jpg",
         "/gallery/2.jpg",
         "/gallery/3.jpg",
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
      
         // Add more image URLs here
     ];
-     const  imageGalleryData.sort(randomLikeSort);
+       imageGalleryData.sort(randomLikeSort);
 
     const imageGalleryHome = document.getElementById("imageGalleryHome");
 
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for gallery images (replace with your actual image URLs)
-    const galleryDataArray = [
+    const imageGalleryData = [
         "/gallery/16.jpg",
         "/gallery/17.jpg",
         "/gallery/18.jpg",
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "/gallery/30.jpg",
 
     ];
-     const  imageGalleryData.sort(randomLikeSort);
+       imageGalleryData.sort(randomLikeSort);
 
     const imageGallery = document.getElementById("imageGallery");
 
