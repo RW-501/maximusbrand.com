@@ -62,10 +62,23 @@ nav {
 .nav-links a:hover {
     color: red;
 }
+.fab, .far {
+    font-weight: 600;
+    font-size: 2.5em;
+    color: white;
+
+}
+footer a{
+
+    font-weight: 600;
+    font-size: 2.5em;
+    color: white;
+
+}
 
 /* Section Styling */
 .section {
-    padding: 60px 0;
+    padding: 60px 50px;
     text-align: center;
 }
 /* Styling for Sort Buttons */
@@ -85,11 +98,19 @@ nav {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+        box-shadow: 0px -2px 6px 0px rgb(35 22 22 / 76%);
+
 }
 
 .sort-buttons button:hover {
     background-color: #b30000;
 }
+#products h2{
+    font-weight: 600;
+    font-size: 2em;
+
+}
+
 
 /* About Section Styling */
 #aboutText {
