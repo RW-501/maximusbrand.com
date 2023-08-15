@@ -364,10 +364,5 @@ function openProductPopup(product) {
     }
 
 
-}
-
-
-
-
     
 });
