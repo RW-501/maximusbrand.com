@@ -124,7 +124,7 @@ function randomLikeSort(a, b) {
             name: "Stylish and Sexy Lace Boyshorts ",
             image: "https://i.etsystatic.com/23152276/r/il/26a533/3001879773/il_794xN.3001879773_p32n.jpg",
             description: "Discover the perfect blend of style and comfort with our Lace Boyshorts Bikini Panties. The elegant combination of sheer mesh and lace creates a beautiful pattern, offering a feminine look that you'll love. These panties are comfortable to wear and come with an uncovering back to give you a stylish edge.",
-            price: "12.99",
+            price: "$12.99",
             url:"https://www.etsy.com/listing/970415618/womens-plus-size-underwear-stylish-and?click_key=2ce20f15f12c57b0a37b85ae0fd964d6400b7b5b%3A970415618&click_sum=c2548ed6&ref=listing-free-shipping-bundle-1",
             images: [
             "https://i.etsystatic.com/23152276/r/il/8fd6bd/3001870045/il_794xN.3001870045_h9ef.jpg",
@@ -136,7 +136,7 @@ function randomLikeSort(a, b) {
             name: "Sexy Geometric Lace Thong Panties ",
             image: "https://i.etsystatic.com/23152276/r/il/527e6c/5189414687/il_794xN.5189414687_8b0n.jpg",
             description: "Sustainable, Sexy, and Shamelessly Stylish! One size",
-            price: "$49.99",
+            price: "$9.99",
             url:"https://www.etsy.com/listing/1520497972/new-sexy-geometric-lace-thong-panties?click_key=57a128d77b7203695a72da2ef26f97af2639e903%3A1520497972&click_sum=9fd5550e&ref=listing-free-shipping-bundle-1",
             images: [
             "https://i.etsystatic.com/23152276/r/il/c3cab2/5141197230/il_794xN.5141197230_c09z.jpg",
@@ -290,7 +290,7 @@ function openProductPopup(product) {
             <h3>${product.name}</h3>
             <img src="${product.image}" alt="${product.name}">
             <p>${product.description}</p>
-            <p  class="details-price">$${product.price}</p>
+            <p  class="details-price">${product.price}</p>
             <div class="mini-gallery" id="miniGallery">
                 <!-- Additional images will be loaded here dynamically -->
             </div>
