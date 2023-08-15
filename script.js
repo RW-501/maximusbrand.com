@@ -287,10 +287,10 @@ function openProductPopup(product) {
 
     const productDetail = `
         <div class="product-detail">
-            <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
+            <img src="${product.image}" alt="${product.name}">
             <p>${product.description}</p>
-            <p>${product.price}</p>
+            <p  class="details-price">$${product.price}</p>
             <div class="mini-gallery" id="miniGallery">
                 <!-- Additional images will be loaded here dynamically -->
             </div>
