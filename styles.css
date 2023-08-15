@@ -105,7 +105,7 @@ footer a{
 .sort-buttons button:hover {
     background-color: #b30000;
 }
-#products h2{
+.section h2{
     font-weight: 600;
     font-size: 2em;
 
