@@ -197,40 +197,82 @@ function randomLikeSort(a, b) {
         
         // Add more product data here
     ];
-// Custom comparison function to sort by price then name
-function compareProducts(a, b) {
-    const priceA = parseFloat(a.price.replace("$", ""));
-    const priceB = parseFloat(b.price.replace("$", ""));
 
-    // Sort by price
-    if (priceA < priceB) {
-        return -1;
-    }
-    if (priceA > priceB) {
-        return 1;
-    }
+    
 
-    // If prices are equal, sort by name
-    return a.name.localeCompare(b.name);
+
+    
+    // Sort A-Z button event listener
+    const sortAZButton = document.getElementById("sortAZ");
+    sortAZButton.addEventListener("click", () => {
+        productsData.sort(compareProductsByName);
+        renderProductGrid();
+    });
+
+    // Sort Price High to Low button event listener
+    const sortPriceHLButton = document.getElementById("sortPriceHL");
+    sortPriceHLButton.addEventListener("click", () => {
+        productsData.sort(compareProductsByPriceHL);
+        renderProductGrid();
+    });
+
+    // Initial rendering of product grid
+    renderProductGrid();
+
+// Function to truncate a string and add "..." after a specified length
+function truncateString(str, maxLength) {
+    if (str.length > maxLength) {
+        return str.substring(0, maxLength - 3) + "...";
+    }
+    return str;
 }
 
-// Sort the productsData array using the custom comparison function
-productsData.sort(compareProducts);
+// Function to render the product grid
+function renderProductGrid() {
     const productGrid = document.getElementById("productGrid");
+    productGrid.innerHTML = "";
+
+    productsData.sort(randomLikeSort);
 
     productsData.forEach((product, index) => {
+        const truncatedDescription = truncateString(product.description, 120);
         const productCard = document.createElement("div");
         productCard.classList.add("product-card");
-productCard.innerHTML = `
+   productCard.innerHTML = `
     <img src="${product.image}" alt="${product.name}">
     <h3>${product.name}</h3>
-    <p>${product.description}</p>
+            <p>${truncatedDescription}</p>
     <p>${product.price}</p>
     <button class="view-details" data-index="${index}">View Details</button>
 `;
 
         productGrid.appendChild(productCard);
     });
+
+    // Add event listeners for product detail popups
+    const viewDetailButtons = document.querySelectorAll(".view-details");
+    viewDetailButtons.forEach(button => {
+        button.addEventListener("click", () => openProductPopup(button.getAttribute("data-index")));
+    });
+}
+
+// Custom comparison function to sort products by name (A-Z)
+function compareProductsByName(a, b) {
+    return a.name.localeCompare(b.name);
+}
+
+// Custom comparison function to sort products by price (high to low)
+function compareProductsByPriceHL(a, b) {
+    const priceA = parseFloat(a.price.replace("$", ""));
+    const priceB = parseFloat(b.price.replace("$", ""));
+
+    return priceB - priceA;
+}
+
+
+
+
+    
 
     // Add event listeners for product detail popups
     const viewDetailButtons = document.querySelectorAll(".view-details");
