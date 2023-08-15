@@ -124,13 +124,14 @@ productsData.sort(compareProducts);
     productsData.forEach(product => {
         const productCard = document.createElement("div");
         productCard.classList.add("product-card");
-        productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <p>${product.price}</p>
-            <button class="view-details">View Details</button>
-        `;
+productCard.innerHTML = `
+    <img src="${product.image}" alt="${product.name}">
+    <h3>${product.name}</h3>
+    <p>${product.description}</p>
+    <p>${product.price}</p>
+    <button class="view-details" data-index="${index}">View Details</button>
+`;
+
         productGrid.appendChild(productCard);
     });
 
@@ -141,10 +142,38 @@ productsData.sort(compareProducts);
     });
 
     // Function to open product detail popup
-    function openProductPopup(product) {
-        // Implement your popup logic here
-        console.log("Open product popup:", product);
-    }
+function openProductPopup(product) {
+    const modal = document.getElementById("productDetailModal");
+    const modalContent = document.getElementById("modalContent");
+
+    const productDetail = `
+        <div class="product-detail">
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <p>${product.price}</p>
+            <button class="cta-button">Add to Cart</button>
+        </div>
+    `;
+
+    modalContent.innerHTML = productDetail;
+    modal.style.display = "block";
+
+    // Add event listener for the CTA button
+    const ctaButton = modalContent.querySelector(".cta-button");
+    ctaButton.addEventListener("click", () => {
+        // Implement your add to cart logic here
+        console.log("Added to cart:", product);
+    });
+
+    // Close the modal when the close button is clicked
+    const closeButton = modal.querySelector(".close-button");
+    closeButton.addEventListener("click", () => {
+        modal.style.display = "none";
+        ctaButton.removeEventListener("click", () => {});
+    });
+}
+
 
  
 
