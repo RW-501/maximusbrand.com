@@ -33,9 +33,10 @@ function randomLikeSort(a, b) {
 
     const imageGalleryHome = document.getElementById("imageGalleryHome");
 
-    imageGalleryHomeData.forEach(imageHomeUrl => {
+    imageGalleryHomeData.forEach((imageHomeUrl ,index) => {
         const imageHomeCard = document.createElement("div");
         imageHomeCard.classList.add("image-card");
+        imageHomeCard.addEventListener("click", () => openModal(imageHomeUrl, index));
 
         const imageHome = document.createElement("img");
         imageHome.src = imageHomeUrl;
@@ -70,9 +71,10 @@ function randomLikeSort(a, b) {
 
     const imageGallery = document.getElementById("imageGallery");
 
-    imageGalleryData.forEach(imageUrl => {
+    imageGalleryData.forEach((imageUrl ,index) => {
         const imageCard = document.createElement("div");
         imageCard.classList.add("image-card");
+        imageCard.addEventListener("click", () => openModal(imageUrl, index));
 
         const image = document.createElement("img");
         image.src = imageUrl;
