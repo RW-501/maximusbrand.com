@@ -87,17 +87,76 @@ function randomLikeSort(a, b) {
     // Sample JSON data for products
     const productsData = [
         {
-            name: "Product 1",
-            image: "product1.jpg",
-            description: "Product 1 description goes here.",
-            price: "$49.99"
+            name: "Black Lives Matter Flag ",
+            image: "https://i.etsystatic.com/23152276/r/il/0e1b48/2745749046/il_1140xN.2745749046_g4ps.jpg",
+            description: "Show your support for the Black Lives Matter movement with this high-quality 3x5 flag made of durable 68D polyester material. ",
+            price: "$12.99",
+            url:"https://www.etsy.com/listing/914493552/black-lives-matter-flag-3x5-high-quality"
         },
         {
-            name: "Product 2",
+            name: "Product ",
             image: "product2.jpg",
-            description: "Product 2 description goes here.",
-            price: "$39.99"
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
         },
+                {
+            name: "Product ",
+            image: "product2.jpg",
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
+        },
+                {
+            name: "Product ",
+            image: "product2.jpg",
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
+        },
+                {
+            name: "Product ",
+            image: "product2.jpg",
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
+        },
+                {
+            name: "Product ",
+            image: "product2.jpg",
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
+        },
+                {
+            name: "Product ",
+            image: "product2.jpg",
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
+        },
+                {
+            name: "Product ",
+            image: "product2.jpg",
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
+        },
+                {
+            name: "Product ",
+            image: "product2.jpg",
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
+        },
+                {
+            name: "Product ",
+            image: "product2.jpg",
+            description: "Product",
+            price: "$49.99",
+            url:"kkkkk"
+        },
+        
         // Add more product data here
     ];
 // Custom comparison function to sort by price then name
@@ -121,7 +180,7 @@ function compareProducts(a, b) {
 productsData.sort(compareProducts);
     const productGrid = document.getElementById("productGrid");
 
-    productsData.forEach(product => {
+    productsData.forEach((product, index) => {
         const productCard = document.createElement("div");
         productCard.classList.add("product-card");
 productCard.innerHTML = `
@@ -152,7 +211,7 @@ function openProductPopup(product) {
             <h3>${product.name}</h3>
             <p>${product.description}</p>
             <p>${product.price}</p>
-            <button class="cta-button">Add to Cart</button>
+            <a href="${product.url}" class="cta-button">Get It</a>
         </div>
     `;
 
