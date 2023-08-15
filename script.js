@@ -249,6 +249,11 @@ function renderProductGrid() {
         productGrid.appendChild(productCard);
     });
 
+
+
+
+    
+
     // Add event listeners for product detail popups
     const viewDetailButtons = document.querySelectorAll(".view-details");
     viewDetailButtons.forEach(button => {
@@ -274,23 +279,24 @@ function compareProductsByPriceHL(a, b) {
 
     
 
-    // Add event listeners for product detail popups
-    const viewDetailButtons = document.querySelectorAll(".view-details");
-    viewDetailButtons.forEach((button, index) => {
-        button.addEventListener("click", () => openProductPopup(productsData[index]));
-    });
+// Add event listeners for product detail popups
+const viewDetailButtons = document.querySelectorAll(".view-details");
+viewDetailButtons.forEach(button => {
+    button.addEventListener("click", () => openProductPopup(button.getAttribute("data-index")));
+});
 
-    // Function to open product detail popup
-function openProductPopup(product) {
+// Function to open product detail popup
+function openProductPopup(index) {
     const modal = document.getElementById("productDetailModal");
     const modalContent = document.getElementById("modalContent");
+    const product = productsData[index]; // Get the product data based on the index
 
     const productDetail = `
         <div class="product-detail">
             <h3>${product.name}</h3>
             <img src="${product.image}" alt="${product.name}">
             <p>${product.description}</p>
-            <p  class="details-price">${product.price}</p>
+            <p class="details-price">${product.price}</p>
             <div class="mini-gallery" id="miniGallery">
                 <!-- Additional images will be loaded here dynamically -->
             </div>
@@ -301,41 +307,34 @@ function openProductPopup(product) {
     modalContent.innerHTML = productDetail;
     modal.style.display = "block";
 
+    const miniGallery = modalContent.querySelector("#miniGallery");
 
-   const miniGallery = modalContent.querySelector("#miniGallery");
-
-    if(product){
-    // Add additional images to the mini-gallery
-    product.images.forEach(imageUrl => {
-        const miniImage = document.createElement("img");
-        miniImage.src = imageUrl;
-        miniImage.alt = "Product Image";
-        miniGallery.appendChild(miniImage);
-    });
+    if (product.images) {
+        // Add additional images to the mini-gallery
+        product.images.forEach(imageUrl => {
+            const miniImage = document.createElement("img");
+            miniImage.src = imageUrl;
+            miniImage.alt = "Product Image";
+            miniGallery.appendChild(miniImage);
+        });
     }
 
-
-    
     // Add event listener for the CTA button
     const ctaButton = modalContent.querySelector(".cta-button");
     ctaButton.addEventListener("click", () => {
         // Implement your add to cart logic here
-      //  console.log("Added to cart:", product);
+        // console.log("Added to cart:", product);
     });
 
-  
-
-
-  // Close the modal when the close button is clicked
+    // Close the modal when the close button is clicked
     let closeButton = modal.querySelector(".close-button");
     closeButton.addEventListener("click", () => {
         modal.style.display = "none";
-                console.log("close");
-
+        console.log("close");
         ctaButton.removeEventListener("click", () => {});
     });
- 
 }
+
     // Sample JSON data for about section
     const aboutText = "Maximus Brand, a dynamic Clothing and Accessories subsidiary of TechNoob, is committed to offering high-quality and fashionable products that cater to the unique fashion sense of our customers. From casual wear to formal attire, we offer a wide range of clothing and accessories suitable for any occasion. Stay up-to-date with our latest collections and releases by visiting our website, MaximusBrand.com. Experience the epitome of style and comfort with Maximus Brand.";
 
