@@ -327,7 +327,7 @@ function openProductPopup(product) {
 
 
   // Close the modal when the close button is clicked
-    const closeButton = modal.querySelector(".close-button");
+    let closeButton = modal.querySelector(".close-button");
     closeButton.addEventListener("click", () => {
         modal.style.display = "none";
                 console.log("close");
@@ -354,7 +354,7 @@ function openProductPopup(product) {
         modal.style.display = "block";
 
   // Close the modal when the close button is clicked
-    const closeButton = modal.querySelector(".close-button");
+    let closeButton = modal.querySelector(".close-button");
     closeButton.addEventListener("click", () => {
         modal.style.display = "none";
                 console.log("close");
