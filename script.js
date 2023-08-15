@@ -235,7 +235,7 @@ function renderProductGrid() {
     productsData.sort(randomLikeSort);
 
     productsData.forEach((product, index) => {
-        const truncatedDescription = truncateString(product.description, 120);
+        const truncatedDescription = truncateString(product.description, 80);
         const productCard = document.createElement("div");
         productCard.classList.add("product-card");
    productCard.innerHTML = `
