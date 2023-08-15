@@ -8,7 +8,7 @@ function randomLikeSort(a, b) {
 }
 
     const imageGalleryHomeData = [
-        "/gallery/1.jpg",
+        "/gallery/1.jpeg",
         "/gallery/2.jpg",
         "/gallery/3.jpg",
         "/gallery/4.jpg",
