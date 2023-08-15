@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const imageGallery = document.getElementById("imageGallery");
 
-    galleryData.forEach(imageUrl => {
+    imageGalleryData.forEach(imageUrl => {
         const imageCard = document.createElement("div");
         imageCard.classList.add("image-card");
 
