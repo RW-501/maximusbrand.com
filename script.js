@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const imageGalleryHome = document.getElementById("imageGalleryHome");
 
     imageGalleryData.forEach(imageHomeUrl => {
-        const imageCard = document.createElement("div");
+        const imageHomeCard = document.createElement("div");
         imageCard.classList.add("image-card");
 
         const imageHome = document.createElement("img");
