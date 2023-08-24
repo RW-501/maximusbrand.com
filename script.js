@@ -80,6 +80,7 @@ function displayHomeGallery() {
     }, timeoutDuration);
 }
 
+displayHomeGallery();
 
     // Sample JSON data for gallery images (replace with your actual image URLs)
     const imageGalleryData = [
