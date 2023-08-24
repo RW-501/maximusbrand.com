@@ -65,6 +65,8 @@ function randomLikeSort(a, b) {
         "/gallery/28.jpg",
         "/gallery/29.jpg",
         "/gallery/30.jpg",
+        "/gallery/31.jpg",
+        "/gallery/32.jpg",
 
     ];
        imageGalleryData.sort(randomLikeSort);
