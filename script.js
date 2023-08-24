@@ -26,7 +26,7 @@ function randomLikeSort(a, b) {
      
         // Add more image URLs here
     ];
-
+var count = 0;
 
 function displayHomeGallery() {
     console.log("Displaying Home Gallery");
@@ -52,9 +52,11 @@ function displayHomeGallery() {
             // Check if all images have loaded
             if (loadedCount === imageGalleryHomeData.length) {
                 // All images have loaded, do something here if needed
+                if(count === 0){
                 console.log("All images have loaded");
                     showText();
-
+                count++;
+                }
             }
         };
 
