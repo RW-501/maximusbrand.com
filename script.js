@@ -8,6 +8,16 @@ function randomLikeSort(a, b) {
     return randomValue;
 }
 
+
+var count = 0;
+
+function displayHomeGallery() {
+    console.log("Displaying Home Gallery");
+
+    const imageGalleryHome = document.getElementById("imageGalleryHome");
+    imageGalleryHomeData.sort(randomLikeSort);
+
+    let loadedCount = 0; // Counter to track loaded images
     const imageGalleryHomeData = [
         "/gallery/1.jpeg",
         "/gallery/2.jpg",
@@ -26,16 +36,6 @@ function randomLikeSort(a, b) {
      
         // Add more image URLs here
     ];
-var count = 0;
-
-function displayHomeGallery() {
-    console.log("Displaying Home Gallery");
-
-    const imageGalleryHome = document.getElementById("imageGalleryHome");
-    imageGalleryHomeData.sort(randomLikeSort);
-
-    let loadedCount = 0; // Counter to track loaded images
-
     imageGalleryHomeData.forEach((imageHomeUrl, index) => {
         const imageHomeCard = document.createElement("div");
         imageHomeCard.classList.add("image-card");
