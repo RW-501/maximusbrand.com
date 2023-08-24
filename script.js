@@ -373,13 +373,14 @@ typeWriterEffect(aboutParagraph, aboutText, 50);
     });
 
     }
-document.addEventListener("DOMContentLoaded", () => {
-
+    
+    
+    
+    
+    document.addEventListener("DOMContentLoaded", () => {
     displayHomeGallery();
     showText();
     displayGallery();
     // Initial rendering of product grid
     renderProductGrid();
-
-    
 });
