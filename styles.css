@@ -192,8 +192,8 @@ footer a{
     flex-direction: column;
     gap: 2%;
     margin-top: 40px;
+    justify-content: center;
     flex-flow: wrap;
-
 }
 
 .image-card {
