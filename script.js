@@ -8,6 +8,7 @@ function randomLikeSort(a, b) {
     return randomValue;
 }
 
+    var imageGalleryHomeData = [];
 
 var count = 0;
 
@@ -18,7 +19,8 @@ function displayHomeGallery() {
     imageGalleryHomeData.sort(randomLikeSort);
 
     let loadedCount = 0; // Counter to track loaded images
-    const imageGalleryHomeData = [
+    
+     imageGalleryHomeData = [
         "/gallery/1.jpeg",
         "/gallery/2.jpg",
         "/gallery/3.jpg",
