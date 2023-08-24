@@ -249,7 +249,7 @@ function renderProductGrid() {
     <h3>${product.name}</h3>
             <p>${truncatedDescription}</p>
     <p>${product.price}</p>
-    <button class="view-details" data-product-index="${index}">View Details</button>
+    <button class="view-details" data-index="${index}">View Details</button>
 `;
 
         productGrid.appendChild(productCard);
@@ -282,7 +282,7 @@ function compareProductsByPriceHL(a, b) {
 // Add event listeners for product detail popups
 const viewDetailButtons = document.querySelectorAll(".view-details");
 viewDetailButtons.forEach(button => {
-    button.addEventListener("click", () => openProductPopup(button.getAttribute("data-product-index")));
+    button.addEventListener("click", () => openProductPopup(button.getAttribute("data-index")));
 });
 
 // Function to open product detail popup
