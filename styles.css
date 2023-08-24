@@ -187,14 +187,12 @@ footer a{
 
 /* Gallery Styling */
 .image-gallery {
-    /*
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    */
+    display: flex;
+    /* grid-template-columns: repeat(3, 1fr); */
+    flex-direction: column;
     gap: 20px;
-    
     margin-top: 40px;
-        display: flex;
+    flex-flow: wrap;
 
 }
 
@@ -209,7 +207,7 @@ footer a{
     position: relative;
     z-index: 1;
     display: block;
-    width: inherit;
+    width: 29%;
     box-sizing: content-box;
 }
 
