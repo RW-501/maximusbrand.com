@@ -4,7 +4,7 @@
     // Function to achieve a random-like sort using the sort() method
 function randomLikeSort(a, b) {
     const randomValue = Math.random() - 0.5;
-    console.log(`Comparing ${a} and ${b}. Random value: ${randomValue}`);
+  //  console.log(`Comparing ${a} and ${b}. Random value: ${randomValue}`);
     return randomValue;
 }
 
