@@ -30,7 +30,12 @@ nav {
     margin: 0 auto;
     padding: 0 20px;
 }
-
+@media (max-width: 768px) {
+    /* Apply these styles to the .nav element */
+    .nav {
+        display: block;
+    }
+}
 .logo {
     font-size: 2rem;
     font-weight: bold;
