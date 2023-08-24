@@ -3,7 +3,9 @@
     // Sample JSON data for gallery images (replace with your actual image URLs)
     // Function to achieve a random-like sort using the sort() method
 function randomLikeSort(a, b) {
-    return Math.random() - 0.5; // Returns a random number between -0.5 and 0.5
+    const randomValue = Math.random() - 0.5;
+    console.log(`Comparing ${a} and ${b}. Random value: ${randomValue}`);
+    return randomValue;
 }
 
     const imageGalleryHomeData = [
@@ -28,6 +30,7 @@ function randomLikeSort(a, b) {
 
 
 function displayHomeGallery(){
+    console.log("Displaying Home Gallery");
 
     const imageGalleryHome = document.getElementById("imageGalleryHome");
        imageGalleryHomeData.sort(randomLikeSort);
@@ -71,6 +74,7 @@ function displayHomeGallery(){
 
 function displayGallery(){
        imageGalleryData.sort(randomLikeSort);
+    console.log("Displaying Gallery");
 
     const imageGallery = document.getElementById("imageGallery");
 
@@ -235,6 +239,7 @@ function renderProductGrid() {
     const productGrid = document.getElementById("productGrid");
     productGrid.innerHTML = "";
 
+    console.log("Rendering Product Grid");
 
     productsData.forEach((product, index) => {
         const truncatedDescription = truncateString(product.description, 80);
@@ -283,6 +288,9 @@ viewDetailButtons.forEach(button => {
 
 // Function to open product detail popup
 function openProductPopup(index) {
+
+    console.log(`Opening Product Popup for product at index ${index}`);
+
     const modal = document.getElementById("productDetailModal");
     const modalContent = document.getElementById("modalContent");
     const product = productsData[index]; // Get the product data based on the index
@@ -346,7 +354,7 @@ function typeWriterEffect(element, text, speed) {
 }
 
     function showText(){
-// About text content
+    console.log("Showing About Text");
 const aboutText = "Maximus Brand, a dynamic Clothing and Accessories subsidiary of TechNoob, is committed to offering high-quality and fashionable products that cater to the unique fashion sense of our customers. From casual wear to formal attire, we offer a wide range of clothing and accessories suitable for any occasion. Stay up-to-date with our latest collections and releases by visiting our website, MaximusBrand.com. Experience the epitome of style and comfort with Maximus Brand.";
 
 // Populate About Us text using typewriter effect
@@ -360,6 +368,7 @@ typeWriterEffect(aboutParagraph, aboutText, 50);
         const modal = document.getElementById("imageModal");
         const modalImage = document.getElementById("modalImage");
         let closeButton = modal.querySelector(".close-button");
+    console.log(`Opening Modal for image at index ${index} with URL: ${imageUrl}`);
 
         modalImage.src = imageUrl;
         modal.style.display = "block";
@@ -378,6 +387,8 @@ typeWriterEffect(aboutParagraph, aboutText, 50);
     
     
     document.addEventListener("DOMContentLoaded", () => {
+            console.log(`DOMContentLoaded`);
+
     displayHomeGallery();
     showText();
     displayGallery();
