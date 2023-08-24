@@ -1,6 +1,5 @@
 
 
-document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for gallery images (replace with your actual image URLs)
     // Function to achieve a random-like sort using the sort() method
 function randomLikeSort(a, b) {
@@ -28,10 +27,10 @@ function randomLikeSort(a, b) {
     ];
 
 
-
-       imageGalleryHomeData.sort(randomLikeSort);
+function displayHomeGallery(){
 
     const imageGalleryHome = document.getElementById("imageGalleryHome");
+       imageGalleryHomeData.sort(randomLikeSort);
 
     imageGalleryHomeData.forEach((imageHomeUrl ,index) => {
         const imageHomeCard = document.createElement("div");
@@ -45,7 +44,7 @@ function randomLikeSort(a, b) {
         imageHomeCard.appendChild(imageHome);
         imageGalleryHome.appendChild(imageHomeCard);
     });
-
+}
 
 
     // Sample JSON data for gallery images (replace with your actual image URLs)
@@ -69,6 +68,8 @@ function randomLikeSort(a, b) {
         "/gallery/32.jpg",
 
     ];
+
+function displayGallery(){
        imageGalleryData.sort(randomLikeSort);
 
     const imageGallery = document.getElementById("imageGallery");
@@ -85,6 +86,7 @@ function randomLikeSort(a, b) {
         imageCard.appendChild(image);
         imageGallery.appendChild(imageCard);
     });
+}
 
     // Sample JSON data for products
     const productsData = [
@@ -218,8 +220,6 @@ function randomLikeSort(a, b) {
         renderProductGrid();
     });
 
-    // Initial rendering of product grid
-    renderProductGrid();
 
 // Function to truncate a string and add "..." after a specified length
 function truncateString(str, maxLength) {
@@ -345,6 +345,7 @@ function typeWriterEffect(element, text, speed) {
     }, speed);
 }
 
+    function showText(){
 // About text content
 const aboutText = "Maximus Brand, a dynamic Clothing and Accessories subsidiary of TechNoob, is committed to offering high-quality and fashionable products that cater to the unique fashion sense of our customers. From casual wear to formal attire, we offer a wide range of clothing and accessories suitable for any occasion. Stay up-to-date with our latest collections and releases by visiting our website, MaximusBrand.com. Experience the epitome of style and comfort with Maximus Brand.";
 
@@ -352,7 +353,7 @@ const aboutText = "Maximus Brand, a dynamic Clothing and Accessories subsidiary 
 const aboutParagraph = document.getElementById("aboutText");
 typeWriterEffect(aboutParagraph, aboutText, 50);
 
-
+    }
     // Rest of your code...
 
     function openModal(imageUrl, index) {
@@ -372,7 +373,13 @@ typeWriterEffect(aboutParagraph, aboutText, 50);
     });
 
     }
+document.addEventListener("DOMContentLoaded", () => {
 
+    displayHomeGallery();
+    showText();
+    displayGallery();
+    // Initial rendering of product grid
+    renderProductGrid();
 
     
 });
