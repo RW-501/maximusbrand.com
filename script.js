@@ -1,5 +1,6 @@
 
 
+document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for gallery images (replace with your actual image URLs)
     // Function to achieve a random-like sort using the sort() method
 function randomLikeSort(a, b) {
@@ -244,7 +245,7 @@ function renderProductGrid() {
     <h3>${product.name}</h3>
             <p>${truncatedDescription}</p>
     <p>${product.price}</p>
-    <button class="view-details" data-index="${index}">View Details</button>
+    <button class="view-details" product-index="${index}">View Details</button>
 `;
 
         productGrid.appendChild(productCard);
@@ -255,12 +256,6 @@ function renderProductGrid() {
 
     
 
-    // Add event listeners for product detail popups
-    const viewDetailButtons = document.querySelectorAll(".view-details");
-    viewDetailButtons.forEach(button => {
-        button.addEventListener("click", () => openProductPopup(button.getAttribute("data-index")));
-    });
-}
 
 // Custom comparison function to sort products by name (A-Z)
 function compareProductsByName(a, b) {
@@ -283,7 +278,7 @@ function compareProductsByPriceHL(a, b) {
 // Add event listeners for product detail popups
 const viewDetailButtons = document.querySelectorAll(".view-details");
 viewDetailButtons.forEach(button => {
-    button.addEventListener("click", () => openProductPopup(button.getAttribute("data-index")));
+    button.addEventListener("click", () => openProductPopup(button.getAttribute("product-index")));
 });
 
 // Function to open product detail popup
@@ -380,3 +375,4 @@ typeWriterEffect(aboutParagraph, aboutText, 50);
 
 
     
+});
