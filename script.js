@@ -1,6 +1,5 @@
 
 
-document.addEventListener("DOMContentLoaded", () => {
     // Sample JSON data for gallery images (replace with your actual image URLs)
     // Function to achieve a random-like sort using the sort() method
 function randomLikeSort(a, b) {
@@ -381,4 +380,3 @@ typeWriterEffect(aboutParagraph, aboutText, 50);
 
 
     
-});
