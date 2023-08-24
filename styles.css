@@ -111,29 +111,6 @@ footer a{
 
 }
 
-/* Stylish blue button to encourage users to tag you on Facebook */
-.tag-us-button {
-    text-align: center;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-}
-
-.tag-us-button a {
-    background-color: #1877F2; /* Facebook blue */
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.tag-us-button a:hover {
-    background-color: #1558F2; /* Darker blue on hover */
-}
-
 
 
 
@@ -348,3 +325,30 @@ footer {
 .cta-button:hover {
     background-color: #b30000;
 }
+
+
+/* Stylish blue button to encourage users to tag you on Facebook */
+.tag-us-button {
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.tag-us-button a {
+    background-color: #1877F2; /* Facebook blue */
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.tag-us-button a:hover {
+    background-color: #1558F2; /* Darker blue on hover */
+}
+
+
+        
