@@ -28,13 +28,15 @@ function randomLikeSort(a, b) {
     ];
 
 
-function displayHomeGallery(){
+function displayHomeGallery() {
     console.log("Displaying Home Gallery");
 
     const imageGalleryHome = document.getElementById("imageGalleryHome");
-       imageGalleryHomeData.sort(randomLikeSort);
+    imageGalleryHomeData.sort(randomLikeSort);
 
-    imageGalleryHomeData.forEach((imageHomeUrl ,index) => {
+    let loadedCount = 0; // Counter to track loaded images
+
+    imageGalleryHomeData.forEach((imageHomeUrl, index) => {
         const imageHomeCard = document.createElement("div");
         imageHomeCard.classList.add("image-card");
         imageHomeCard.addEventListener("click", () => openModal(imageHomeUrl, index));
@@ -43,9 +45,39 @@ function displayHomeGallery(){
         imageHome.src = imageHomeUrl;
         imageHome.alt = "Gallery Image";
 
+        // Add an onload event handler to check if the image has loaded
+        imageHome.onload = () => {
+            loadedCount++;
+
+            // Check if all images have loaded
+            if (loadedCount === imageGalleryHomeData.length) {
+                // All images have loaded, do something here if needed
+                console.log("All images have loaded");
+                    showText();
+
+            }
+        };
+
+        // Add an onerror event handler to handle image loading errors
+        imageHome.onerror = () => {
+            console.error(`Error loading image at index ${index}: ${imageHomeUrl}`);
+        };
+
         imageHomeCard.appendChild(imageHome);
         imageGalleryHome.appendChild(imageHomeCard);
     });
+
+    // Add a timeout to check if all images have loaded after a specified time
+    const timeoutDuration = 10000; // Set the timeout duration in milliseconds (e.g., 10 seconds)
+
+    setTimeout(() => {
+        if (loadedCount < imageGalleryHomeData.length) {
+            // Not all images have loaded, you can choose to reload or take appropriate action
+            console.log("Not all images have loaded. Reloading or taking action...");
+            // You can add code here to reload or handle the situation
+            displayHomeGallery();
+        }
+    }, timeoutDuration);
 }
 
 
@@ -393,7 +425,6 @@ typeWriterEffect(aboutParagraph, aboutText, 50);
             console.log(`DOMContentLoaded`);
 
     displayHomeGallery();
-    showText();
     displayGallery();
     // Initial rendering of product grid
     renderProductGrid();
