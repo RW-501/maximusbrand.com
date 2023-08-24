@@ -249,7 +249,7 @@ function renderProductGrid() {
     <h3>${product.name}</h3>
             <p>${truncatedDescription}</p>
     <p>${product.price}</p>
-    <button class="view-details" product-index="${index}">View Details</button>
+    <button class="view-details" data-product-index="${index}">View Details</button>
 `;
 
         productGrid.appendChild(productCard);
@@ -282,7 +282,7 @@ function compareProductsByPriceHL(a, b) {
 // Add event listeners for product detail popups
 const viewDetailButtons = document.querySelectorAll(".view-details");
 viewDetailButtons.forEach(button => {
-    button.addEventListener("click", () => openProductPopup(button.getAttribute("product-index")));
+    button.addEventListener("click", () => openProductPopup(button.getAttribute("data-product-index")));
 });
 
 // Function to open product detail popup
@@ -367,7 +367,7 @@ typeWriterEffect(aboutParagraph, aboutText, 50);
         const modal = document.getElementById("imageModal");
         const modalImage = document.getElementById("modalImage");
         let closeButton = modal.querySelector(".close-button");
-    console.log(`Opening Modal for image at index ${index} with URL: ${imageUrl}`);
+  //  console.log(`Opening Modal for image at index ${index} with URL: ${imageUrl}`);
 
         modalImage.src = imageUrl;
         modal.style.display = "block";
