@@ -256,9 +256,14 @@ function renderProductGrid() {
     });
 
 
-}
 
-    
+
+        // Add event listeners for product detail popups
+    const viewDetailButtons = document.querySelectorAll(".view-details");
+    viewDetailButtons.forEach(button => {
+        button.addEventListener("click", () => openProductPopup(button.getAttribute("data-index")));
+    });
+}
 
 
 // Custom comparison function to sort products by name (A-Z)
@@ -276,15 +281,14 @@ function compareProductsByPriceHL(a, b) {
 
 
 
-
-    
+/*   
 
 // Add event listeners for product detail popups
 const viewDetailButtons = document.querySelectorAll(".view-details");
 viewDetailButtons.forEach(button => {
     button.addEventListener("click", () => openProductPopup(button.getAttribute("data-index")));
 });
-
+*/
 // Function to open product detail popup
 function openProductPopup(index) {
 
