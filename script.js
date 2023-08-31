@@ -277,6 +277,35 @@ function displayGallery(){
             // Add more image URLs here
         ]
         },
+
+
+
+
+             {
+            name: "Black Gauze Panties -2 Rings",
+            image: "https://i.etsystatic.com/23152276/r/il/465c93/5244025012/il_fullxfull.5244025012_ejsg.jpg",
+            description: "Upgrade your lingerie collection with these stylish Black Gauze Panties featuring a unique 2 Rings design. These panties are designed to fit most sizes comfortably and are crafted from high-quality nylon material. Whether you're looking for everyday comfort or a special occasion piece, these panties have got you covered.",
+            price: "$6.99",
+            url:"https://www.etsy.com/listing/1542559780/black-gauze-panties-2-rings?click_key=d29f53ebddaa56a83784b1f4bc31e4675189cab9%3A1542559780&click_sum=618b2554&ref=shop_home_active_1",
+            images: [
+            "https://i.etsystatic.com/23152276/r/il/adaaa3/5244025000/il_fullxfull.5244025000_cisc.jpg",
+            "https://i.etsystatic.com/23152276/r/il/cf3703/5292215113/il_fullxfull.5292215113_7a98.jpg",
+            // Add more image URLs here
+        ]
+        },
+             {
+            name: "Black Gauze Panties -6 Rings",
+            image: "https://i.etsystatic.com/23152276/r/il/283341/5243951142/il_fullxfull.5243951142_2vx4.jpg",
+            description: "Stylish 6 Rings Design: These panties feature a fashionable 6 Rings design that adds a touch of elegance to your intimate wear.",
+            price: "$7.99",
+            url:"https://www.etsy.com/listing/1556728907/black-gauze-panties-6-rings?click_key=fc07c3ff786b3ae508878b42be0a6a7ff3c79326%3A1556728907&click_sum=b852f80b&ref=shop_home_active_2",
+            images: [
+            "https://i.etsystatic.com/23152276/r/il/8fc79f/5243938686/il_fullxfull.5243938686_mtto.jpg",
+            "https://i.etsystatic.com/23152276/r/il/c73fb5/5292128897/il_fullxfull.5292128897_bxrb.jpg",
+            // Add more image URLs here
+        ]
+        },
+        
         
         // Add more product data here
     ];
