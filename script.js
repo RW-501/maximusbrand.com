@@ -265,7 +265,18 @@ function displayGallery(){
             // Add more image URLs here
         ]
         },
-     
+       {
+            name: "Bowknot Women's Crotchless Thong Set of 3",
+            image: "https://i.etsystatic.com/23152276/r/il/7ab5a0/3323093959/il_fullxfull.3323093959_n0ux.jpg",
+            description: "Indulge in your inner allure with our Sexy Bowknot Crotchless Thong. Crafted from a blend of 80% nylon and 20% cotton, this thong is the perfect combination of softness and stretch, ensuring a comfortable fit for waist sizes ranging from 23 to 33 inches.",
+            price: "$8.99",
+            url:"https://www.etsy.com/listing/1070585169/sexy-bowknot-womens-crotchless-thong-see?click_key=28b5f750d9f86aba55faae513a423fb9e09266b5%3A1070585169&click_sum=8679d2b2&ref=shop_home_active_15",
+            images: [
+            "https://i.etsystatic.com/23152276/r/il/d5bf45/3323093903/il_fullxfull.3323093903_2atr.jpg",
+            "https://i.etsystatic.com/23152276/r/il/224772/3612624970/il_fullxfull.3612624970_f986.jpg",
+            // Add more image URLs here
+        ]
+        },
         
         // Add more product data here
     ];
