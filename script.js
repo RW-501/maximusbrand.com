@@ -230,14 +230,38 @@ function displayGallery(){
         ]
         },
              {
-            name: "Product ",
+            name: "Women's Tank Top ",
             image: "https://i.etsystatic.com/23152276/r/il/ad821c/4857234583/il_794xN.4857234583_rtsi.jpg",
-            description: "Slim Fit Sleeveless Women's Tank Top T-Shirt in Black with White Borders - Perfect for Gym, Yoga, Sports, and Daily Wear ",
+            description: "Slim Fit Sleeveless Tank Top T-Shirt in Black with White Borders - Perfect for Gym, Yoga, Sports, and Daily Wear ",
             price: "$8.99",
             url:"https://www.etsy.com/listing/1445108382/womens-black-white-sleeveless-tank-top?click_key=c8e7bf2b6fb95d6a72ede35aab48fd84dfc2dfca%3A1445108382&click_sum=6c675640&ref=shop_home_active_1",
             images: [
             "https://i.etsystatic.com/23152276/r/il/cc42e7/4825967414/il_794xN.4825967414_hu29.jpg",
             "https://i.etsystatic.com/23152276/r/il/595a7b/4857234593/il_794xN.4857234593_rpn0.jpg",
+            // Add more image URLs here
+        ]
+
+                },
+             {
+            name: "Lace Panty and Bra Set ",
+            image: "https://i.etsystatic.com/23152276/r/il/366432/5286113621/il_fullxfull.5286113621_cu4d.jpg",
+            description: "Indulge in luxurious comfort and timeless allure with our elegant embroidered Lace Panty and Bra Set. Crafted with exquisite attention to detail, this set is designed to make you feel confident and beautiful every day.",
+            price: "$9.99",
+            url:"https://www.etsy.com/listing/1541270914/elegance-embroidered-lace-panty-and-bra?click_key=b6b4b38d566e94dd688cb39acaee8c95661a1329%3A1541270914&click_sum=58ae4102&ref=shop_home_active_1",
+            images: [
+            "https://i.etsystatic.com/23152276/r/il/14b119/5286113619/il_fullxfull.5286113619_mdyg.jpg",
+            "https://i.etsystatic.com/23152276/r/il/2fd03e/5237932146/il_fullxfull.5237932146_a8bk.jpg",
+            // Add more image URLs here
+        ]
+        },  {
+            name: "Lace Hustler High Rise Panties ",
+            image: "https://i.etsystatic.com/23152276/r/il/51df5f/5284888671/il_fullxfull.5284888671_a90i.jpg",
+            description: "Fashion-Forward Design: These panties boast a fashionable combination of sheer mesh and delicate lace, creating a stunning pattern that's both elegant and chic. Unbeatable Comfort: Crafted with your comfort in mind, these panties are soft, breathable, and sweat-absorbing, ensuring you feel great all day long.",
+            price: "$10.99",
+            url:"https://www.etsy.com/listing/1541012196/lace-hustler-high-rise-panties-elegance?click_key=acbd3b349d75a1e57f64687735467f50ab9607bc%3A1541012196&click_sum=8642b6ee&ref=shop_home_active_2",
+            images: [
+            "https://i.etsystatic.com/23152276/r/il/5fb789/5284888683/il_fullxfull.5284888683_oek2.jpg",
+            "https://i.etsystatic.com/23152276/r/il/5a12a5/5236700218/il_fullxfull.5236700218_swju.jpg",
             // Add more image URLs here
         ]
         },
