@@ -345,18 +345,22 @@ function renderProductGrid() {
 
     console.log("Rendering Product Grid");
 
-    productsData.forEach((product, index) => {
-        const truncatedDescription = truncateString(product.description, 80);
-        const productCard = document.createElement("div");
-        productCard.classList.add("product-card");
-   productCard.innerHTML = `
-    <img src="${product.image}" alt="${product.name}">
-    <h3>${product.name}</h3>
-            <p>${truncatedDescription}</p>
-    <p>${product.price}</p>
-    <button class="view-details" data-index="${index}">View Details</button>
-`;
+  productsData.forEach((product, index) => {
+    const truncatedDescription = truncateString(product.description, 80);
+    const productCard = document.createElement("div");
+    productCard.classList.add("product-card");
 
+    // Add onclick attribute to openProductPopup function with the index
+    productCard.setAttribute("onclick", `openProductPopup(${index})`);
+
+    productCard.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${truncatedDescription}</p>
+        <p>${product.price}</p>
+        <button class="view-details" data-index="${index}">View Details</button>
+    `;
+    // Append the productCard to your container or wherever you want to display it
         productGrid.appendChild(productCard);
     });
 
