@@ -408,7 +408,7 @@ function openProductPopup(index) {
             <h3>${product.name}</h3>
             <img src="${product.image}" alt="${product.name}">
             <p>${product.description}</p>
-            <p class="details-price">${product.price}</p>
+            <p class="details-price"><a href="${product.url}"> ${product.price}</a></p>
             <div class="mini-gallery" id="miniGallery">
                 <!-- Additional images will be loaded here dynamically -->
             </div>
