@@ -116,7 +116,11 @@ footer a{
 
 }
 
+.product-detail a {
 
+    color: #333;
+    text-decoration: none;
+}
 
 
 .view-details button{
@@ -289,7 +293,7 @@ footer {
 }
 
 .product-detail {
-    max-width: 80%;
+    max-width: 100%;
     margin: 20% auto;
 display: inline-block;
     background-color: #f9f9f9;
