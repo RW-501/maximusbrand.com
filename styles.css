@@ -106,8 +106,9 @@ nav {
     border-radius: 10px;
     padding: 20px;
     transition: transform 0.3s ease;
-            width: 50%;
-        margin: auto;
+          width: 50%;
+        margin: 2% auto;
+        display: block;
 }
 
 .product-card:hover {
