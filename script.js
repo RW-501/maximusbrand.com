@@ -312,13 +312,15 @@ function displayGallery(){
 
     
 
-
-  // Get the dropdown elements
+// Get the elements
 const categoryDropdown = document.getElementById("categoryDropdown");
 const sizeDropdown = document.getElementById("sizeDropdown");
+const sortAZButton = document.getElementById("sortAZ");
+const sortZAButton = document.getElementById("sortZA");
+const sortPriceHLButton = document.getElementById("sortPriceHL");
 const sortPriceLowHighButton = document.getElementById("sortPriceLowHigh");
 
-// Initialize dropdown options based on productsData
+// Initialize dropdowns
 function initializeDropdowns() {
     const categories = new Set();
     const sizes = new Set();
@@ -345,17 +347,25 @@ function initializeDropdowns() {
     });
 }
 
-// Event listener for Category Dropdown
-categoryDropdown.addEventListener("change", () => {
-    filterAndRenderProducts();
+// Event listeners for dropdowns and sort buttons
+categoryDropdown.addEventListener("change", () => filterAndRenderProducts());
+sizeDropdown.addEventListener("change", () => filterAndRenderProducts());
+
+sortAZButton.addEventListener("click", () => {
+    productsData.sort(compareProductsByName);
+    renderProductGrid();
 });
 
-// Event listener for Size Dropdown
-sizeDropdown.addEventListener("change", () => {
-    filterAndRenderProducts();
+sortZAButton.addEventListener("click", () => {
+    productsData.sort(compareProductsByNameZA);
+    renderProductGrid();
 });
 
-// Event listener for Sort Price Low to High
+sortPriceHLButton.addEventListener("click", () => {
+    productsData.sort(compareProductsByPriceHL);
+    renderProductGrid();
+});
+
 sortPriceLowHighButton.addEventListener("click", () => {
     productsData.sort(compareProductsByPriceLH);
     renderProductGrid();
@@ -379,7 +389,7 @@ function filterAndRenderProducts() {
     renderProductGrid(filteredProducts);
 }
 
-// Function to render the product grid based on filtered products
+// Function to render the product grid
 function renderProductGrid(products = productsData) {
     const productGrid = document.getElementById("productGrid");
     productGrid.innerHTML = ""; // Clear existing products
@@ -389,7 +399,6 @@ function renderProductGrid(products = productsData) {
         const productCard = document.createElement("div");
         productCard.classList.add("product-card");
 
-        // Add onclick attribute to openProductPopup function with the index
         productCard.setAttribute("onclick", `openProductPopup(${index})`);
 
         productCard.innerHTML = `
@@ -399,7 +408,6 @@ function renderProductGrid(products = productsData) {
             <p>${product.price}</p>
             <button class="view-details" data-index="${index}">View Details</button>
         `;
-        // Append the productCard to your container or wherever you want to display it
         productGrid.appendChild(productCard);
     });
 
@@ -410,34 +418,38 @@ function renderProductGrid(products = productsData) {
     });
 }
 
-// Custom comparison function to sort products by price (low to high)
+// Comparison functions for sorting
+function compareProductsByName(a, b) {
+    return a.name.localeCompare(b.name);
+}
+
+function compareProductsByNameZA(a, b) {
+    return b.name.localeCompare(a.name);
+}
+
+function compareProductsByPriceHL(a, b) {
+    const priceA = parseFloat(a.price.replace("$", ""));
+    const priceB = parseFloat(b.price.replace("$", ""));
+    return priceB - priceA;
+}
+
 function compareProductsByPriceLH(a, b) {
     const priceA = parseFloat(a.price.replace("$", ""));
     const priceB = parseFloat(b.price.replace("$", ""));
-
     return priceA - priceB;
+}
+
+// String truncation function
+function truncateString(str, maxLength) {
+    if (str.length > maxLength) {
+        return str.substring(0, maxLength - 3) + "...";
+    }
+    return str;
 }
 
 // Initialize dropdowns on page load
 // initializeDropdowns();
 
-
-// Get the Z to A sort button element
-const sortZAButton = document.getElementById("sortZA");
-
-// Event listener for Sort Z to A button
-sortZAButton.addEventListener("click", () => {
-    productsData.sort(compareProductsByNameZA);
-    renderProductGrid();
-});
-
-// Custom comparison function to sort products by name (Z-A)
-function compareProductsByNameZA(a, b) {
-    return b.name.localeCompare(a.name);
-}
-
-// Render the product grid on initial load
-renderProductGrid();
 
 
 
