@@ -419,7 +419,7 @@ function compareProductsByPriceLH(a, b) {
 }
 
 // Initialize dropdowns on page load
-initializeDropdowns();
+// initializeDropdowns();
 
 
 // Get the Z to A sort button element
