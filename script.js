@@ -49,7 +49,7 @@ function displayHomeGallery() {
 
         const imageHome = document.createElement("img");
         imageHome.src = imageHomeUrl;
-        imageHome.alt = "Gallery Image";
+        imageHome.alt = "MaximusBrand.com Gallery Image";
 
         // Add an onload event handler to check if the image has loaded
         imageHome.onload = () => {
@@ -125,7 +125,7 @@ function displayGallery(){
 
         const image = document.createElement("img");
         image.src = imageUrl;
-        image.alt = "Gallery Image";
+        image.alt = "MaximusBrand.com Product Image";
 
         imageCard.appendChild(image);
         imageGallery.appendChild(imageCard);
@@ -412,11 +412,13 @@ function openProductPopup(index) {
             <h3>${product.name}</h3>
             <img src="${product.image}" alt="${product.name}">
             <p>${product.description}</p>
-            <p class="details-price"><a href="${product.url}"> ${product.price}</a></p>
+            <a href="${product.url}"><p class="details-price"> ${product.price}</p>
+            Check-out with Stripe
+            </a>
             <div class="mini-gallery" id="miniGallery">
                 <!-- Additional images will be loaded here dynamically -->
             </div>
-            <a href="${product.url}" class="cta-button">Get It</a>
+            <a href="${product.url}" class="cta-button">Buy it now</a>
         </div>
     `;
 
