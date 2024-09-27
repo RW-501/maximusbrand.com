@@ -132,183 +132,173 @@ function displayGallery(){
     });
 }
 
-    // Sample JSON data for products
-    const productsData = [
-        {
-            name: "Black Lives Matter Flag ",
-            image: "https://i.etsystatic.com/23152276/r/il/0e1b48/2745749046/il_1140xN.2745749046_g4ps.jpg",
-            description: "Show your support for the Black Lives Matter movement with this high-quality 3x5 flag made of durable 68D polyester material. ",
-            price: "$12.99",
-            url:"https://buy.stripe.com/dR67vL4d19el7Li7sE",
-            images: [
+    
+
+const productsData = [
+    {
+        name: "Black Lives Matter Flag",
+        image: "https://i.etsystatic.com/23152276/r/il/0e1b48/2745749046/il_1140xN.2745749046_g4ps.jpg",
+        description: "Show your support for the Black Lives Matter movement with this high-quality 3x5 flag made of durable 68D polyester material.",
+        price: "$12.99",
+        url: "https://buy.stripe.com/dR67vL4d19el7Li7sE",
+        size: "3x5 ft",
+        category: "Flags",
+        images: [
+            "https://i.etsystatic.com/23152276/r/il/a0f6ad/2745722894/il_794xN.2745722894_m2av.jpg"
+            // Add more image URLs here
+        ]
+    },
+    {
+        name: "Fleece Sweater size XL",
+        image: "https://i.etsystatic.com/23152276/r/il/000df6/5190639007/il_794xN.5190639007_dpra.jpg",
+        description: "Men's Zipper Knit Jacket | Stylish & Warm Fleece Sweater size XL",
+        price: "$29.99",
+        url: "https://buy.stripe.com/8wMaHXgZNbmt7Li9AL",
+        size: "XL",
+        category: "Clothing",
+        images: [
+            "https://i.etsystatic.com/23152276/r/il/a31225/5142420290/il_1140xN.5142420290_ktl1.jpg"
+            // Add more image URLs here
+        ]
+    },
+    {
+        name: "Black & White American Flag",
+        image: "https://i.etsystatic.com/23152276/r/il/771475/2745722718/il_794xN.2745722718_mzxt.jpg",
+        description: "Black & White American Flag 3x5 ft with Metal Grommets, High-Quality Polyester Material for Indoor/Outdoor Use",
+        price: "$13.99",
+        url: "https://buy.stripe.com/4gwcQ538X0HP9TqfZ8",
+        size: "3x5 ft",
+        category: "Flags",
+        images: [
             "https://i.etsystatic.com/23152276/r/il/a0f6ad/2745722894/il_794xN.2745722894_m2av.jpg",
+            "https://i.etsystatic.com/23152276/r/il/771475/2745722718/il_794xN.2745722718_mzxt.jpg"
             // Add more image URLs here
         ]
-        },
-        {
-            name: "Fleece Sweater size XL ",
-            image: "https://i.etsystatic.com/23152276/r/il/000df6/5190639007/il_794xN.5190639007_dpra.jpg",
-            description: "Men's Zipper Knit Jacket | Stylish & Warm Fleece Sweater size XL",
-            price: "$29.99",
-            url:"https://buy.stripe.com/8wMaHXgZNbmt7Li9AL",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/a31225/5142420290/il_1140xN.5142420290_ktl1.jpg",
-            // Add more image URLs here
-        ]
-        },
-             {
-            name: "Black & White American Flag ",
-            image: "https://i.etsystatic.com/23152276/r/il/771475/2745722718/il_794xN.2745722718_mzxt.jpg",
-            description: "Black & White American Flag 3x5 ft with Metal Grommets, High-Quality Polyester Material for Indoor/Outdoor Use",
-            price: "$13.99",
-            url:"https://buy.stripe.com/4gwcQ538X0HP9TqfZ8",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/a0f6ad/2745722894/il_794xN.2745722894_m2av.jpg",
-            "https://i.etsystatic.com/23152276/r/il/771475/2745722718/il_794xN.2745722718_mzxt.jpg",
-            // Add more image URLs here
-        ]
-        },
-             {
-            name: "Stylish and Sexy Lace Boyshorts ",
-            image: "https://i.etsystatic.com/23152276/r/il/26a533/3001879773/il_794xN.3001879773_p32n.jpg",
-            description: "Discover the perfect blend of style and comfort with our Lace Boyshorts Bikini Panties. The elegant combination of sheer mesh and lace creates a beautiful pattern, offering a feminine look you'll love. These panties are comfortable to wear and come with an uncovering back to give you a stylish edge.",
-            price: "$12.99",
-            url:"https://buy.stripe.com/00gcQ59xl3U1ghObIR",
-            images: [
+    },
+    {
+        name: "Stylish and Sexy Lace Boyshorts",
+        image: "https://i.etsystatic.com/23152276/r/il/26a533/3001879773/il_794xN.3001879773_p32n.jpg",
+        description: "Discover the perfect blend of style and comfort with our Lace Boyshorts Bikini Panties. The elegant combination of sheer mesh and lace creates a beautiful pattern, offering a feminine look you'll love. These panties are comfortable to wear and come with an uncovering back to give you a stylish edge.",
+        price: "$12.99",
+        url: "https://buy.stripe.com/00gcQ59xl3U1ghObIR",
+        size: "One Size",
+        category: "Underwear",
+        images: [
             "https://i.etsystatic.com/23152276/r/il/8fd6bd/3001870045/il_794xN.3001870045_h9ef.jpg",
-            "https://i.etsystatic.com/23152276/r/il/4470bc/2954162204/il_794xN.2954162204_4a9b.jpg",
+            "https://i.etsystatic.com/23152276/r/il/4470bc/2954162204/il_794xN.2954162204_4a9b.jpg"
             // Add more image URLs here
         ]
-        },
-             {
-            name: "Sexy Geometric Lace Thong Panties ",
-            image: "https://i.etsystatic.com/23152276/r/il/527e6c/5189414687/il_794xN.5189414687_8b0n.jpg",
-            description: "Sustainable, Sexy, and Shamelessly Stylish! One size",
-            price: "$9.99",
-            url:"https://buy.stripe.com/fZedU99xl0HPc1yeV2",
-            images: [
+    },
+    {
+        name: "Sexy Geometric Lace Thong Panties",
+        image: "https://i.etsystatic.com/23152276/r/il/527e6c/5189414687/il_794xN.5189414687_8b0n.jpg",
+        description: "Sustainable, Sexy, and Shamelessly Stylish! One size",
+        price: "$9.99",
+        url: "https://buy.stripe.com/fZedU99xl0HPc1yeV2",
+        size: "One Size",
+        category: "Underwear",
+        images: [
             "https://i.etsystatic.com/23152276/r/il/c3cab2/5141197230/il_794xN.5141197230_c09z.jpg",
-            "https://i.etsystatic.com/23152276/r/il/fb4ade/5189414921/il_794xN.5189414921_i65w.jpg",
+            "https://i.etsystatic.com/23152276/r/il/fb4ade/5189414921/il_794xN.5189414921_i65w.jpg"
             // Add more image URLs here
         ]
-        },
-             {
-            name: "Leather French Beret  ",
-            image: "https://i.etsystatic.com/23152276/r/il/dfd3a1/5141968318/il_794xN.5141968318_csx9.jpg",
-            description: "The adjustable drawstring tie closure allows you to customize the circumference of the beret, accommodating head sizes from 21.6 to 22.4 (55-57cm).",
-            price: "$15.99",
-            url:"https://buy.stripe.com/7sI03j5h5aip0iQ007",
-            images: [
+    },
+    {
+        name: "Leather French Beret",
+        image: "https://i.etsystatic.com/23152276/r/il/dfd3a1/5141968318/il_794xN.5141968318_csx9.jpg",
+        description: "The adjustable drawstring tie closure allows you to customize the circumference of the beret, accommodating head sizes from 21.6 to 22.4 (55-57cm).",
+        price: "$15.99",
+        url: "https://buy.stripe.com/7sI03j5h5aip0iQ007",
+        size: "One Size (55-57cm)",
+        category: "Accessories",
+        images: [
             "https://i.etsystatic.com/23152276/r/il/44d2d0/5141968322/il_794xN.5141968322_e7zr.jpg",
-            "https://i.etsystatic.com/23152276/r/il/fc4dd4/5141968314/il_794xN.5141968314_qpwa.jpg",
+            "https://i.etsystatic.com/23152276/r/il/fc4dd4/5141968314/il_794xN.5141968314_qpwa.jpg"
             // Add more image URLs here
         ]
-        },
-             {
-            name: "Leggings, Capris, and Shorts  ",
-            image: "https://i.etsystatic.com/23152276/r/il/07a325/2910262504/il_794xN.2910262504_3706.jpg",
-            description: "Comfortable, Sexy, and Stretchy in Multiple Sizes and Colors,  Leggings, Capris, and Shorts",
-            price: "$14.99",
-            url:"https://www.etsy.com/listing/972559479/womens-plus-size-leggings-capris-and?click_key=b2815ec2fa57d6a533f6437050777581f13f471d%3A972559479&click_sum=b21d3236&ref=shop_home_active_11",
-            images: [
+    },
+    {
+        name: "Leggings, Capris, and Shorts",
+        image: "https://i.etsystatic.com/23152276/r/il/07a325/2910262504/il_794xN.2910262504_3706.jpg",
+        description: "Comfortable, Sexy, and Stretchy in Multiple Sizes and Colors, Leggings, Capris, and Shorts",
+        price: "$14.99",
+        url: "https://www.etsy.com/listing/972559479/womens-plus-size-leggings-capris-and?click_key=b2815ec2fa57d6a533f6437050777581f13f471d%3A972559479&click_sum=b21d3236&ref=shop_home_active_11",
+        size: "S, M, L, XL, XXL",
+        category: "Clothing",
+        images: [
             "https://i.etsystatic.com/23152276/r/il/3453af/2910261684/il_794xN.2910261684_t6y7.jpg",
             "https://i.etsystatic.com/23152276/r/il/8da924/2957950085/il_794xN.2957950085_cz22.jpg",
             "https://i.etsystatic.com/23152276/r/il/1e238d/2910261706/il_794xN.2910261706_m4wa.jpg",
-            "https://i.etsystatic.com/23152276/r/il/0bd3d6/2910261702/il_794xN.2910261702_nowh.jpg",
+            "https://i.etsystatic.com/23152276/r/il/0bd3d6/2910261702/il_794xN.2910261702_nowh.jpg"
             // Add more image URLs here
         ]
-        },
-             {
-            name: "Black Lives Matter T-Shirt ",
-            image: "https://i.etsystatic.com/23152276/r/il/299b76/2793385799/il_794xN.2793385799_7sq4.jpg",
-            description: "BLM Unisex Tee is soft and comfortable 50% cotton blend, this black tee features a round neck and is machine washable for easy care.",
-            price: "$9.99",
-            url:"https://buy.stripe.com/7sI5nDeRF6297LieV0",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/f9c61a/2793385861/il_794xN.2793385861_1vir.jpg",
+    },
+    {
+        name: "Black Lives Matter T-Shirt",
+        image: "https://i.etsystatic.com/23152276/r/il/299b76/2793385799/il_794xN.2793385799_7sq4.jpg",
+        description: "BLM Unisex Tee is soft and comfortable 50% cotton blend, this black tee features a round neck and is machine washable for easy care.",
+        price: "$9.99",
+        url: "https://buy.stripe.com/7sI5nDeRF6297LieV0",
+        size: "S, M, L, XL, XXL",
+        category: "Clothing",
+        images: [
+            "https://i.etsystatic.com/23152276/r/il/f9c61a/2793385861/il_794xN.2793385861_1vir.jpg"
             // Add more image URLs here
         ]
-        },
-             {
-            name: "Women's Tank Top ",
-            image: "https://i.etsystatic.com/23152276/r/il/ad821c/4857234583/il_794xN.4857234583_rtsi.jpg",
-            description: "Slim Fit Sleeveless Tank Top T-Shirt in Black with White Borders - Perfect for Gym, Yoga, Sports, and Daily Wear ",
-            price: "$8.99",
-            url:"https://buy.stripe.com/bIYaHXdNBfCJ1mU9AF",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/cc42e7/4825967414/il_794xN.4825967414_hu29.jpg",
-            "https://i.etsystatic.com/23152276/r/il/595a7b/4857234593/il_794xN.4857234593_rpn0.jpg",
+    },
+    {
+        name: "Women's Tank Top",
+        image: "https://i.etsystatic.com/23152276/r/il/ad821c/4857234583/il_794xN.4857234583_r94e.jpg",
+        description: "Classic Tank Top | Women's Slim Fit Tank | 100% Organic Cotton",
+        price: "$14.99",
+        url: "https://buy.stripe.com/5kA16lbhz7Otb04cMM",
+        size: "S, M, L, XL",
+        category: "Clothing",
+        images: [
+            "https://i.etsystatic.com/23152276/r/il/c8570a/4857225427/il_794xN.4857225427_dji0.jpg",
+            "https://i.etsystatic.com/23152276/r/il/1c5f70/4857225551/il_794xN.4857225551_dnp2.jpg",
+            "https://i.etsystatic.com/23152276/r/il/d06e3a/4857234469/il_794xN.4857234469_c0h6.jpg"
             // Add more image URLs here
         ]
+    }, {
+        name: "Black Gauze Panties -2 Rings",
+        image: "https://i.etsystatic.com/23152276/r/il/60a7f3/3503498300/il_794xN.3503498300_24ko.jpg",
+        description: "Experience comfort and style with our Black Gauze Panties featuring two rings for a unique touch. These panties are perfect for everyday wear.",
+        price: "$9.99",
+        url: "https://buy.stripe.com/5kA7vHf4g2e1aHq4iL",
+        images: [
+            "https://i.etsystatic.com/23152276/r/il/cd56a4/3503498296/il_794xN.3503498296_jgkg.jpg",
+            // Add more image URLs here
+        ]
+    },
+    {
+        name: "Sheer Black Lace Thong",
+        image: "https://i.etsystatic.com/23152276/r/il/90a1e0/3628259284/il_794xN.3628259284_3v35.jpg",
+        description: "Embrace your sensuality with our Sheer Black Lace Thong. This elegant design features intricate lace patterns for a seductive look.",
+        price: "$8.99",
+        url: "https://buy.stripe.com/14k3j1f4g2e1aHq4iK",
+        images: [
+            "https://i.etsystatic.com/23152276/r/il/d7a702/3628259290/il_794xN.3628259290_4jpf.jpg",
+            // Add more image URLs here
+        ]
+    },
+    {
+        name: "Cotton Comfort Bra",
+        image: "https://i.etsystatic.com/23152276/r/il/a8356a/3619493470/il_794xN.3619493470_uq1g.jpg",
+        description: "Stay comfortable all day with our Cotton Comfort Bra, designed for everyday wear. Soft cotton fabric ensures maximum comfort.",
+        price: "$15.99",
+        url: "https://buy.stripe.com/9AQbKTeRFgGNaXu3cY",
+        images: [
+            "https://i.etsystatic.com/23152276/r/il/ee1623/3619493476/il_794xN.3619493476_jp2u.jpg",
+            // Add more image URLs here
+        ]
+    }
+];
 
-                },
-             {
-            name: "Lace Panty and Bra Set ",
-            image: "https://i.etsystatic.com/23152276/r/il/366432/5286113621/il_fullxfull.5286113621_cu4d.jpg",
-            description: "Indulge in luxurious comfort and timeless allure with our elegant embroidered Lace Panty and Bra Set. Crafted with exquisite attention to detail, this set is designed to make you feel confident and beautiful every day.",
-            price: "$9.99",
-            url:"https://buy.stripe.com/fZeg2h38X4Y54z6004",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/14b119/5286113619/il_fullxfull.5286113619_mdyg.jpg",
-            "https://i.etsystatic.com/23152276/r/il/2fd03e/5237932146/il_fullxfull.5237932146_a8bk.jpg",
-            // Add more image URLs here
-        ]
-        },  {
-            name: "Lace Hustler High Rise Panties ",
-            image: "https://i.etsystatic.com/23152276/r/il/51df5f/5284888671/il_fullxfull.5284888671_a90i.jpg",
-            description: "Fashion-Forward Design: These panties boast a fashionable combination of sheer mesh and delicate lace, creating a stunning pattern that's elegant. Unbeatable Comfort: Crafted with your comfort in mind, these panties are soft, breathable, and sweat-absorbing, ensuring you feel great all day long.",
-            price: "$10.99",
-            url:"https://buy.stripe.com/14k9DTfVJfCJ6HebIL",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/5fb789/5284888683/il_fullxfull.5284888683_oek2.jpg",
-            "https://i.etsystatic.com/23152276/r/il/5a12a5/5236700218/il_fullxfull.5236700218_swju.jpg",
-            // Add more image URLs here
-        ]
-        },
-       {
-            name: "Bowknot Women's Crotchless Thong Set of 3",
-            image: "https://i.etsystatic.com/23152276/r/il/7ab5a0/3323093959/il_fullxfull.3323093959_n0ux.jpg",
-            description: "Indulge in your inner allure with our Sexy Bowknot Crotchless Thong. Crafted from a blend of 80% nylon and 20% cotton, this thong is the perfect combination of softness and stretch, ensuring a comfortable fit for waist sizes ranging from 23 to 33 inches.",
-            price: "$8.99",
-            url:"https://buy.stripe.com/28oaHXeRFgGNaXu3ce",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/d5bf45/3323093903/il_fullxfull.3323093903_2atr.jpg",
-            "https://i.etsystatic.com/23152276/r/il/224772/3612624970/il_fullxfull.3612624970_f986.jpg",
-            // Add more image URLs here
-        ]
-        },
 
 
 
 
-             {
-            name: "Black Gauze Panties -2 Rings",
-            image: "https://i.etsystatic.com/23152276/r/il/465c93/5244025012/il_fullxfull.5244025012_ejsg.jpg",
-            description: "Upgrade your lingerie collection with these stylish Black Gauze Panties featuring a unique 2 Rings design. These panties are designed to fit most sizes comfortably and are crafted from high-quality nylon material. Whether you're looking for everyday comfort or a special occasion piece, these panties have got you covered.",
-            price: "$6.99",
-            url:"https://buy.stripe.com/7sIeYd4d176d7Li5kl",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/adaaa3/5244025000/il_fullxfull.5244025000_cisc.jpg",
-            "https://i.etsystatic.com/23152276/r/il/cf3703/5292215113/il_fullxfull.5292215113_7a98.jpg",
-            // Add more image URLs here
-        ]
-        },
-             {
-            name: "Black Gauze Panties -6 Rings",
-            image: "https://i.etsystatic.com/23152276/r/il/283341/5243951142/il_fullxfull.5243951142_2vx4.jpg",
-            description: "Stylish 6 Rings Design: These panties feature a fashionable 6 Rings design that adds a touch of elegance to your intimate wear.",
-            price: "$7.99",
-            url:"https://buy.stripe.com/4gwg2hdNB1LT3v26oo",
-            images: [
-            "https://i.etsystatic.com/23152276/r/il/8fc79f/5243938686/il_fullxfull.5243938686_mtto.jpg",
-            "https://i.etsystatic.com/23152276/r/il/c73fb5/5292128897/il_fullxfull.5292128897_bxrb.jpg",
-            // Add more image URLs here
-        ]
-        },
-        
-        
-        // Add more product data here
-    ];
 
     
 
