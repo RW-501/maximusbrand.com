@@ -139,7 +139,7 @@ function displayGallery(){
             image: "https://i.etsystatic.com/23152276/r/il/0e1b48/2745749046/il_1140xN.2745749046_g4ps.jpg",
             description: "Show your support for the Black Lives Matter movement with this high-quality 3x5 flag made of durable 68D polyester material. ",
             price: "$12.99",
-            url:"https://buy.stripe.com/test_aEU5nNflR2vj83SeUU",
+            url:"https://buy.stripe.com/dR67vL4d19el7Li7sE",
             images: [
             "https://i.etsystatic.com/23152276/r/il/a0f6ad/2745722894/il_794xN.2745722894_m2av.jpg",
             // Add more image URLs here
