@@ -248,29 +248,32 @@ const productsData = [
     },
     {
         name: "Women's Tank Top",
-        image: "https://i.etsystatic.com/23152276/r/il/ad821c/4857234583/il_794xN.4857234583_r94e.jpg",
+        image: "https://maximusbrand.com/itemsImages/tanktop.jpg",
         description: "Classic Tank Top | Women's Slim Fit Tank | 100% Organic Cotton",
         price: "$14.99",
         url: "https://buy.stripe.com/5kA16lbhz7Otb04cMM",
         size: "S, M, L, XL",
         category: "Clothing",
         images: [
-            "https://i.etsystatic.com/23152276/r/il/c8570a/4857225427/il_794xN.4857225427_dji0.jpg",
-            "https://i.etsystatic.com/23152276/r/il/1c5f70/4857225551/il_794xN.4857225551_dnp2.jpg",
-            "https://i.etsystatic.com/23152276/r/il/d06e3a/4857234469/il_794xN.4857234469_c0h6.jpg"
+            "https://maximusbrand.com/itemsImages/tanktop.jpg"
             // Add more image URLs here
         ]
     }, {
         name: "Black Gauze Panties -2 Rings",
-        image: "https://i.etsystatic.com/23152276/r/il/60a7f3/3503498300/il_794xN.3503498300_24ko.jpg",
+        image: "https://maximusbrand.com/itemsImages/2ring.jpg",
         description: "Experience comfort and style with our Black Gauze Panties featuring two rings for a unique touch. These panties are perfect for everyday wear.",
         price: "$9.99",
         url: "https://buy.stripe.com/5kA7vHf4g2e1aHq4iL",
         images: [
-            "https://i.etsystatic.com/23152276/r/il/cd56a4/3503498296/il_794xN.3503498296_jgkg.jpg",
+            "https://maximusbrand.com/itemsImages/2ring.jpg"
             // Add more image URLs here
         ]
-    },
+    }
+];
+
+
+/*
+   },
     {
         name: "Sheer Black Lace Thong",
         image: "https://i.etsystatic.com/23152276/r/il/90a1e0/3628259284/il_794xN.3628259284_3v35.jpg",
@@ -293,11 +296,8 @@ const productsData = [
             // Add more image URLs here
         ]
     }
-];
 
-
-
-
+*/
 
 
     
