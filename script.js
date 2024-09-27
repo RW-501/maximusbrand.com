@@ -438,7 +438,7 @@ function truncateString(str, maxLength) {
 }
 
 // Initialize dropdowns on page load
-// initializeDropdowns();
+ initializeDropdowns();
 
 
 
