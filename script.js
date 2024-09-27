@@ -338,7 +338,7 @@ function initializeDropdowns() {
 }
 
 // Event listeners for dropdowns and sort buttons
-categoryDropdown.addEventListener("change", () => filterAndRenderProducts());
+// categoryDropdown.addEventListener("change", () => filterAndRenderProducts());
 sizeDropdown.addEventListener("change", () => filterAndRenderProducts());
 
 sortAZButton.addEventListener("click", () => {
