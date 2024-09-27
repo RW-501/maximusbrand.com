@@ -310,6 +310,8 @@ const sortZAButton = document.getElementById("sortZA");
 const sortPriceHLButton = document.getElementById("sortPriceHL");
 const sortPriceLowHighButton = document.getElementById("sortPriceLowHigh");
 
+
+ /*
 // Initialize dropdowns
 function initializeDropdowns() {
     const categories = new Set();
@@ -320,7 +322,7 @@ function initializeDropdowns() {
         sizes.add(product.size);
     });
 
-  /*  // Populate Category Dropdown
+   // Populate Category Dropdown
     categories.forEach(category => {
         const option = document.createElement("option");
         option.value = category;
@@ -490,6 +492,8 @@ function openProductPopup(index) {
             miniGallery.appendChild(miniImage);
         });
     }
+
+
 
     // Add event listener for the CTA button
     const ctaButton = modalContent.querySelector(".cta-button");
