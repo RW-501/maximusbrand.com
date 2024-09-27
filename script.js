@@ -313,80 +313,131 @@ function displayGallery(){
     
 
 
-    
-    // Sort A-Z button event listener
-    const sortAZButton = document.getElementById("sortAZ");
-    sortAZButton.addEventListener("click", () => {
-        productsData.sort(compareProductsByName);
-        renderProductGrid();
+  // Get the dropdown elements
+const categoryDropdown = document.getElementById("categoryDropdown");
+const sizeDropdown = document.getElementById("sizeDropdown");
+const sortPriceLowHighButton = document.getElementById("sortPriceLowHigh");
+
+// Initialize dropdown options based on productsData
+function initializeDropdowns() {
+    const categories = new Set();
+    const sizes = new Set();
+
+    productsData.forEach(product => {
+        categories.add(product.category);
+        sizes.add(product.size);
     });
 
-    // Sort Price High to Low button event listener
-    const sortPriceHLButton = document.getElementById("sortPriceHL");
-    sortPriceHLButton.addEventListener("click", () => {
-        productsData.sort(compareProductsByPriceHL);
-        renderProductGrid();
+    // Populate Category Dropdown
+    categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categoryDropdown.appendChild(option);
     });
 
-
-// Function to truncate a string and add "..." after a specified length
-function truncateString(str, maxLength) {
-    if (str.length > maxLength) {
-        return str.substring(0, maxLength - 3) + "...";
-    }
-    return str;
+    // Populate Size Dropdown
+    sizes.forEach(size => {
+        const option = document.createElement("option");
+        option.value = size;
+        option.textContent = size;
+        sizeDropdown.appendChild(option);
+    });
 }
-    productsData.sort(randomLikeSort);
 
-// Function to render the product grid
-function renderProductGrid() {
+// Event listener for Category Dropdown
+categoryDropdown.addEventListener("change", () => {
+    filterAndRenderProducts();
+});
+
+// Event listener for Size Dropdown
+sizeDropdown.addEventListener("change", () => {
+    filterAndRenderProducts();
+});
+
+// Event listener for Sort Price Low to High
+sortPriceLowHighButton.addEventListener("click", () => {
+    productsData.sort(compareProductsByPriceLH);
+    renderProductGrid();
+});
+
+// Function to filter and render products based on dropdown selection
+function filterAndRenderProducts() {
+    const selectedCategory = categoryDropdown.value;
+    const selectedSize = sizeDropdown.value;
+
+    let filteredProducts = productsData;
+
+    if (selectedCategory) {
+        filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
+    }
+
+    if (selectedSize) {
+        filteredProducts = filteredProducts.filter(product => product.size === selectedSize);
+    }
+
+    renderProductGrid(filteredProducts);
+}
+
+// Function to render the product grid based on filtered products
+function renderProductGrid(products = productsData) {
     const productGrid = document.getElementById("productGrid");
-    productGrid.innerHTML = "";
+    productGrid.innerHTML = ""; // Clear existing products
 
-    console.log("Rendering Product Grid");
+    products.forEach((product, index) => {
+        const truncatedDescription = truncateString(product.description, 80);
+        const productCard = document.createElement("div");
+        productCard.classList.add("product-card");
 
-  productsData.forEach((product, index) => {
-    const truncatedDescription = truncateString(product.description, 80);
-    const productCard = document.createElement("div");
-    productCard.classList.add("product-card");
+        // Add onclick attribute to openProductPopup function with the index
+        productCard.setAttribute("onclick", `openProductPopup(${index})`);
 
-    // Add onclick attribute to openProductPopup function with the index
-    productCard.setAttribute("onclick", `openProductPopup(${index})`);
-
-    productCard.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>${truncatedDescription}</p>
-        <p>${product.price}</p>
-        <button class="view-details" data-index="${index}">View Details</button>
-    `;
-    // Append the productCard to your container or wherever you want to display it
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${truncatedDescription}</p>
+            <p>${product.price}</p>
+            <button class="view-details" data-index="${index}">View Details</button>
+        `;
+        // Append the productCard to your container or wherever you want to display it
         productGrid.appendChild(productCard);
     });
 
-
-
-
-        // Add event listeners for product detail popups
+    // Add event listeners for product detail popups
     const viewDetailButtons = document.querySelectorAll(".view-details");
     viewDetailButtons.forEach(button => {
         button.addEventListener("click", () => openProductPopup(button.getAttribute("data-index")));
     });
 }
 
-
-// Custom comparison function to sort products by name (A-Z)
-function compareProductsByName(a, b) {
-    return a.name.localeCompare(b.name);
-}
-
-// Custom comparison function to sort products by price (high to low)
-function compareProductsByPriceHL(a, b) {
+// Custom comparison function to sort products by price (low to high)
+function compareProductsByPriceLH(a, b) {
     const priceA = parseFloat(a.price.replace("$", ""));
     const priceB = parseFloat(b.price.replace("$", ""));
 
-    return priceB - priceA;
+    return priceA - priceB;
 }
+
+// Initialize dropdowns on page load
+initializeDropdowns();
+
+
+// Get the Z to A sort button element
+const sortZAButton = document.getElementById("sortZA");
+
+// Event listener for Sort Z to A button
+sortZAButton.addEventListener("click", () => {
+    productsData.sort(compareProductsByNameZA);
+    renderProductGrid();
+});
+
+// Custom comparison function to sort products by name (Z-A)
+function compareProductsByNameZA(a, b) {
+    return b.name.localeCompare(a.name);
+}
+
+// Render the product grid on initial load
+renderProductGrid();
 
 
 
