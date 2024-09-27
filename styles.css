@@ -284,7 +284,7 @@ footer a{
     gap: 10px;
 }
 
-.sort-buttons button {
+.sort-buttons button select {
     background-color: red;
     color: white;
     border: none;
