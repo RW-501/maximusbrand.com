@@ -320,7 +320,7 @@ function initializeDropdowns() {
         sizes.add(product.size);
     });
 
-    // Populate Category Dropdown
+  /*  // Populate Category Dropdown
     categories.forEach(category => {
         const option = document.createElement("option");
         option.value = category;
@@ -336,10 +336,11 @@ function initializeDropdowns() {
         sizeDropdown.appendChild(option);
     });
 }
-
+*/
+    
 // Event listeners for dropdowns and sort buttons
 // categoryDropdown.addEventListener("change", () => filterAndRenderProducts());
-sizeDropdown.addEventListener("change", () => filterAndRenderProducts());
+// sizeDropdown.addEventListener("change", () => filterAndRenderProducts());
 
 sortAZButton.addEventListener("click", () => {
     productsData.sort(compareProductsByName);
