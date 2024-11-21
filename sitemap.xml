@@ -1,69 +1,93 @@
-   <div class="logo">Maximus Brand</div>  
-             <!--   <img src="/gallery/17.jpg" alt="Maximus Brand Logo"> -->
-        <nav>
-            <ul class="nav-links">
-                <li><a href="https://www.maximusbrand.com/">Home</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#products">Proucts</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <div class="product-grid" id="productGrid"><div class="product-card" onclick="openProductPopup(0)">
-            <img src="https://i.etsystatic.com/23152276/r/il/0e1b48/2745749046/il_1140xN.2745749046_g4ps.jpg" alt="Black Lives Matter Flag">
-            <h3>Black Lives Matter Flag</h3>
-            <p>Show your support for the Black Lives Matter movement with this high-quality ...</p>
-            <p>$12.99</p>
-            <button class="view-details" data-index="0">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(1)">
-            <img src="https://i.etsystatic.com/23152276/r/il/000df6/5190639007/il_794xN.5190639007_dpra.jpg" alt="Fleece Sweater size XL">
-            <h3>Fleece Sweater size XL</h3>
-            <p>Men's Zipper Knit Jacket | Stylish &amp; Warm Fleece Sweater size XL</p>
-            <p>$29.99</p>
-            <button class="view-details" data-index="1">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(2)">
-            <img src="https://i.etsystatic.com/23152276/r/il/771475/2745722718/il_794xN.2745722718_mzxt.jpg" alt="Black &amp; White American Flag">
-            <h3>Black &amp; White American Flag</h3>
-            <p>Black &amp; White American Flag 3x5 ft with Metal Grommets, High-Quality Polyeste...</p>
-            <p>$13.99</p>
-            <button class="view-details" data-index="2">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(3)">
-            <img src="https://i.etsystatic.com/23152276/r/il/26a533/3001879773/il_794xN.3001879773_p32n.jpg" alt="Stylish and Sexy Lace Boyshorts">
-            <h3>Stylish and Sexy Lace Boyshorts</h3>
-            <p>Discover the perfect blend of style and comfort with our Lace Boyshorts Bikin...</p>
-            <p>$12.99</p>
-            <button class="view-details" data-index="3">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(4)">
-            <img src="https://i.etsystatic.com/23152276/r/il/527e6c/5189414687/il_794xN.5189414687_8b0n.jpg" alt="Sexy Geometric Lace Thong Panties">
-            <h3>Sexy Geometric Lace Thong Panties</h3>
-            <p>Sustainable, Sexy, and Shamelessly Stylish! One size</p>
-            <p>$9.99</p>
-            <button class="view-details" data-index="4">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(5)">
-            <img src="https://i.etsystatic.com/23152276/r/il/dfd3a1/5141968318/il_794xN.5141968318_csx9.jpg" alt="Leather French Beret">
-            <h3>Leather French Beret</h3>
-            <p>The adjustable drawstring tie closure allows you to customize the circumferen...</p>
-            <p>$15.99</p>
-            <button class="view-details" data-index="5">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(6)">
-            <img src="https://i.etsystatic.com/23152276/r/il/07a325/2910262504/il_794xN.2910262504_3706.jpg" alt="Leggings, Capris, and Shorts">
-            <h3>Leggings, Capris, and Shorts</h3>
-            <p>Comfortable, Sexy, and Stretchy in Multiple Sizes and Colors, Leggings, Capri...</p>
-            <p>$14.99</p>
-            <button class="view-details" data-index="6">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(7)">
-            <img src="https://i.etsystatic.com/23152276/r/il/299b76/2793385799/il_794xN.2793385799_7sq4.jpg" alt="Black Lives Matter T-Shirt">
-            <h3>Black Lives Matter T-Shirt</h3>
-            <p>BLM Unisex Tee is soft and comfortable 50% cotton blend, this black tee featu...</p>
-            <p>$9.99</p>
-            <button class="view-details" data-index="7">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(8)">
-            <img src="https://maximusbrand.com/itemsImages/tanktop.jpg" alt="Women's Tank Top">
-            <h3>Women's Tank Top</h3>
-            <p>Classic Tank Top | Women's Slim Fit Tank | 100% Organic Cotton</p>
-            <p>$14.99</p>
-            <button class="view-details" data-index="8">View Details</button>
-        </div><div class="product-card" onclick="openProductPopup(9)">
-            <img src="https://maximusbrand.com/itemsImages/2ring.jpg" alt="Black Gauze Panties -2 Rings">
-            <h3>Black Gauze Panties -2 Rings</h3>
-            <p>Experience comfort and style with our Black Gauze Panties featuring two rings...</p>
-            <p>$9.99</p>
-            <button class="view-details" data-index="9">View Details</button>
-        </div></div>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.maximusbrand.com/</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Gallery Page -->
+  <url>
+    <loc>https://www.maximusbrand.com/#gallery</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Products Page -->
+  <url>
+    <loc>https://www.maximusbrand.com/#products</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://www.maximusbrand.com/#contact</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Product Pages -->
+  <url>
+    <loc>https://www.maximusbrand.com/product/black-lives-matter-flag</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/fleece-sweater-xl</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/black-white-american-flag</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/lace-boyshorts</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/sexy-lace-thong-panties</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/leather-french-beret</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/leggings-capris-shorts</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/black-lives-matter-t-shirt</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/womens-tank-top</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.maximusbrand.com/product/black-gauze-panties</loc>
+    <lastmod>2024-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
