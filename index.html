@@ -176,45 +176,256 @@
     <title>Maximus Brand - Urban Clothing & Accessories</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+
+    /* Reset some default styles */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styling */
+body {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f8f8;
+}
+
+/* Header Styling */
+header {
+    background-color: #111; /* Dark header for contrast */
+    color: white;
+    padding: 20px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo Styling */
+.logo {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: #ff6347; /* Tomato red hover color for better visibility */
+}
+
+/* Navigation Styling */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Hamburger Menu - Initially Hidden */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger div {
+    background-color: white;
+    width: 30px;
+    height: 3px;
+    border-radius: 5px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.open div:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open div:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open div:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ff6347; /* Hover color for the links */
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Mobile Menu Display */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background-color: #111;
+        width: 100%;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+}
+
+/* Section Styling */
+.section {
+    padding: 30px 50px;
+    text-align: center;
+}
+
+/* Featured Products Section Styling */
+.featuredproducts {
+    background-color: #fff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.featuredproducts h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* Card Styling */
+.product-card {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 50%;
+    margin: 2% auto;
+    display: block;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Product Image Styling */
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    background-color: #222;
+    color: white;
+    font-size: 0.9rem;
+}
+
+footer a {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #ff6347;
+}
+
+/* Responsive Mobile-Friendly Design */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 450px) {
+    .nav {
+        display: block;
+    }
+    .logo {
+        font-size: 2rem;
+    }
+    .nav-links {
+        padding-left: 0;
+    }
+}
+
+</style>
+
 </head>
 <body>
     <header>
-           <div class="logo">Maximus Brand</div>  
-             <!--   <img src="/gallery/17.jpg" alt="Maximus Brand Logo"> -->
+        <div class="logo">Maximus Brand</div>
         <nav>
             <ul class="nav-links">
                 <li><a href="https://www.maximusbrand.com/">Home</a></li>
                 <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#products">Proucts</a></li>
+                <li><a href="#products">Products</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
+    
     <main>
         <h1>Welcome to Maximus Brand</h1>
         <p>Discover our collection of high-quality urban clothing and accessories. Stay stylish and comfortable with our unique designs.</p>
-       <!--       <section class="products">
-            <h2>Featured Products</h2>
-            <div class="product-card">
-                <img src="https://i.etsystatic.com/23152276/r/il/ad821c/4857234583/il_794xN.4857234583_rtsi.jpg" alt="Slim Fit Sleeveless Women's Tank Top T-Shirt">
-                <h3>Slim Fit Sleeveless Women's Tank Top T-Shirt</h3>
-                <p>Price: $8.99</p>
-                <a href="https://www.etsy.com/listing/1445108382/womens-black-white-sleeveless-tank-top?click_key=c8e7bf2b6fb95d6a72ede35aab48fd84dfc2dfca%3A1445108382&click_sum=6c675640&ref=shop_home_active_1" class="buy-button">Buy Now</a>
-            </div>
-            <div class="product-card">
-                <img src="https://i.etsystatic.com/23152276/r/il/771475/2745722718/il_794xN.2745722718_mzxt.jpg" alt="Black & White American Flag">
-                <h3>Black & White American Flag</h3>
-                <p>Price: $13.99</p>
-                <a href="https://www.etsy.com/listing/928415387/black-white-american-flag-3x5-ft-with?click_key=b0fd1dca567c262294b4b3aaec3db47879b22d30%3A928415387&click_sum=73318958&ref=listing-free-shipping-bundle-2" class="buy-button">Buy Now</a>
-            </div>
-            <div class="product-card">
-                <img src="https://i.etsystatic.com/23152276/r/il/0e1b48/2745749046/il_1140xN.2745749046_g4ps.jpg" alt="Black Lives Matter Flag">
-                <h3>Black Lives Matter Flag</h3>
-                <p>Price: $12.99</p>
-                <a href="https://www.etsy.com/listing/914493552/black-lives-matter-flag-3x5-high-quality" class="buy-button">Buy Now</a>
-            </div>
-        -->
-        </section>
+
+        
     </main>
 </body>
 </html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MaximusBrand.com offers high-quality urban clothing and accessories. Stay up-to-date with our latest collections and releases.">
+    <meta name="keywords" content="MaximusBrand.com, urban clothing, accessories, fashion, style">
+    <meta name="author" content="Maximus Brand">
+    <link rel="icon" href="/fav/favicon.ico" sizes="192x192">
+    <title>Products - Maximus Brand</title>
+
+    <!-- OpenGraph meta tags for social media sharing -->
+    <meta property="og:title" content="Maximus Brand Products">
+    <meta property="og:description" content="Explore high-quality urban clothing and accessories.">
+    <meta property="og:image" content="https://www.maximusbrand.com/gallery/product-image.jpg">
+    <meta property="og:url" content="https://www.maximusbrand.com/products">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Products</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="filters">
+            <label for="sort">Sort by:</label>
+            <select id="sort" onchange="filterProducts()">
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="category">Category</option>
+            </select>
+            <input type="text" id="search" placeholder="Search products" oninput="filterProducts()">
+        </section>
+
+        <section class="product-grid">
+            <!-- Example of a product card with hover effects -->
+            <div class="product-card">
+                <img src="path-to-image.jpg" alt="Product Name">
+                <div class="product-info">
+                    <h3>Product Name</h3>
+                    <p>$XX.XX</p>
+                    <div class="rating">
+                        <span>⭐⭐⭐⭐☆</span> 63 reviews
+                    </div>
+                    <button onclick="location.href='product-details.html'">View Details</button>
+                    <button class="add-to-cart" onclick="addToCart('product-id')">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Repeat for other products -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Maximus Brand</p>
+    </footer>
+
+    <script>
+        // Dynamic Filtering & Searching
+        function filterProducts() {
+            const searchQuery = document.getElementById('search').value.toLowerCase();
+            const sortBy = document.getElementById('sort').value;
+            const productCards = document.querySelectorAll('.product-card');
+            
+            // Filter products by name and sort them
+            productCards.forEach(card => {
+                const productName = card.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchQuery)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Add product to cart (AJAX functionality to be added)
+        function addToCart(productId) {
+            // Simulating an add-to-cart event (AJAX call could go here)
+            alert("Product added to cart!");
+        }
+    </script>
+</body>
+</html>
