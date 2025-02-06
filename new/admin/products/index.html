@@ -50,51 +50,68 @@
         <h2>Add / Update Product</h2>
       
         <form id="product-form">
-            <!-- Basic Info -->
             <div class="section">
                 <h3>Basic Information</h3>
                 <input type="hidden" id="product-id">
                 <input type="text" id="product-name" placeholder="Product Name" required>
                 <input type="text" id="product-collection" placeholder="Collection (optional)">
-                <select id="product-category" required>
-                    <option value="">Select Category</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Digital">Digital</option>
-                    <option value="Customizable">Customizable</option>
-                </select>
+                <input type="text" id="product-tags" placeholder="Tags (comma-separated)">
+                <input type="text" id="product-brand" placeholder="Brand">
                 <textarea id="product-description" placeholder="Product Description"></textarea>
             </div>
-
-            <!-- Pricing & Stock -->
+        
             <div class="section">
                 <h3>Pricing & Stock</h3>
-                <input type="number" id="product-price" placeholder="Price" required>
-                <input type="number" id="product-discount" placeholder="Discount (%)">
-                <input type="number" id="product-stock" placeholder="Stock Quantity" required>
+                <input type="text" id="product-price" placeholder="Price ($)">
+                <input type="text" id="product-discount" placeholder="Discount (%)">
+                <input type="text" id="product-multiple-discount" placeholder="Multiple Item Discount (%)">
+                <input type="text" id="product-stock" placeholder="Stock Quantity">
+                <input type="text" id="product-quantity" placeholder="Total Quantity">
+                <input type="text" id="product-sold" placeholder="Sold Quantity">
             </div>
-
-<!-- Media (Image & Video) -->
-<div class="section">
-    <h3>Media</h3>
-    <button type="button" id="add-image-btn">Add Image</button>
-    <button type="button" id="add-video-btn">Add Video</button>
-    
-    <input type="file" id="product-image" accept="image/*" hidden>
-    <input type="file" id="product-video" accept="video/*" hidden>
-    
-    <div id="media-preview" class="media-container">
-        <p>Drag and drop to reorder media</p>
-    </div>
-</div>
-
-
-            <!-- Attributes (Shown Based on Category) -->
+            
+            <div class="section">
+                <h3>Media</h3>
+                <button type="button" id="add-image-btn">Add Image</button>
+                <button type="button" id="add-video-btn">Add Video</button>
+                <input type="file" id="product-image" accept="image/*" hidden>
+                <input type="file" id="product-video" accept="video/*" hidden>
+                <div id="media-preview" class="media-container">
+                    <p>Drag and drop to reorder media</p>
+                </div>
+            </div>
+        
             <div id="dynamic-attributes"></div>
-
-            <!-- Submit -->
+        
+            <div class="section">
+                <h3>Shipping Information</h3>
+                <label><input type="checkbox" id="product-freeShipping"> Free Shipping</label>
+                <input type="text" id="product-shipsFrom" placeholder="Ships From">
+                <input type="text" id="product-delivery" placeholder="Estimated Delivery Time">
+            </div>
+        
+            <div class="section">
+                <h3>Storage & Source</h3>
+                <input type="text" id="product-storage" placeholder="Item Stored Location">
+                <input type="text" id="product-source" placeholder="Source (e.g. Maximus Store)">
+            </div>
+        
+            <div class="section">
+                <h3>Product Metadata</h3>
+                <input type="text" id="product-sku" placeholder="SKU">
+                <input type="text" id="product-barcode" placeholder="Barcode">
+                <input type="text" id="product-asin" placeholder="ASIN">
+                <input type="text" id="product-upc" placeholder="UPC">
+            </div>
+        
+            <div class="section">
+                <h3>Additional Notes</h3>
+                <textarea id="product-note" placeholder="Special Notes"></textarea>
+            </div>
+        
             <button type="submit">Save Product</button>
         </form>
+        
     </div>
 
 </body>
