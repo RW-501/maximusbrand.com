@@ -193,6 +193,7 @@ function generateSearchableName(name) {
 }
 
 window.editProduct = (id, product) => {
+    console.log("products  ",product);
     document.getElementById("product-id").value = id;
     document.getElementById("product-name").value = product.name;
     document.getElementById("product-collection").value = product.collection || "";
