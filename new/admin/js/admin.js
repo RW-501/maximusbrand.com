@@ -6,6 +6,12 @@ import {
   getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js';
 
+
+
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js';
+
+const storage = getStorage();
+
 // Firebase Config
 const firebaseConfig = {
     apiKey: "AIzaSyAwidhrmgEda-1RdjQGW7kXsVAnzqmqBWE",
@@ -83,7 +89,7 @@ async function loadProducts() {
 // Add / Update Product
 productForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    
+
     const productData = {
         name: document.getElementById("product-name").value,
         collection: document.getElementById("product-collection").value,
@@ -92,75 +98,58 @@ productForm.addEventListener("submit", async (event) => {
         price: parseFloat(document.getElementById("product-price").value),
         discount: parseInt(document.getElementById("product-discount").value),
         stock: parseInt(document.getElementById("product-stock").value),
-        image: document.getElementById("product-image").value,
-        video: document.getElementById("product-video").value
+        media: mediaList.map(media => media.url), // Save media URLs
     };
 
-    await addDoc(collection(db, "mainProducts"), productData);
-    
+    const productId = document.getElementById("product-id").value;
+
+    if (productId) {
+        await updateDoc(doc(db, "mainProducts", productId), productData);
+    } else {
+        await addDoc(collection(db, "mainProducts"), productData);
+    }
+
     productForm.reset();
+    mediaPreview.innerHTML = "";
+    mediaList = [];
     loadProducts();
 });
 
-// Handle Category Change
-categoryField.addEventListener("change", () => {
-    dynamicAttributes.innerHTML = "";
-    
-    if (categoryField.value === "Clothing") {
-        dynamicAttributes.innerHTML = `
-            <h3>Clothing Attributes</h3>
-            <input type="text" id="product-size" placeholder="Sizes (comma-separated)">
-            <input type="text" id="product-material" placeholder="Material">
-        `;
-    } else if (categoryField.value === "Electronics") {
-        dynamicAttributes.innerHTML = `
-            <h3>Electronics Attributes</h3>
-            <input type="text" id="product-battery" placeholder="Battery Life">
-            <input type="text" id="product-warranty" placeholder="Warranty">
-        `;
-    }
-});
-
-// Edit Product
-window.editProduct = (id, name, image, price, stock) => {
-    document.getElementById("product-id").value = id;
-    document.getElementById("product-name").value = name;
-    document.getElementById("product-image").value = image;
-    document.getElementById("product-price").value = price;
-    document.getElementById("product-stock").value = stock;
-};
-
-// Delete Product
-window.deleteProduct = async (id) => {
-    if (confirm("Are you sure you want to delete this product?")) {
-        await deleteDoc(doc(db, "mainProducts", id));
-        loadProducts();
-    }
-};
 
 
-
-const imageInput = document.getElementById("product-image");
-const videoInput = document.getElementById("product-video");
-
-
+let mediaList = []; // Store media items for preview and Firebase upload
 
 // Open file selector when clicking buttons
-document.getElementById("add-image-btn").addEventListener("click", () => imageInput.click());
-document.getElementById("add-video-btn").addEventListener("click", () => videoInput.click());
+document.getElementById("add-image-btn").addEventListener("click", () => document.getElementById("product-image").click());
+document.getElementById("add-video-btn").addEventListener("click", () => document.getElementById("product-video").click());
 
-// Handle Image Upload
-imageInput.addEventListener("change", (event) => handleMediaUpload(event, "image"));
-videoInput.addEventListener("change", (event) => handleMediaUpload(event, "video"));
+// Handle Image & Video Upload
+document.getElementById("product-image").addEventListener("change", (event) => handleMediaUpload(event, "image"));
+document.getElementById("product-video").addEventListener("change", (event) => handleMediaUpload(event, "video"));
 
-let mediaList = []; // Store media items for preview and drag/drop
-
-function handleMediaUpload(event, type) {
+async function handleMediaUpload(event, type) {
     const file = event.target.files[0];
     if (!file) return;
 
-    const url = URL.createObjectURL(file);
-    
+    const storageRef = ref(storage, `products/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+        (snapshot) => {
+            console.log(`Upload Progress: ${(snapshot.bytesTransferred / snapshot.totalBytes) * 100}%`);
+        }, 
+        (error) => {
+            console.error("Upload Failed:", error);
+        }, 
+        async () => {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            addMediaToPreview(downloadURL, type);
+        }
+    );
+}
+
+// Add Media Preview
+function addMediaToPreview(url, type) {
     const mediaItem = document.createElement("div");
     mediaItem.classList.add("media-item");
     mediaItem.setAttribute("draggable", "true");
@@ -171,14 +160,14 @@ function handleMediaUpload(event, type) {
         mediaItem.innerHTML = `<video src="${url}" controls></video><button class="remove-media">✖</button>`;
     }
 
-    mediaList.push({ file, type });
+    mediaList.push({ url, type });
     mediaPreview.appendChild(mediaItem);
 
     addDragAndDrop();
-    addRemoveButton(mediaItem, file);
+    addRemoveButton(mediaItem, url);
 }
 
-// Add Drag & Drop Reordering
+// Drag & Drop Reordering
 function addDragAndDrop() {
     const mediaItems = document.querySelectorAll(".media-item");
     let draggedItem = null;
@@ -199,7 +188,7 @@ function addDragAndDrop() {
                 let droppedIndex = items.indexOf(item);
 
                 mediaList.splice(droppedIndex, 0, mediaList.splice(draggedIndex, 1)[0]);
-                
+
                 if (draggedIndex > droppedIndex) {
                     parent.insertBefore(draggedItem, item);
                 } else {
@@ -213,12 +202,31 @@ function addDragAndDrop() {
 }
 
 // Remove Media Item
-function addRemoveButton(mediaItem, file) {
+function addRemoveButton(mediaItem, url) {
     mediaItem.querySelector(".remove-media").addEventListener("click", () => {
         mediaItem.remove();
-        mediaList = mediaList.filter(media => media.file !== file);
+        mediaList = mediaList.filter(media => media.url !== url);
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// Delete Product
+window.deleteProduct = async (id) => {
+    if (confirm("Are you sure you want to delete this product?")) {
+        await deleteDoc(doc(db, "mainProducts", id));
+        loadProducts();
+    }
+};
 
 
 /*
