@@ -10,7 +10,6 @@ import {
 
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js';
 
-const storage = getStorage();
 
 // Firebase Config
 const firebaseConfig = {
@@ -27,6 +26,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 // DOM Elements
 const adminPanel = document.getElementById("admin-panel");
