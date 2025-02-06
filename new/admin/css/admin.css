@@ -64,10 +64,10 @@ h1, h2, h3 {
 #product-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-kground-color: #ecf0f1;
-}
+
 #product-table tr:hover {
-    bac
+    background-color: #ecf0f1;
+}
 
 /* Form Styles */
 form {
