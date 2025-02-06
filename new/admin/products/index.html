@@ -1,0 +1,62 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Maximus Brand</title>
+    <script type="module" src="admin/admin.js"></script>
+    <link rel="stylesheet" href="admin/admin.css">
+</head>
+<body>
+
+    <div id="admin-login">
+        <h2>Admin Login</h2>
+        <button id="google-login">Login with Google</button>
+    </div>
+
+    <div id="admin-panel" style="display: none;">
+        <h1>Product Management</h1>
+        <button id="logout-btn">Logout</button>
+
+        <h2>Products</h2>
+        <table id="product-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="product-list">
+                <!-- Products will load here dynamically -->
+            </tbody>
+        </table>
+
+        <h2>Add / Update Product</h2>
+        <form id="product-form">
+            <input type="hidden" id="product-id">
+            <input type="text" id="product-name" placeholder="Product Name" required>
+            <input type="text" id="product-image" placeholder="Image URL" required>
+            <input type="number" id="product-price" placeholder="Price" required>
+            <input type="number" id="product-stock" placeholder="Stock Quantity" required>
+            <button type="submit">Save Product</button>
+        </form>
+    </div>
+
+</body>
+</html>

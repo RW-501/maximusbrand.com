@@ -1,31 +1,89 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
 }
-.product-card {
-    display: inline-block;
+
+/* Header */
+.tn_Class_Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    color: white;
+    padding: 10px 20px;
+}
+
+.tn_Class_SearchBar input {
+    padding: 5px;
+}
+
+.tn_Class_CartIcon {
+    cursor: pointer;
+}
+
+/* Featured Products */
+.tn_Class_FeaturedProducts {
+    text-align: center;
+    padding: 20px;
+}
+
+.tn_Class_FeaturedCarousel {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Product Grid */
+.tn_Class_ProductGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.tn_Class_ProductCard {
     background: white;
     padding: 10px;
-    margin: 10px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    text-align: center;
 }
-.product-card img {
+
+.tn_Class_ProductCard img {
     width: 100%;
     border-radius: 5px;
 }
-.old-price {
-    text-decoration: line-through;
-    color: gray;
+
+/* Product Detail Modal */
+.tn_Class_ProductModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
 }
-button {
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
+
+.tn_Class_ModalContent {
+    background: white;
+    width: 50%;
+    margin: 100px auto;
+    padding: 20px;
+    text-align: center;
 }
-button:hover {
-    background: #ff3b3b;
+
+/* Cart */
+.tn_Class_CartSection {
+    padding: 20px;
+}
+
+.tn_Class_CartItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
