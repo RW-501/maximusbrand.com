@@ -148,10 +148,30 @@
         
             <div class="section">
                 <h3>Shipping Information</h3>
-                <label><input type="checkbox" id="product-freeShipping"> Free Shipping</label>
-                <input type="text" id="product-shipsFrom" placeholder="Ships From">
-                <input type="text" id="product-delivery" placeholder="Estimated Delivery Time">
+            
+                <label>
+                    <input type="checkbox" id="product-freeShipping"> Free Shipping
+                </label>
+            
+                <label for="product-shipsFrom">Ships From</label>
+                <select id="product-shipsFrom" required>
+                    <option value="" disabled selected>Select Location</option>
+                    <option value="Dallas, Texas, USA">Dallas, Texas, USA</option>
+                    <option value="China">China</option>
+                    <option value="Taiwan">Taiwan</option>
+                    <option value="Other">Other</option>
+                </select>
+            
+                <label for="product-delivery">Estimated Delivery Time</label>
+                <select id="product-delivery" required>
+                    <option value="" disabled selected>Select Delivery Time</option>
+                    <option value="3-5 days">3-5 days</option>
+                    <option value="7 days">7 days</option>
+                    <option value="Less than 2 weeks">Less than 2 weeks</option>
+                    <option value="Less than 30 days">Less than 30 days</option>
+                </select>
             </div>
+            
         
             <div class="section">
                 <h3>Storage & Source</h3>
