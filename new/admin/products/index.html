@@ -48,12 +48,51 @@
         </table>
 
         <h2>Add / Update Product</h2>
+      
         <form id="product-form">
-            <input type="hidden" id="product-id">
-            <input type="text" id="product-name" placeholder="Product Name" required>
-            <input type="text" id="product-image" placeholder="Image URL" required>
-            <input type="number" id="product-price" placeholder="Price" required>
-            <input type="number" id="product-stock" placeholder="Stock Quantity" required>
+            <!-- Basic Info -->
+            <div class="section">
+                <h3>Basic Information</h3>
+                <input type="hidden" id="product-id">
+                <input type="text" id="product-name" placeholder="Product Name" required>
+                <input type="text" id="product-collection" placeholder="Collection (optional)">
+                <select id="product-category" required>
+                    <option value="">Select Category</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Digital">Digital</option>
+                    <option value="Customizable">Customizable</option>
+                </select>
+                <textarea id="product-description" placeholder="Product Description"></textarea>
+            </div>
+
+            <!-- Pricing & Stock -->
+            <div class="section">
+                <h3>Pricing & Stock</h3>
+                <input type="number" id="product-price" placeholder="Price" required>
+                <input type="number" id="product-discount" placeholder="Discount (%)">
+                <input type="number" id="product-stock" placeholder="Stock Quantity" required>
+            </div>
+
+<!-- Media (Image & Video) -->
+<div class="section">
+    <h3>Media</h3>
+    <button type="button" id="add-image-btn">Add Image</button>
+    <button type="button" id="add-video-btn">Add Video</button>
+    
+    <input type="file" id="product-image" accept="image/*" hidden>
+    <input type="file" id="product-video" accept="video/*" hidden>
+    
+    <div id="media-preview" class="media-container">
+        <p>Drag and drop to reorder media</p>
+    </div>
+</div>
+
+
+            <!-- Attributes (Shown Based on Category) -->
+            <div id="dynamic-attributes"></div>
+
+            <!-- Submit -->
             <button type="submit">Save Product</button>
         </form>
     </div>
