@@ -48,7 +48,6 @@
         </table>
 
         <h2>Add / Update Product</h2>
-      
         <form id="product-form">
             <div class="section">
                 <h3>Basic Information</h3>
@@ -57,9 +56,32 @@
                 <input type="text" id="product-collection" placeholder="Collection (optional)">
                 <input type="text" id="product-tags" placeholder="Tags (comma-separated)">
                 <input type="text" id="product-brand" placeholder="Brand">
+                <input type="text" id="product-style" placeholder="Style">
+                <input type="text" id="product-gender" placeholder="Gender">
                 <textarea id="product-description" placeholder="Product Description"></textarea>
+                <input type="text" id="product-highlights" placeholder="Highlights (comma-separated)">
             </div>
-        
+            
+            <div class="section">
+                <h3>Category & Subcategory</h3>
+                <label for="product-category">Category</label>
+                <select id="product-category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Home & Kitchen">Home & Kitchen</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Toys & Games">Toys & Games</option>
+                    <option value="Automotive">Automotive</option>
+                </select>
+            
+                <label for="product-subCategory">Subcategory</label>
+                <select id="product-subCategory" required>
+                    <option value="" disabled selected>Select Subcategory</option>
+                </select>
+            </div>
+            
             <div class="section">
                 <h3>Pricing & Stock</h3>
                 <input type="text" id="product-price" placeholder="Price ($)">
@@ -69,7 +91,30 @@
                 <input type="text" id="product-quantity" placeholder="Total Quantity">
                 <input type="text" id="product-sold" placeholder="Sold Quantity">
             </div>
-            
+        
+            <div class="section">
+                <h3>Size & Appearance</h3>
+                <input type="text" id="product-size" placeholder="Size (comma-separated)">
+                <input type="text" id="product-color" placeholder="Color">
+                <input type="text" id="product-material" placeholder="Material">
+            </div>
+        
+            <div class="section">
+                <h3>Customization</h3>
+                <label><input type="checkbox" id="product-customizable"> Customizable</label>
+                <input type="text" id="product-custom-time" placeholder="Estimated Customization Time">
+                <input type="text" id="product-custom-options" placeholder="Customization Options (comma-separated)">
+            </div>
+        
+            <div class="section">
+                <h3>Electronics Specifications</h3>
+                <input type="text" id="product-battery" placeholder="Battery Life">
+                <input type="text" id="product-charging" placeholder="Charging Time">
+                <input type="text" id="product-wireless" placeholder="Wireless Range">
+                <input type="text" id="product-warranty" placeholder="Warranty">
+                <input type="text" id="product-connectivity" placeholder="Connectivity (comma-separated)">
+            </div>
+        
             <div class="section">
                 <h3>Media</h3>
                 <button type="button" id="add-image-btn">Add Image</button>
@@ -81,7 +126,18 @@
                 </div>
             </div>
         
-            <div id="dynamic-attributes"></div>
+            <div class="section">
+                <h3>Digital Products</h3>
+                <label><input type="checkbox" id="product-digital"> Digital Product</label>
+                <input type="text" id="product-download" placeholder="Download URL">
+                <input type="text" id="product-fileFormat" placeholder="File Format (comma-separated)">
+            </div>
+        
+            <div class="section">
+                <h3>Presale & Variety</h3>
+                <label><input type="checkbox" id="product-presale"> Presale</label>
+                <label><input type="checkbox" id="product-variety"> Multiple Variants</label>
+            </div>
         
             <div class="section">
                 <h3>Shipping Information</h3>
@@ -111,6 +167,7 @@
         
             <button type="submit">Save Product</button>
         </form>
+        
         
     </div>
 

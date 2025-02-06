@@ -196,7 +196,7 @@ window.editProduct = (id, products) => {
     console.log("products  ",products);
 
     let product = products[0];
-    console.log("product  ",product);
+    console.log("products  ",products);
 
     document.getElementById("product-id").value = id;
     document.getElementById("product-name").value = product.name;
@@ -278,6 +278,34 @@ document.querySelectorAll("#product-price, #product-discount, #product-multiple-
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const categorySelect = document.getElementById("product-category");
+    const subCategorySelect = document.getElementById("product-subCategory");
+
+    const subCategories = {
+        "Clothing": ["T-Shirts", "Hoodies", "Jackets", "Jeans", "Shoes"],
+        "Electronics": ["Smartphones", "Laptops", "Headphones", "Cameras"],
+        "Home & Kitchen": ["Furniture", "Appliances", "Cookware", "Bedding"],
+        "Beauty": ["Makeup", "Skincare", "Haircare", "Fragrances"],
+        "Sports": ["Gym Equipment", "Cycling", "Running", "Outdoor Gear"],
+        "Toys & Games": ["Board Games", "Action Figures", "Educational Toys"],
+        "Automotive": ["Car Accessories", "Tires", "Tools", "Batteries"]
+    };
+
+    categorySelect.addEventListener("change", function () {
+        const selectedCategory = this.value;
+        subCategorySelect.innerHTML = '<option value="" disabled selected>Select Subcategory</option>';
+
+        if (subCategories[selectedCategory]) {
+            subCategories[selectedCategory].forEach(sub => {
+                let option = document.createElement("option");
+                option.value = sub;
+                option.textContent = sub;
+                subCategorySelect.appendChild(option);
+            });
+        }
+    });
+});
 
 let mediaList = []; // Store media items for preview and Firebase upload
 
