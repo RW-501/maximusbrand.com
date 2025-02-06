@@ -192,8 +192,12 @@ function generateSearchableName(name) {
     return name.toLowerCase().split(" ");
 }
 
-window.editProduct = (id, product) => {
-    console.log("products  ",product);
+window.editProduct = (id, products) => {
+    console.log("products  ",products);
+
+    let product = products[0];
+    console.log("product  ",product);
+
     document.getElementById("product-id").value = id;
     document.getElementById("product-name").value = product.name;
     document.getElementById("product-collection").value = product.collection || "";
