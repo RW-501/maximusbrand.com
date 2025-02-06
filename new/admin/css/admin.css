@@ -64,10 +64,10 @@ h1, h2, h3 {
 #product-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-
-#product-table tr:hover {
-    background-color: #ecf0f1;
+kground-color: #ecf0f1;
 }
+#product-table tr:hover {
+    bac
 
 /* Form Styles */
 form {
@@ -81,7 +81,7 @@ form {
     border-radius: 6px;
 }
 
-input, textarea, button {
+input, textarea, select, button {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -89,13 +89,13 @@ input, textarea, button {
     border-radius: 4px;
 }
 
-input:focus, textarea:focus {
+input:focus, select:focus, textarea:focus {
     border-color: #3498db;
     outline: none;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
-button {
+button, select {
     background-color: #3498db;
     color: white;
     border: none;
