@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maximus Brand - E-commerce</title>
+    <link rel="stylesheet" href="index/main.css">
+    <script defer src="index/main.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="tn_ID_Header" class="tn_Class_Header">
+        <div class="tn_Class_Container">
+            <div id="tn_ID_Logo" class="tn_Class_Logo">Maximus Brand</div>
+            <div id="tn_ID_SearchBar" class="tn_Class_SearchBar">
+                <input type="text" placeholder="Search products...">
+                <button>Search</button>
+            </div>
+            <div id="tn_ID_UserMenu" class="tn_Class_UserMenu">
+                <span>Sign In / Profile</span>
+                <span id="tn_ID_CartIcon" class="tn_Class_CartIcon">🛒 <span id="tn_ID_CartCount">0</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Products -->
+    <section id="tn_ID_FeaturedProducts" class="tn_Class_FeaturedProducts">
+        <h2>Featured Products</h2>
+        <div id="tn_ID_FeaturedCarousel" class="tn_Class_FeaturedCarousel">
+            <!-- Auto-scroll carousel will be populated dynamically -->
+        </div>
+    </section>
+
+    <!-- Main Product Grid -->
+    <section id="tn_ID_ProductGridSection" class="tn_Class_ProductGridSection">
+        <div id="tn_ID_SortFilterBar" class="tn_Class_SortFilterBar">
+            <label>Sort By:
+                <select id="tn_ID_SortOptions">
+                    <option value="most_viewed">Most Viewed</option>
+                    <option value="high_quantity">High Quantity</option>
+                    <option value="high_price">Highest Price</option>
+                    <option value="low_price">Lowest Price</option>
+                    <option value="discounted">Discounted</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </label>
+        </div>
+        <div id="tn_ID_ProductGrid" class="tn_Class_ProductGrid">
+            <!-- Products will be loaded here dynamically -->
+        </div>
+    </section>
+
+    <!-- Product Detail Modal -->
+    <div id="tn_ID_ProductModal" class="tn_Class_ProductModal">
+        <div class="tn_Class_ModalContent">
+            <span id="tn_ID_CloseModal" class="tn_Class_CloseModal">&times;</span>
+            <div id="tn_ID_ModalContent" class="tn_Class_ModalContentInner">
+                <!-- Product details will be injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart/Checkout -->
+    <section id="tn_ID_CartSection" class="tn_Class_CartSection">
+        <h2>Shopping Cart</h2>
+        <div id="tn_ID_CartItems" class="tn_Class_CartItems">
+            <!-- Items will be dynamically populated here -->
+        </div>
+        <div id="tn_ID_CartSummary" class="tn_Class_CartSummary">
+            <p>Total: $<span id="tn_ID_CartTotal">0.00</span></p>
+            <button id="tn_ID_CheckoutButton" class="tn_Class_CheckoutButton">Proceed to Checkout</button>
+        </div>
+    </section>
+
+    <!-- PayPal Button -->
+    <div id="tn_ID_PaypalContainer" class="tn_Class_PaypalContainer"></div>
+
+
+
+
+
+
+
+
+
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+
+
+
+</body>
+</html>
+
+
+
