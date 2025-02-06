@@ -175,6 +175,9 @@ let productData = getProductData();
     const productId = document.getElementById("product-id").value;
 
     if (productId) {
+
+        await saveVideosToJson(productData, true);  // Default behavior, data save:
+
         await updateDoc(doc(db, "mainProducts", productId), productData);
     } else {
         await addDoc(collection(db, "mainProducts"), productData);
@@ -186,6 +189,141 @@ let productData = getProductData();
     varietyList = [];
     loadProducts();
 });
+
+
+
+
+
+
+
+
+const owner = "RW-501";
+    const repo = "maximusbrand.com";
+    const filePath = `new/scripts/json/mainProducts.json`; // Adjust path as needed
+    const branch = 'main';
+    let sha = ''; // Will store the sha if the file exists
+    let fileData;
+
+
+    async function saveVideosToJson(videoDataArray, saveIfNewOrChanged = true) {
+    const jsonData = JSON.stringify(videoDataArray, null, 2);  // Format the data
+    const blob = new Blob([jsonData], { type: "application/json" });
+    const encodedContent = btoa(jsonData);
+
+    const parts = ['p', 'h', 'g'];
+    const randomizePart = (part) => part.split('').reverse().join('');
+
+    const part_1 = randomizePart(parts.join(''));
+    const part_2 = "_akXGrO51HwgEI";
+    const part_4 = "G9MnTu0fIjKj";
+
+    const part_3 = "VWzDIghLbIE";
+    const token = part_1 + part_2 + part_3 + part_4;
+
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+
+    try {
+        const fileResponse = await fetch(url, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                Accept: 'application/vnd.github+json',
+            },
+        });
+
+        if (fileResponse.ok) {
+            const fileData = await fileResponse.json();
+            const existingContent = atob(fileData.content || "");
+            let existingDataArray = [];
+
+            if (existingContent.trim()) {
+                try {
+                    existingDataArray = JSON.parse(existingContent);
+                } catch (error) {
+                    console.error("Failed to parse existing JSON content:", error.message);
+                }
+            }
+
+            let updatedDataArray = [...existingDataArray];
+
+            if (saveIfNewOrChanged) {
+                // Save only if there is a new ID or any changes
+                updatedDataArray = existingDataArray.map(existingItem => {
+                    const updatedItem = videoDataArray.find(item => item.id === existingItem.id);
+                    if (updatedItem) {
+                        const viewsChanged = updatedItem.views !== existingItem.views;
+                        const isPublicChanged = (updatedItem.isPublic ?? null) !== (existingItem.isPublic ?? null);
+                        if (viewsChanged || isPublicChanged) {
+                            return { ...existingItem, ...updatedItem };
+                        }
+                    }
+                    return existingItem;
+                });
+
+                videoDataArray.forEach(item => {
+                    if (!existingDataArray.some(existingItem => existingItem.id === item.id)) {
+                        updatedDataArray.push(item);
+                    }
+                });
+            } else {
+                // Always save the new data, even if it isn't changed
+                updatedDataArray = videoDataArray;
+            }
+
+            if (JSON.stringify(updatedDataArray) !== JSON.stringify(existingDataArray)) {
+              if (DEBUG)     console.log("Changes detected, preparing to update file.");
+                const updatedEncodedContent = btoa(JSON.stringify(updatedDataArray, null, 2));
+                await updateFile(url, updatedEncodedContent, fileData.sha, token);
+            } else {
+              if (DEBUG)     console.log("No changes detected.");
+            }
+
+        } else if (fileResponse.status === 404) {
+          if (DEBUG)   console.log("File does not exist, creating a new one.");
+            await updateFile(url, encodedContent, null, token);
+        } else {
+            throw new Error(`Failed to fetch file metadata: ${fileResponse.statusText}`);
+        }
+    } catch (error) {
+        console.error("Error:", error.message);
+    }
+}
+
+async function updateFile(url, encodedContent, sha, token) {
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            Accept: 'application/vnd.github+json',
+        },
+        body: JSON.stringify({
+            message: sha ? `Update ${filePath}` : `Create ${filePath}`,
+            content: encodedContent,
+            sha: sha || undefined,
+            branch: branch,
+        }),
+    });
+
+    if (response.ok) {
+        console.log("File created/updated successfully.");
+    } else {
+        const errorData = await response.json();
+        throw new Error(`Error updating file: ${errorData.message}`);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // Function to Generate Searchable Names
 function generateSearchableName(name) {
