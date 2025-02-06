@@ -256,21 +256,7 @@ function loadCategoryAttributes(category, product = {}) {
         `;
     }
 }
-// Load media preview when editing a product
-function addMediaToPreview(url, type) {
-    const mediaItem = document.createElement("div");
-    mediaItem.classList.add("media-item");
-    mediaItem.setAttribute("draggable", "true");
 
-    if (type === "image") {
-        mediaItem.innerHTML = `<img src="${url}" alt="Uploaded Image"><button class="remove-media">✖</button>`;
-    } else {
-        mediaItem.innerHTML = `<video src="${url}" controls></video><button class="remove-media">✖</button>`;
-    }
-
-    mediaPreview.appendChild(mediaItem);
-    addRemoveButton(mediaItem, url);
-}
 
 // Function to clean and convert input to a valid number
 function formatNumberInput(value) {
