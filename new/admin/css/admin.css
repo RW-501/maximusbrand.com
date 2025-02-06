@@ -93,6 +93,8 @@ input, textarea, select, button {
     border: 1px solid #ccc;
     border-radius: 4px;
     display: block;
+    box-sizing: border-box;
+
 }
 
 input:focus, select:focus, textarea:focus {
