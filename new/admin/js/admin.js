@@ -331,9 +331,9 @@ function generateSearchableName(name) {
 }
 
 window.editProduct = (id, products) => {
-    console.log("products  ",products);
+ 
 
-    let product = products[0];
+    let product = JSON.stringify(products, null, 2);
     console.log("products  ",products);
 
     document.getElementById("product-id").value = id;
