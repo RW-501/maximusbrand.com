@@ -87,6 +87,7 @@ input, textarea, select, button {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    display: block;
 }
 
 input:focus, select:focus, textarea:focus {
