@@ -10,6 +10,9 @@ import {
 
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js';
 
+const DEBUG = true;
+if (DEBUG) console.log("Module Debug on");
+
 
 // Firebase Config
 const firebaseConfig = {
@@ -177,10 +180,16 @@ let productData = getProductData();
 
     if (productId) {
 
-        await saveVideosToJson(productData, true);  // Default behavior, data save:
+        let jsonProductData = JSON.stringify(productData, null, 2);
+
+        await saveVideosToJson(jsonProductData, true);  // Default behavior, data save:
 
         await updateDoc(doc(db, "mainProducts", productId), productData);
     } else {
+        let jsonProductData = JSON.stringify(productData, null, 2);
+
+        await saveVideosToJson(jsonProductData, true);  // Default behavior, data save:
+
         await addDoc(collection(db, "mainProducts"), productData);
     }
 
