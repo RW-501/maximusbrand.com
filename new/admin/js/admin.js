@@ -352,17 +352,13 @@ document.getElementById("product-variety").addEventListener("change", function (
 let variety = []; // Store selected variants
 
 function openVariantPopup() {
-    // Dummy product list (Replace with actual products from database)
-    const products = [
-        { id: 1, name: "Red T-Shirt", image: "red-shirt.jpg" },
-        { id: 2, name: "Blue Hoodie", image: "blue-hoodie.jpg" },
-        { id: 3, name: "Green Sneakers", image: "green-sneakers.jpg" }
-    ];
+
+    
 
     const variantList = document.getElementById("variant-list");
     variantList.innerHTML = ""; // Clear previous list
 
-    products.forEach(product => {
+    allProducts.forEach(product => {
         let listItem = document.createElement("li");
         listItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
         listItem.onclick = function () {
@@ -373,10 +369,13 @@ function openVariantPopup() {
 
     document.getElementById("variant-popup").style.display = "block";
 }
+window.openVariantPopup = openVariantPopup;
 
 function closeVariantPopup() {
     document.getElementById("variant-popup").style.display = "none";
 }
+
+window.closeVariantPopup = closeVariantPopup;
 
 function selectVariant(product) {
     if (!variety.some(v => v.id === product.id)) {
