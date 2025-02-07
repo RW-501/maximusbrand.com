@@ -203,3 +203,8 @@ button:hover {
 .popup ul li:hover {
     background: #f0f0f0;
 }
+
+
+hidden {
+    display: none;
+}

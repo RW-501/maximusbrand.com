@@ -98,6 +98,7 @@ async function loadProducts() {
 }
 
 
+let variety = []; // Store selected variants
 
 function getProductData(){
 
@@ -152,7 +153,7 @@ function getProductData(){
         isPresale: document.getElementById("product-presale")?.checked || false,
         status:  document.getElementById("product-status")?.value || "active",
         isVariety: document.getElementById("product-variety")?.checked || false,
-        variety: [], // Dynamic variety options
+        variety: variety,
         isMultipleItems: document.getElementById("product-multiple")?.checked || false,
         ratings: {
             average: 0,
@@ -349,7 +350,6 @@ document.getElementById("product-variety").addEventListener("change", function (
     }
 });
 
-let variety = []; // Store selected variants
 
 function openVariantPopup() {
 
@@ -398,41 +398,133 @@ function selectVariant(product) {
 function generateSearchableName(name) {
     return name.toLowerCase().split(" ");
 }
+window.editProduct = (productId) => {
+    console.log("Editing product:", productId);
 
-window.editProduct = (productId, productOld) => {
- 
-console.log("productOld  ",productOld);
-   
+    let product = allProducts.find(p => p.id === productId); // Find product by ID
+    if (!product) {
+        console.error("Product not found!");
+        return;
+    }
 
-let product = allProducts.find(p => p.id === productId); // Find product by ID
-console.log("product  ",product);
-
-
+    // Set basic product fields
     document.getElementById("product-id").value = productId;
     document.getElementById("product-name").value = product.name;
     document.getElementById("product-collection").value = product.collection || "";
     document.getElementById("product-category").value = product.category;
+    document.getElementById("product-subCategory").value = product.subCategory || "";
     document.getElementById("product-description").value = product.description;
+    document.getElementById("product-highlights").value = product.highlights?.join(", ") || "";
 
     // Format numbers before displaying
-    document.getElementById("product-price").value = `$${product.price}`;
-    document.getElementById("product-discount").value = product.discount ? `${product.discount}%` : "";
-    document.getElementById("product-multiple-discount").value = product.multipleItemDiscount ? `${product.multipleItemDiscount}%` : "";
+    document.getElementById("product-price").value = product.price;
+    document.getElementById("product-discount").value = product.discount || "";
+    document.getElementById("product-multiple-discount").value = product.multipleItemDiscount || "";
     document.getElementById("product-stock").value = product.stock;
     document.getElementById("product-quantity").value = product.quantity || "";
     document.getElementById("product-sold").value = product.sold || "";
 
+    // Handle multi-select fields (tags, size, color, material, season)
+    setMultiSelect("product-tags", product.tags);
+    setMultiSelect("product-size", product.size);
+    setMultiSelect("product-color", product.color);
+    setMultiSelect("product-material", product.material);
+    setMultiSelect("product-season", product.season);
+    setMultiSelect("product-connectivity", product.connectivity);
+    setMultiSelect("product-fileFormat", product.fileFormat);
+
+    // Set single select dropdowns
+    document.getElementById("product-fit").value = product.fit || "";
+    document.getElementById("product-gender").value = product.gender || "";
+    document.getElementById("product-style").value = product.style || "";
+    document.getElementById("product-warranty").value = product.warranty || "";
+    document.getElementById("product-shipsFrom").value = product.shipping?.shipsFrom || "";
+    document.getElementById("product-delivery").value = product.shipping?.estimatedDelivery || "";
+    document.getElementById("product-status").value = product.status || "active";
+
+    // Handle checkboxes
+    document.getElementById("product-featured").checked = product.isFeatured || false;
+    document.getElementById("product-bestseller").checked = product.isBestseller || false;
+    document.getElementById("product-customizable").checked = product.isCustomizable || false;
+    document.getElementById("product-digital").checked = product.isDigital || false;
+    document.getElementById("product-presale").checked = product.isPresale || false;
+    document.getElementById("product-variety").checked = product.isVariety || false;
+    document.getElementById("product-multiple").checked = product.isMultipleItems || false;
+    document.getElementById("product-freeShipping").checked = product.shipping?.freeShipping || false;
+
+    // Handle customization options
+    document.getElementById("product-custom-time").value = product.estimatedCustomizationTime || "";
+    document.getElementById("product-custom-options").value = product.customizationOptions?.join(", ") || "";
+
+    // Set battery & electronics specifications
+    document.getElementById("product-battery").value = product.batteryLife || "";
+    document.getElementById("product-charging").value = product.chargingTime || "";
+    document.getElementById("product-wireless").value = product.wirelessRange || "";
+
+    // Set digital product fields
+    document.getElementById("product-download").value = product.downloadURL || "";
+
+    // Set metadata fields
+    document.getElementById("product-sku").value = product.meta?.SKU || "";
+    document.getElementById("product-barcode").value = product.meta?.barcode || "";
+    document.getElementById("product-asin").value = product.meta?.ASIN || "";
+    document.getElementById("product-upc").value = product.meta?.UPC || "";
+    document.getElementById("product-note").value = product.note || "";
+
+    // Handle variety selection
+    loadSelectedVariants(product.variety);
+
     // Load media (images/videos)
-    mediaPreview.innerHTML = "";
-    mediaList = product.media || [];
-    mediaList.forEach(url => {
-        addMediaToPreview(url, url.includes(".mp4") ? "video" : "image");
-    });
-
-
+    loadMediaPreview(product.media || []);
 };
 
+/**
+ * Helper function to set multi-select values.
+ */
+function setMultiSelect(elementId, values) {
+    const select = document.getElementById(elementId);
+    if (!select) return;
+    if (!values || !Array.isArray(values)) values = [];
 
+    // Convert all options to an array and check if they match the product values
+    Array.from(select.options).forEach(option => {
+        option.selected = values.includes(option.value);
+    });
+}
+
+/**
+ * Loads selected variants in the variant section.
+ */
+function loadSelectedVariants(variants) {
+    let selectedVariants = document.getElementById("selected-variants");
+    selectedVariants.innerHTML = ""; // Clear previous variants
+
+    if (!variants || variants.length === 0) return;
+
+    variants.forEach(variant => {
+        let variantItem = document.createElement("div");
+        variantItem.innerHTML = `<img src="${variant.image}" width="50"> ${variant.name}`;
+        selectedVariants.appendChild(variantItem);
+    });
+}
+
+/**
+ * Loads media preview (images & videos).
+ */
+function loadMediaPreview(mediaList) {
+    let mediaPreview = document.getElementById("media-preview");
+    mediaPreview.innerHTML = ""; // Clear previous media
+
+    mediaList.forEach(url => {
+        let mediaItem = document.createElement("div");
+        if (url.includes(".mp4")) {
+            mediaItem.innerHTML = `<video width="100" controls><source src="${url}" type="video/mp4"></video>`;
+        } else {
+            mediaItem.innerHTML = `<img src="${url}" width="100">`;
+        }
+        mediaPreview.appendChild(mediaItem);
+    });
+}
 
 
 
