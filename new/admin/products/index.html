@@ -406,15 +406,34 @@
             <div class="section">
                 <h3>Options</h3>
                 <label>Presale <input type="checkbox" id="product-presale"> </label>
-                <label>Multiple Variants <input type="checkbox" id="product-variety"></label>
+                
+<!-- Checkbox for Multiple Variants -->
+<label>
+    Multiple Variants <input type="checkbox" id="product-variety">
+</label>
                 <label>Featured <input type="checkbox" id="product-featured"> </label>
                 <label>Bestseller <input type="checkbox" id="product-bestseller"> </label>
-                <label>Multiple Products <input type="checkbox" id="product-multiple"> </label>
+                <label>Multiple Items <input type="checkbox" id="product-multiple"> </label>
 
            
             </div>
-        
-            <div class="section">
+
+
+<!-- Popup for Selecting Variants -->
+<div id="variant-popup" class="popup">
+    <div class="popup-content">
+        <h3>Select a Product Variant</h3>
+        <ul id="variant-list"></ul>
+        <button onclick="closeVariantPopup()">Close</button>
+    </div>
+</div>
+
+<!-- Selected Variants Display -->
+<div id="selected-variants"></div>
+
+
+
+<div class="section">
                 <h3>Shipping Information</h3>
             
                 <label>

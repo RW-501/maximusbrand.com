@@ -66,34 +66,40 @@ logoutBtn.addEventListener("click", () => {
 });
 
 // Load Products from Firebase
-// 
+// let allProducts = []; // Global array to store products
+
 async function loadProducts() {
     productTable.innerHTML = "";
+    allProducts = []; // Reset array before loading
+
     const querySnapshot = await getDocs(collection(db, "mainProducts"));
 
     querySnapshot.forEach((doc) => {
-        const product = doc.data();
+        const product = { id: doc.id, ...doc.data() }; // Add ID to product data
+        allProducts.push(product); // Store product in global array
+
         const row = `
             <tr>
-                <td>${doc.id}</td>
+                <td>${product.id}</td>
                 <td>${product.name}</td>
                 <td><img src="${product.image}" width="50"></td>
                 <td>$${product.price}</td>
                 <td>${product.stock}</td>
                 <td>
-                    <button onclick='editProduct("${doc.id}", ${JSON.stringify(product)})'>Edit</button>
-                    <button onclick="deleteProduct('${doc.id}')">Delete</button>
+                    <button onclick='editProduct("${product.id}")'>Edit</button>
+                    <button onclick="deleteProduct('${product.id}')">Delete</button>
                 </td>
             </tr>
         `;
         productTable.innerHTML += row;
     });
+
+    console.log("All Products Loaded:", allProducts);
 }
 
 
 
 function getProductData(){
-
 
     const productData = {
 
@@ -182,6 +188,7 @@ productForm.addEventListener("submit", async (event) => {
 let productData = getProductData();
 
     const productId = document.getElementById("product-id").value;
+
 
     if (productId) {
 
@@ -333,6 +340,54 @@ async function updateFile(url, encodedContent, sha, token) {
 
 
 
+document.getElementById("product-variety").addEventListener("change", function () {
+    if (this.checked) {
+        openVariantPopup();
+    } else {
+        variety = []; // Clear selected variants if unchecked
+        document.getElementById("selected-variants").innerHTML = "";
+    }
+});
+
+let variety = []; // Store selected variants
+
+function openVariantPopup() {
+    // Dummy product list (Replace with actual products from database)
+    const products = [
+        { id: 1, name: "Red T-Shirt", image: "red-shirt.jpg" },
+        { id: 2, name: "Blue Hoodie", image: "blue-hoodie.jpg" },
+        { id: 3, name: "Green Sneakers", image: "green-sneakers.jpg" }
+    ];
+
+    const variantList = document.getElementById("variant-list");
+    variantList.innerHTML = ""; // Clear previous list
+
+    products.forEach(product => {
+        let listItem = document.createElement("li");
+        listItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
+        listItem.onclick = function () {
+            selectVariant(product);
+        };
+        variantList.appendChild(listItem);
+    });
+
+    document.getElementById("variant-popup").style.display = "block";
+}
+
+function closeVariantPopup() {
+    document.getElementById("variant-popup").style.display = "none";
+}
+
+function selectVariant(product) {
+    if (!variety.some(v => v.id === product.id)) {
+        variety.push(product);
+
+        let selectedVariants = document.getElementById("selected-variants");
+        let variantItem = document.createElement("div");
+        variantItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
+        selectedVariants.appendChild(variantItem);
+    }
+}
 
 
 
@@ -345,12 +400,16 @@ function generateSearchableName(name) {
     return name.toLowerCase().split(" ");
 }
 
-window.editProduct = (id, product) => {
+window.editProduct = (productId, productOld) => {
  
-console.log("product  ",product);
+console.log("productOld  ",productOld);
    
 
-    document.getElementById("product-id").value = id;
+let product = allProducts.find(p => p.id === productId); // Find product by ID
+console.log("product  ",product);
+
+
+    document.getElementById("product-id").value = productId;
     document.getElementById("product-name").value = product.name;
     document.getElementById("product-collection").value = product.collection || "";
     document.getElementById("product-category").value = product.category;
