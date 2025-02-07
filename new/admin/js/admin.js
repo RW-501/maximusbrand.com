@@ -63,10 +63,11 @@ logoutBtn.addEventListener("click", () => {
 });
 
 // Load Products from Firebase
+// 
 async function loadProducts() {
     productTable.innerHTML = "";
     const querySnapshot = await getDocs(collection(db, "mainProducts"));
-    
+
     querySnapshot.forEach((doc) => {
         const product = doc.data();
         const row = `
@@ -77,7 +78,7 @@ async function loadProducts() {
                 <td>$${product.price}</td>
                 <td>${product.stock}</td>
                 <td>
-                    <button onclick="editProduct('${doc.id}', '${product}')">Edit</button>
+                    <button onclick='editProduct("${doc.id}", ${JSON.stringify(product)})'>Edit</button>
                     <button onclick="deleteProduct('${doc.id}')">Delete</button>
                 </td>
             </tr>
@@ -330,14 +331,12 @@ function generateSearchableName(name) {
     return name.toLowerCase().split(" ");
 }
 
-window.editProduct = (id, products) => {
+window.editProduct = (id, product) => {
  
 
-    let product = JSON.stringify(products, null, 2);
+   // let product = JSON.stringify(products, null, 2);
     console.log("product  ",product);
-    console.log("products  ",products);
     console.log("product.name  ",product.name);
-    console.log("products.name  ",products.name);
 
     document.getElementById("product-id").value = id;
     document.getElementById("product-name").value = product.name;
