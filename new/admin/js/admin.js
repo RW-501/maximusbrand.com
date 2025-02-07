@@ -426,14 +426,64 @@ document.addEventListener("DOMContentLoaded", function () {
     const subCategorySelect = document.getElementById("product-subCategory");
 
     const subCategories = {
-        "Clothing": ["T-Shirts", "Hoodies", "Jackets", "Jeans", "Shoes"],
-        "Electronics": ["Smartphones", "Laptops", "Headphones", "Cameras"],
-        "Home & Kitchen": ["Furniture", "Appliances", "Cookware", "Bedding"],
-        "Beauty": ["Makeup", "Skincare", "Haircare", "Fragrances"],
-        "Sports": ["Gym Equipment", "Cycling", "Running", "Outdoor Gear"],
-        "Toys & Games": ["Board Games", "Action Figures", "Educational Toys"],
-        "Automotive": ["Car Accessories", "Tires", "Tools", "Batteries"]
+        "Clothing": [
+            "T-Shirts", "Hoodies", "Jackets", "Jeans", "Shoes", 
+            "Sweaters", "Dresses", "Shorts", "Socks", "Underwear", 
+            "Activewear", "Swimwear", "Formal Wear", "Hats", "Scarves"
+        ],
+        "Electronics": [
+            "Smartphones", "Laptops", "Headphones", "Cameras",
+            "Tablets", "Smartwatches", "Gaming Consoles", "Monitors", 
+            "Printers", "Drones", "Speakers", "VR Headsets", "Power Banks", 
+            "Routers", "Wearable Tech"
+        ],
+        "Home & Kitchen": [
+            "Furniture", "Appliances", "Cookware", "Bedding",
+            "Lighting", "Home Decor", "Storage Solutions", "Cleaning Supplies", 
+            "Bathroom Essentials", "Dinnerware", "Kitchen Tools", "Vacuum Cleaners",
+            "Laundry Appliances", "Outdoor Furniture", "Smart Home Devices"
+        ],
+        "Beauty": [
+            "Makeup", "Skincare", "Haircare", "Fragrances",
+            "Nail Care", "Men’s Grooming", "Anti-Aging Products", "Bath & Body", 
+            "Sunscreen", "Beauty Tools", "Organic & Natural", "Hair Styling Tools",
+            "Perfumes & Colognes", "Facial Cleansers", "Lip Care"
+        ],
+        "Sports": [
+            "Gym Equipment", "Cycling", "Running", "Outdoor Gear",
+            "Team Sports", "Camping & Hiking", "Yoga & Pilates", "Fishing", 
+            "Golf", "Tennis", "Water Sports", "Martial Arts", "Winter Sports",
+            "Skateboarding", "Climbing Gear"
+        ],
+        "Toys & Games": [
+            "Board Games", "Action Figures", "Educational Toys",
+            "Building Blocks", "Dolls & Plush Toys", "Remote Control Toys", 
+            "Puzzles", "Outdoor Play", "STEM Toys", "Musical Toys", 
+            "Card Games", "Ride-on Toys", "Video Games", "Collectibles", "Magic Kits"
+        ],
+        "Automotive": [
+            "Car Accessories", "Tires", "Tools", "Batteries",
+            "Motorcycle Gear", "Car Cleaning Supplies", "Dash Cams", "GPS Devices", 
+            "Car Audio", "Seat Covers", "Performance Parts", "Brake Systems",
+            "Vehicle Lighting", "Safety Equipment", "Oil & Fluids"
+        ],
+        "Digital": [
+            "E-books", "Software", "Online Courses", "Music Downloads",
+            "Stock Photos", "Digital Art", "Website Templates", "Mobile Apps",
+            "3D Models", "Digital Marketing Services", "Fonts & Typography",
+            "Coding Scripts", "Online Subscriptions", "Video Templates",
+            "Printable Designs"
+        ],
+        "Customizable": [
+            "Engraved Jewelry", "Monogrammed Clothing", "Personalized Gifts",
+            "Photo Albums", "Custom Stickers", "Customized Mugs",
+            "DIY Craft Kits", "Tailored Suits", "Custom Shoes",
+            "Bespoke Furniture", "Custom Pet Accessories",
+            "Personalized Tech Gadgets", "Custom Artwork", "Handmade Jewelry",
+            "Customized Phone Cases"
+        ]
     };
+    
 
     categorySelect.addEventListener("change", function () {
         const selectedCategory = this.value;
