@@ -66,7 +66,7 @@ logoutBtn.addEventListener("click", () => {
 });
 
 // Load Products from Firebase
-// let allProducts = []; // Global array to store products
+ let allProducts = []; // Global array to store products
 
 async function loadProducts() {
     productTable.innerHTML = "";
