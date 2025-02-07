@@ -139,9 +139,9 @@ function getProductData(){
         downloadURL: document.getElementById("product-download")?.value || "",
         fileFormat: document.getElementById("product-fileFormat")?.value.split(",") || [],
         isPresale: document.getElementById("product-presale")?.checked || false,
-        status: "active",
+        status:  document.getElementById("product-status")?.value || "active",
         isVariety: document.getElementById("product-variety")?.checked || false,
-        variety: varietyList, // Dynamic variety options
+        variety: [], // Dynamic variety options
         isMultipleItems: document.getElementById("product-multiple")?.checked || false,
         ratings: {
             average: 0,
@@ -392,6 +392,9 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("electronic-section").style.display = "block";
         } else if (selectedCategory === "Digital") {
             document.getElementById("digital-section").style.display = "block";
+            document.getElementById("product-freeShipping").checked = true;
+            document.getElementById("product-shipsFrom").value = "Digital";
+            document.getElementById("product-delivery").value = "After Checkout";
             
         } else if (selectedCategory === "Customizable") {
             document.getElementById("custom-section").style.display = "block";

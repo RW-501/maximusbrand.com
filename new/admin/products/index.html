@@ -110,7 +110,7 @@
         
             <div class="section changeable-sections" id="custom-section">
                 <h3>Customization</h3>
-                <label><input type="checkbox" id="product-customizable"> Customizable</label>
+                <label>Customizable <input type="checkbox" id="product-customizable"> </label>
                 <input type="text" id="product-custom-time" placeholder="Estimated Customization Time">
                 <input type="text" id="product-custom-options" placeholder="Customization Options (comma-separated)">
             </div>
@@ -137,22 +137,27 @@
         
             <div class="section changeable-sections" id="digital-section">
                 <h3>Digital Products</h3>
-                <label><input type="checkbox" id="product-digital"> Digital Product</label>
+                <label> Digital Product <input type="checkbox" id="product-digital"></label>
                 <input type="text" id="product-download" placeholder="Download URL">
                 <input type="text" id="product-fileFormat" placeholder="File Format (comma-separated)">
             </div>
         
             <div class="section">
-                <h3>Presale & Variety</h3>
-                <label><input type="checkbox" id="product-presale"> Presale</label>
-                <label><input type="checkbox" id="product-variety"> Multiple Variants</label>
+                <h3>Options</h3>
+                <label>Presale <input type="checkbox" id="product-presale"> </label>
+                <label>Multiple Variants <input type="checkbox" id="product-variety"></label>
+                <label>Featured <input type="checkbox" id="product-featured"> </label>
+                <label>Bestseller <input type="checkbox" id="product-bestseller"> </label>
+                <label>Multiple Products <input type="checkbox" id="product-multiple"> </label>
+
+           
             </div>
         
             <div class="section">
                 <h3>Shipping Information</h3>
             
                 <label>
-                    <input type="checkbox" id="product-freeShipping"> Free Shipping
+                    Free Shipping <input type="checkbox" id="product-freeShipping">
                 </label>
             
                 <label for="product-shipsFrom">Ships From</label>
@@ -190,7 +195,20 @@
                 <input type="text" id="product-asin" placeholder="ASIN">
                 <input type="text" id="product-upc" placeholder="UPC">
             </div>
-        
+
+            <div class="section">
+                <label for="product-status">Status</label>
+                <select id="product-status" required>
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="active">Active</option>
+                    <option value="deactive">Inactive</option>
+                    <option value="deleted">Deleted</option>
+                    <option value="private">Private</option>
+                </select>
+            </div>
+            
+
+
             <div class="section">
                 <h3>Additional Notes</h3>
                 <textarea id="product-note" placeholder="Special Notes"></textarea>
