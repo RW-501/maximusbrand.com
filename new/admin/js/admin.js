@@ -119,25 +119,30 @@ function getProductData(){
         tags: document.getElementById("product-tags")?.value.split(",") || [],
         brand: document.getElementById("product-brand")?.value || "",
         size: document.getElementById("product-size")?.value.split(",") || [],
-        color: document.getElementById("product-color")?.value || "",
-        material: document.getElementById("product-material")?.value || "",
+        color: document.getElementById("product-color")?.value.split(",") || [],
+        material: document.getElementById("product-material")?.value.split(",") || [],
         fit: document.getElementById("product-fit")?.value || "",
         gender: document.getElementById("product-gender")?.value || "",
         style: document.getElementById("product-style")?.value || "",
         season: document.getElementById("product-season")?.value.split(",") || [],
+
         isFeatured: document.getElementById("product-featured")?.checked || false,
         isBestseller: document.getElementById("product-bestseller")?.checked || false,
+
         isCustomizable: document.getElementById("product-customizable")?.checked || false,
         estimatedCustomizationTime: document.getElementById("product-custom-time")?.value || "",
         customizationOptions: document.getElementById("product-custom-options")?.value.split(",") || [],
+        
         batteryLife: document.getElementById("product-battery")?.value || "",
         chargingTime: document.getElementById("product-charging")?.value || "",
         wirelessRange: document.getElementById("product-wireless")?.value || "",
         warranty: document.getElementById("product-warranty")?.value || "",
         connectivity: document.getElementById("product-connectivity")?.value.split(",") || [],
+
         isDigital: document.getElementById("product-digital")?.checked || false,
         downloadURL: document.getElementById("product-download")?.value || "",
         fileFormat: document.getElementById("product-fileFormat")?.value.split(",") || [],
+        
         isPresale: document.getElementById("product-presale")?.checked || false,
         status:  document.getElementById("product-status")?.value || "active",
         isVariety: document.getElementById("product-variety")?.checked || false,

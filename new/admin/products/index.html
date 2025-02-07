@@ -64,7 +64,6 @@
                 <input type="text" id="product-tags" placeholder="Tags (comma-separated)">
                 <input type="text" id="product-brand" placeholder="Brand">
                 <input type="text" id="product-style" placeholder="Style">
-                <input type="text" id="product-gender" placeholder="Gender">
                 <textarea id="product-description" placeholder="Product Description"></textarea>
                 <input type="text" id="product-highlights" placeholder="Highlights (comma-separated)">
             </div>
@@ -103,9 +102,24 @@
         
             <div class="changeable-sections" id="clothing-section">
                 <h3>Size & Appearance</h3>
+                
+
+
+
+
+                <div class="section">
+                    <label for="product-gender">Gender</label>
+                    <select id="product-gender" >
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Unisex">Unisex</option>
+                    </select>
+                </div>
+                
                 <div class="section">
                     <label for="product-size">Size</label>
-                    <select id="product-size" multiple required>
+                    <select id="product-size" multiple >
                         <option value="XS">XS (Extra Small)</option>
                         <option value="S">S (Small)</option>
                         <option value="M">M (Medium)</option>
@@ -148,7 +162,22 @@
                         <option value="Kids-XL">XL (Kids)</option>
                     </select>
                 </div>
-                              
+
+                <div class="section">
+                    <label for="product-fit">Fit</label>
+                    <select id="product-fit" >
+                        <option value="" disabled selected>Select Fit</option>
+                        <option value="Slim Fit">Slim Fit</option>
+                        <option value="Regular Fit">Regular Fit</option>
+                        <option value="Relaxed Fit">Relaxed Fit</option>
+                        <option value="Oversized Fit">Oversized Fit</option>
+                        <option value="Athletic Fit">Athletic Fit</option>
+                        <option value="Loose Fit">Loose Fit</option>
+                        <option value="Tailored Fit">Tailored Fit</option>
+                        <option value="Classic Fit">Classic Fit</option>
+                    </select>
+                </div>
+                
                 <div class="section">
                     <label for="product-color">Color</label>
                     <select id="product-color" multiple>
@@ -204,6 +233,27 @@
                     </select>
                 </div>
 
+
+
+                <div class="section">
+                    <label for="product-season">Season</label>
+                    <select id="product-season" multiple required>
+                        <option value="" disabled>Select Season</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Fall">Fall</option>
+                        <option value="Winter">Winter</option>
+                        <option value="Christmas">Christmas</option>
+                        <option value="Halloween">Halloween</option>
+                        <option value="Valentine's Day">Valentine's Day</option>
+                        <option value="Easter">Easter</option>
+                        <option value="4th of July">4th of July</option>
+                        <option value="Thanksgiving">Thanksgiving</option>
+                        <option value="Back to School">Back to School</option>
+                    </select>
+                </div>
+                
+
             </div>
         
             <div class="section changeable-sections" id="custom-section">
@@ -213,15 +263,85 @@
                 <input type="text" id="product-custom-options" placeholder="Customization Options (comma-separated)">
             </div>
         
-            <div class="section changeable-sections" id="electronic-section">
+            <div class="changeable-sections" id="electronic-section">
                 <h3>Electronics Specifications</h3>
-                <input type="text" id="product-battery" placeholder="Battery Life">
-                <input type="text" id="product-charging" placeholder="Charging Time">
-                <input type="text" id="product-wireless" placeholder="Wireless Range">
-                <input type="text" id="product-warranty" placeholder="Warranty">
-                <input type="text" id="product-connectivity" placeholder="Connectivity (comma-separated)">
+            
+                <!-- Battery Life -->
+                <div class="section">
+                    <label for="product-battery">Battery Life</label>
+                    <select id="product-battery">
+                        <option value="" disabled selected>Select Battery Life</option>
+                        <option value="Up to 1 hour">Up to 1 hour</option>
+                        <option value="1-3 hours">1-3 hours</option>
+                        <option value="3-5 hours">3-5 hours</option>
+                        <option value="5-8 hours">5-8 hours</option>
+                        <option value="8-12 hours">8-12 hours</option>
+                        <option value="12+ hours">12+ hours</option>
+                        <option value="No Battery">No Battery</option>
+                    </select>
+                </div>
+            
+                <!-- Charging Time -->
+                <div class="section">
+                    <label for="product-charging">Charging Time</label>
+                    <select id="product-charging">
+                        <option value="" disabled selected>Select Charging Time</option>
+                        <option value="Less than 30 minutes">Less than 30 minutes</option>
+                        <option value="30 minutes - 1 hour">30 minutes - 1 hour</option>
+                        <option value="1-2 hours">1-2 hours</option>
+                        <option value="2-4 hours">2-4 hours</option>
+                        <option value="4+ hours">4+ hours</option>
+                        <option value="Not Rechargeable">Not Rechargeable</option>
+                    </select>
+                </div>
+            
+                <!-- Wireless Range -->
+                <div class="section">
+                    <label for="product-wireless">Wireless Range</label>
+                    <select id="product-wireless">
+                        <option value="" disabled selected>Select Wireless Range</option>
+                        <option value="Less than 5 ft">Less than 5 ft</option>
+                        <option value="5-10 ft">5-10 ft</option>
+                        <option value="10-20 ft">10-20 ft</option>
+                        <option value="20-50 ft">20-50 ft</option>
+                        <option value="50+ ft">50+ ft</option>
+                        <option value="Not Wireless">Not Wireless</option>
+                    </select>
+                </div>
+            
+                <!-- Warranty -->
+                <div class="section">
+                    <label for="product-warranty">Warranty</label>
+                    <select id="product-warranty">
+                        <option value="" disabled selected>Select Warranty</option>
+                        <option value="No Warranty">No Warranty</option>
+                        <option value="30 Days">30 Days</option>
+                        <option value="90 Days">90 Days</option>
+                        <option value="6 Months">6 Months</option>
+                        <option value="1 Year">1 Year</option>
+                        <option value="2 Years">2 Years</option>
+                        <option value="3+ Years">3+ Years</option>
+                    </select>
+                </div>
+            
+                <!-- Connectivity (Multi-Select) -->
+                <div class="section">
+                    <label for="product-connectivity">Connectivity</label>
+                    <select id="product-connectivity" multiple>
+                        <option value="Bluetooth">Bluetooth</option>
+                        <option value="WiFi">WiFi</option>
+                        <option value="USB">USB</option>
+                        <option value="Ethernet">Ethernet</option>
+                        <option value="NFC">NFC</option>
+                        <option value="HDMI">HDMI</option>
+                        <option value="Thunderbolt">Thunderbolt</option>
+                        <option value="3.5mm Jack">3.5mm Jack</option>
+                        <option value="Wireless Charging">Wireless Charging</option>
+                        <option value="RF (Radio Frequency)">RF (Radio Frequency)</option>
+                    </select>
+                </div>
             </div>
-        
+            
             <div class="section">
                 <h3>Media</h3>
                 <button type="button" id="add-image-btn">Add Image</button>
@@ -233,12 +353,55 @@
                 </div>
             </div>
         
-            <div class="section changeable-sections" id="digital-section">
+            <div class="changeable-sections" id="digital-section">
                 <h3>Digital Products</h3>
-                <label> Digital Product <input type="checkbox" id="product-digital"></label>
-                <input type="text" id="product-download" placeholder="Download URL">
-                <input type="text" id="product-fileFormat" placeholder="File Format (comma-separated)">
+            
+                <!-- Digital Product Checkbox -->
+                <label>
+                    <input type="checkbox" id="product-digital"> Digital Product
+                </label>
+            
+                <!-- Download URL -->
+                <div class="section">
+                    <label for="product-download">Download URL</label>
+                    <input type="text" id="product-download" placeholder="Enter Download URL">
+                </div>
+            
+                <!-- File Format Multi-Select Dropdown -->
+                <div class="section">
+                    <label for="product-fileFormat">File Format</label>
+                    <select id="product-fileFormat" multiple>
+                        <option value="PDF">PDF (.pdf)</option>
+                        <option value="DOCX">Word Document (.docx)</option>
+                        <option value="TXT">Text File (.txt)</option>
+                        <option value="ZIP">Compressed Archive (.zip)</option>
+                        <option value="RAR">Compressed Archive (.rar)</option>
+                        <option value="MP3">Audio File (.mp3)</option>
+                        <option value="WAV">Audio File (.wav)</option>
+                        <option value="MP4">Video File (.mp4)</option>
+                        <option value="MOV">Video File (.mov)</option>
+                        <option value="AVI">Video File (.avi)</option>
+                        <option value="PNG">Image File (.png)</option>
+                        <option value="JPG">Image File (.jpg)</option>
+                        <option value="SVG">Vector Image (.svg)</option>
+                        <option value="PSD">Photoshop File (.psd)</option>
+                        <option value="AI">Illustrator File (.ai)</option>
+                        <option value="EPS">Vector Graphic (.eps)</option>
+                        <option value="EXE">Executable File (.exe)</option>
+                        <option value="DMG">Mac App Installer (.dmg)</option>
+                        <option value="ISO">Disc Image (.iso)</option>
+                        <option value="CSV">Spreadsheet (.csv)</option>
+                        <option value="JSON">Data File (.json)</option>
+                        <option value="XML">Data File (.xml)</option>
+                        <option value="HTML">Web File (.html)</option>
+                        <option value="CSS">Web Stylesheet (.css)</option>
+                        <option value="JS">JavaScript File (.js)</option>
+                        <option value="PPTX">PowerPoint File (.pptx)</option>
+                        <option value="XLSX">Excel Spreadsheet (.xlsx)</option>
+                    </select>
+                </div>
             </div>
+            
         
             <div class="section">
                 <h3>Options</h3>
