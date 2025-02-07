@@ -484,11 +484,15 @@ window.editProduct = (productId) => {
 function setMultiSelect(elementId, values) {
     const select = document.getElementById(elementId);
     if (!select) return;
-    if (!values || !Array.isArray(values)) values = [];
+
+    // Ensure values is always an array (avoid errors)
+    if (!Array.isArray(values)) {
+        values = values ? values.split(",") : []; // Convert string to array if needed
+    }
 
     // Convert all options to an array and check if they match the product values
     Array.from(select.options).forEach(option => {
-        option.selected = values.includes(option.value);
+        option.selected = values.includes(option.value.trim());
     });
 }
 
