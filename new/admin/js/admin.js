@@ -496,6 +496,7 @@ function setMultiSelect(elementId, values) {
     });
 }
 
+
 /**
  * Loads selected variants in the variant section.
  */
