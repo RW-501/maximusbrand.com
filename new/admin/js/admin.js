@@ -342,10 +342,8 @@ function generateSearchableName(name) {
 
 window.editProduct = (id, product) => {
  
-
-   // let product = JSON.stringify(products, null, 2);
-    console.log("product  ",product);
-    console.log("product.name  ",product.name);
+console.log("product  ",product);
+   
 
     document.getElementById("product-id").value = id;
     document.getElementById("product-name").value = product.name;
@@ -368,46 +366,27 @@ window.editProduct = (id, product) => {
         addMediaToPreview(url, url.includes(".mp4") ? "video" : "image");
     });
 
-    // Reload category-specific attributes
-    loadCategoryAttributes(product.category, product);
+
 };
 
-// Function to load category-specific inputs dynamically
-function loadCategoryAttributes(category, product = {}) {
-    const dynamicAttributes = document.getElementById("dynamic-attributes");
-    dynamicAttributes.innerHTML = "";
 
-    if (category === "Clothing") {
-        dynamicAttributes.innerHTML = `
-            <h3>Clothing Attributes</h3>
-            <input type="text" id="product-size" placeholder="Sizes (comma-separated)" value="${product.size ? product.size.join(", ") : ""}">
-            <input type="text" id="product-material" placeholder="Material" value="${product.material || ""}">
-            <input type="text" id="product-color" placeholder="Color" value="${product.color || ""}">
-            <input type="text" id="product-fit" placeholder="Fit" value="${product.fit || ""}">
-            <input type="text" id="product-style" placeholder="Style" value="${product.style || ""}">
-            <input type="text" id="product-season" placeholder="Season (comma-separated)" value="${product.season ? product.season.join(", ") : ""}">
-        `;
+
+
+
+// Function to load category-specific inputs dynamically
+function loadCategoryAttributes(){
+ 
+    
+    const productCategory = document.getElementById("product-category");
+
+    if (productCategory.value === "Clothing") {
+
     } else if (category === "Electronics") {
-        dynamicAttributes.innerHTML = `
-            <h3>Electronics Attributes</h3>
-            <input type="text" id="product-battery" placeholder="Battery Life" value="${product.batteryLife || ""}">
-            <input type="text" id="product-charging" placeholder="Charging Time" value="${product.chargingTime || ""}">
-            <input type="text" id="product-wireless" placeholder="Wireless Range" value="${product.wirelessRange || ""}">
-            <input type="text" id="product-warranty" placeholder="Warranty" value="${product.warranty || ""}">
-            <input type="text" id="product-connectivity" placeholder="Connectivity (comma-separated)" value="${product.connectivity ? product.connectivity.join(", ") : ""}">
-        `;
+
     } else if (category === "Digital") {
-        dynamicAttributes.innerHTML = `
-            <h3>Digital Product Details</h3>
-            <input type="text" id="product-download" placeholder="Download URL" value="${product.downloadURL || ""}">
-            <input type="text" id="product-fileFormat" placeholder="File Formats (comma-separated)" value="${product.fileFormat ? product.fileFormat.join(", ") : ""}">
-        `;
+
     } else if (category === "Customizable") {
-        dynamicAttributes.innerHTML = `
-            <h3>Customization Options</h3>
-            <input type="text" id="product-custom-time" placeholder="Estimated Customization Time" value="${product.estimatedCustomizationTime || ""}">
-            <input type="text" id="product-custom-options" placeholder="Customization Options (comma-separated)" value="${product.customizationOptions ? product.customizationOptions.join(", ") : ""}">
-        `;
+
     }
 }
 
