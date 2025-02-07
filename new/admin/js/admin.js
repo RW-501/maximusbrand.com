@@ -334,7 +334,9 @@ window.editProduct = (id, products) => {
  
 
     let product = JSON.stringify(products, null, 2);
-    console.log("products  ",products);
+    console.log("product  ",product);
+    console.log("products.name  ",product.name);
+    console.log("products.name  ",products.name);
 
     document.getElementById("product-id").value = id;
     document.getElementById("product-name").value = product.name;
