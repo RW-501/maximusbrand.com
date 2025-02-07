@@ -392,6 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("electronic-section").style.display = "block";
         } else if (selectedCategory === "Digital") {
             document.getElementById("digital-section").style.display = "block";
+            
         } else if (selectedCategory === "Customizable") {
             document.getElementById("custom-section").style.display = "block";
         }
