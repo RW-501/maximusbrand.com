@@ -374,21 +374,36 @@ console.log("product  ",product);
 
 
 // Function to load category-specific inputs dynamically
-function loadCategoryAttributes(){
- 
-    
+document.addEventListener("DOMContentLoaded", function () {
     const productCategory = document.getElementById("product-category");
+    const changeableSections = document.querySelectorAll(".changeable-sections");
 
-    if (productCategory.value === "Clothing") {
+    function loadCategoryAttributes() {
+        // Hide all changeable sections
+        changeableSections.forEach(section => section.style.display = "none");
 
-    } else if (category === "Electronics") {
+        // Get selected category
+        const selectedCategory = productCategory.value;
 
-    } else if (category === "Digital") {
-
-    } else if (category === "Customizable") {
-
+        // Show relevant section based on selected category
+        if (selectedCategory === "Clothing") {
+            document.getElementById("clothing-section").style.display = "block";
+        } else if (selectedCategory === "Electronics") {
+            document.getElementById("electronic-section").style.display = "block";
+        } else if (selectedCategory === "Digital") {
+            document.getElementById("digital-section").style.display = "block";
+        } else if (selectedCategory === "Customizable") {
+            document.getElementById("custom-section").style.display = "block";
+        }
     }
-}
+
+    // Run function when category changes
+    productCategory.addEventListener("change", loadCategoryAttributes);
+
+    // Run function once on page load (in case there's a pre-selected value)
+    loadCategoryAttributes();
+});
+
 
 
 // Function to clean and convert input to a valid number
