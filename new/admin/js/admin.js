@@ -428,7 +428,7 @@ window.editProduct = (productId) => {
 
  // Helper function to safely call setMultiSelect only if data exists
  function safeSetMultiSelect(elementId, values) {
-    if (values && Array.isArray(values) && values.length > 0) {
+    if (values && Array.isArray(values) && values.length > 0 && values !== '') {
         setMultiSelect(elementId, values);
     } else {
         console.log(`Skipping ${elementId}, no values found.`);
@@ -502,6 +502,9 @@ function setMultiSelect(elementId, values) {
 
     // Debugging: Log values to check the issue
     console.log(`setMultiSelect called for #${elementId} with values:`, values);
+
+
+
 
     // Ensure values is always an array
     if (!Array.isArray(values)) {
