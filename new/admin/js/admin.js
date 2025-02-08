@@ -494,8 +494,7 @@ function setMultiSelect(elementId, values) {
         if (typeof values === "string") {
             values = values.split(",").map(val => val.trim()); // Convert CSV string to an array
         } else if (values == null || values === undefined) {
-           // values = []; // Ensure values is always an array
-            return;
+            values = []; // Ensure values is always an array
         } else if (typeof values === "object") {
             try {
                 values = Object.values(values); // Convert object to array if necessary
@@ -505,10 +504,13 @@ function setMultiSelect(elementId, values) {
             }
         } else {
             console.error(`Unexpected type for ${elementId}:`, values);
-          //  values = []; // Prevent crashing by assigning an empty array
-
-            return;
+            values = []; // Prevent crashing by assigning an empty array
         }
+    }
+
+    // If values is an empty array, log it and proceed (DO NOT RETURN)
+    if (Array.isArray(values) && values.length === 0) {
+        console.log(`No selections available for #${elementId}`);
     }
 
     // Convert all options to an array and check if they match the product values
