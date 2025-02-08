@@ -425,13 +425,14 @@ window.editProduct = (productId) => {
     document.getElementById("product-sold").value = product.sold || "";
 
     // Handle multi-select fields (tags, size, color, material, season)
-    setMultiSelect("product-tags", product.tags);
-    setMultiSelect("product-size", product.size);
-    setMultiSelect("product-color", product.color);
-    setMultiSelect("product-material", product.material);
-    setMultiSelect("product-season", product.season);
-    setMultiSelect("product-connectivity", product.connectivity);
-    setMultiSelect("product-fileFormat", product.fileFormat);
+
+    setMultiSelect("product-tags", product.tags || []);
+    setMultiSelect("product-size", product.size || []);
+    setMultiSelect("product-color", product.color || []);
+    setMultiSelect("product-material", product.material || []);
+    setMultiSelect("product-season", product.season || []);
+    setMultiSelect("product-connectivity", product.connectivity || []);
+    setMultiSelect("product-fileFormat", product.fileFormat || []);
 
     // Set single select dropdowns
     document.getElementById("product-fit").value = product.fit || "";
@@ -485,10 +486,8 @@ function setMultiSelect(elementId, values) {
     const select = document.getElementById(elementId);
     if (!select) return;
 
-    // Ensure values is always an array (avoid errors)
-    if (!Array.isArray(values)) {
-        values = values ? values.split(",") : []; // Convert string to array if needed
-    }
+    // Ensure `values` is always an array
+    values = Array.isArray(values) ? values : (values ? values.split(",") : []);
 
     // Convert all options to an array and check if they match the product values
     Array.from(select.options).forEach(option => {
