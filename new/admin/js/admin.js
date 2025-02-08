@@ -426,13 +426,27 @@ window.editProduct = (productId) => {
 
     // Handle multi-select fields (tags, size, color, material, season)
 
-    setMultiSelect("product-tags", product.tags || []);
-    setMultiSelect("product-size", product.size || []);
-    setMultiSelect("product-color", product.color || []);
-    setMultiSelect("product-material", product.material || []);
-    setMultiSelect("product-season", product.season || []);
-    setMultiSelect("product-connectivity", product.connectivity || []);
-    setMultiSelect("product-fileFormat", product.fileFormat || []);
+ // Helper function to safely call setMultiSelect only if data exists
+ function safeSetMultiSelect(elementId, values) {
+    if (values && Array.isArray(values) && values.length > 0) {
+        setMultiSelect(elementId, values);
+    } else {
+        console.log(`Skipping ${elementId}, no values found.`);
+    }
+}
+
+
+// Only call setMultiSelect if the property exists and is not empty
+safeSetMultiSelect("product-tags", product.tags);
+safeSetMultiSelect("product-size", product.size);
+safeSetMultiSelect("product-color", product.color);
+safeSetMultiSelect("product-material", product.material);
+safeSetMultiSelect("product-season", product.season);
+safeSetMultiSelect("product-connectivity", product.connectivity);
+safeSetMultiSelect("product-fileFormat", product.fileFormat);
+
+
+
 
     // Set single select dropdowns
     document.getElementById("product-fit").value = product.fit || "";
@@ -511,7 +525,7 @@ function setMultiSelect(elementId, values) {
     // If values is an empty array, log it and proceed (DO NOT RETURN)
     if (Array.isArray(values) && values.length === 0) {
         console.log(`No selections available for #${elementId}`);
-        return;
+       // return;
     }
 
     // Convert all options to an array and check if they match the product values
