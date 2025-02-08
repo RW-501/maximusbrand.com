@@ -486,15 +486,25 @@ function setMultiSelect(elementId, values) {
     const select = document.getElementById(elementId);
     if (!select) return;
 
+    // Debugging: Log values to check the issue
+    console.log(`setMultiSelect called for #${elementId} with values:`, values);
+
     // Ensure values is always an array
     if (!Array.isArray(values)) {
         if (typeof values === "string") {
             values = values.split(",").map(val => val.trim()); // Convert CSV string to an array
-        } else if (values == null) {
-            values = []; // If values are undefined or null, use an empty array
+        } else if (values == null || values === undefined) {
+            values = []; // Ensure values is always an array
+        } else if (typeof values === "object") {
+            try {
+                values = Object.values(values); // Convert object to array if necessary
+            } catch (e) {
+                console.error(`Invalid data format for ${elementId}:`, values);
+                values = []; // Fallback to an empty array
+            }
         } else {
             console.error(`Unexpected type for ${elementId}:`, values);
-            return; // Stop execution to prevent further errors
+            values = []; // Prevent crashing by assigning an empty array
         }
     }
 
@@ -503,6 +513,7 @@ function setMultiSelect(elementId, values) {
         option.selected = values.includes(option.value.trim());
     });
 }
+
 
 
 /**
