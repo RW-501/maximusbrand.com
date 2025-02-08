@@ -511,6 +511,7 @@ function setMultiSelect(elementId, values) {
     // If values is an empty array, log it and proceed (DO NOT RETURN)
     if (Array.isArray(values) && values.length === 0) {
         console.log(`No selections available for #${elementId}`);
+        return;
     }
 
     // Convert all options to an array and check if they match the product values
