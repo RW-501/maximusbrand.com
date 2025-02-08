@@ -195,7 +195,7 @@ let productData = getProductData();
 
         let jsonProductData = JSON.stringify(productData, null, 2);
 
-        await saveVideosToJson(jsonProductData, true);  // Default behavior, data save:
+        await saveVideosToJson(productData, true);  // Default behavior, data save:
 
         await updateDoc(doc(db, "mainProducts", productId), productData);
     } else {
@@ -209,7 +209,7 @@ let productData = getProductData();
     productForm.reset();
     mediaPreview.innerHTML = "";
     mediaList = [];
-    varietyList = [];
+  //  varietyList = [];
     loadProducts();
 });
 
@@ -228,8 +228,8 @@ const owner = "RW-501";
     let fileData;
 
 
-    async function saveVideosToJson(videoDataArray, saveIfNewOrChanged = true) {
-    const jsonData = JSON.stringify(videoDataArray, null, 2);  // Format the data
+    async function saveVideosToJson(jsonProductData, saveIfNewOrChanged = true) {
+    const jsonData = JSON.stringify(jsonProductData, null, 2);  // Format the data
     const blob = new Blob([jsonData], { type: "application/json" });
     const encodedContent = btoa(jsonData);
 
@@ -273,7 +273,7 @@ const owner = "RW-501";
             if (saveIfNewOrChanged) {
                 // Save only if there is a new ID or any changes
                 updatedDataArray = existingDataArray.map(existingItem => {
-                    const updatedItem = videoDataArray.find(item => item.id === existingItem.id);
+                    const updatedItem = jsonProductData.find(item => item.id === existingItem.id);
                     if (updatedItem) {
                         const viewsChanged = updatedItem.views !== existingItem.views;
                         const isPublicChanged = (updatedItem.isPublic ?? null) !== (existingItem.isPublic ?? null);
@@ -284,14 +284,14 @@ const owner = "RW-501";
                     return existingItem;
                 });
 
-                videoDataArray.forEach(item => {
+                jsonProductData.forEach(item => {
                     if (!existingDataArray.some(existingItem => existingItem.id === item.id)) {
                         updatedDataArray.push(item);
                     }
                 });
             } else {
                 // Always save the new data, even if it isn't changed
-                updatedDataArray = videoDataArray;
+                updatedDataArray = jsonProductData;
             }
 
             if (JSON.stringify(updatedDataArray) !== JSON.stringify(existingDataArray)) {
