@@ -216,6 +216,107 @@ let productData = getProductData();
 
 
 
+document.getElementById("fileInput").addEventListener("change", handleFileUpload);
+
+let inventoryData = [];
+let currentIndex = 0;
+
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const csvData = e.target.result;
+        inventoryData = parseCSV(csvData);
+        if (inventoryData.length > 0) {
+            currentIndex = 0;
+            showPopup(currentIndex);
+        }
+    };
+    reader.readAsText(file);
+}
+
+// 📌 Parse CSV File
+function parseCSV(csv) {
+    const rows = csv.split("\n").map(row => row.split(","));
+    const headers = rows.shift().map(header => header.trim());
+
+    return rows.map(row => {
+        let item = {};
+        headers.forEach((header, index) => {
+            item[header] = row[index] ? row[index].trim() : "";
+        });
+        return item;
+    });
+}
+
+// 📌 Show Pop-Up Form
+function showPopup(index) {
+    if (index < 0 || index >= inventoryData.length) return;
+    const item = inventoryData[index];
+
+    const popupContent = `
+        <div class="popup">
+            <h2>Upload Item (${index + 1}/${inventoryData.length})</h2>
+            <label>Title: <input type="text" id="product-name" value="${item.Title || ""}"></label>
+            <label>SKU: <input type="text" id="product-sku" value="${item["Custom label (SKU)"] || ""}"></label>
+            <label>Price: <input type="number" id="product-price" value="${item["Start price"] || 0}"></label>
+            <label>Stock: <input type="number" id="product-stock" value="${item["Available quantity"] || 0}"></label>
+            <label>Sold: <input type="number" id="product-sold" value="${item["Sold quantity"] || 0}"></label>
+            <label>Category: <input type="text" id="product-category" value="${item["eBay category 1 name"] || ""}"></label>
+            <label>Condition: <input type="text" id="product-condition" value="${item["Condition"] || ""}"></label>
+            <label>Color: <input type="text" id="product-color" value="${item["Variation details"]?.replace("Color=", "") || ""}"></label>
+
+            <div class="popup-buttons">
+                <button onclick="uploadItem()">Upload</button>
+                <button onclick="prevItem()">Previous</button>
+                <button onclick="nextItem()">Next</button>
+                <button onclick="closePopup()">Close</button>
+            </div>
+        </div>
+    `;
+    document.getElementById("popup-container").innerHTML = popupContent;
+    document.getElementById("popup-container").style.display = "block";
+}
+
+// 📌 Upload Item
+function uploadItem() {
+    const itemData = {
+        name: document.getElementById("product-name").value,
+        sku: document.getElementById("product-sku").value,
+        price: parseFloat(document.getElementById("product-price").value) || 0,
+        stock: parseInt(document.getElementById("product-stock").value) || 0,
+        sold: parseInt(document.getElementById("product-sold").value) || 0,
+        category: document.getElementById("product-category").value,
+        condition: document.getElementById("product-condition").value,
+        color: document.getElementById("product-color").value,
+    };
+
+    console.log("Uploading Item:", itemData);
+    alert("Item uploaded successfully!");
+
+    nextItem();
+}
+
+// 📌 Navigate Items
+function nextItem() {
+    if (currentIndex < inventoryData.length - 1) {
+        currentIndex++;
+        showPopup(currentIndex);
+    }
+}
+function prevItem() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        showPopup(currentIndex);
+    }
+}
+
+// 📌 Close Pop-Up
+function closePopup() {
+    document.getElementById("popup-container").style.display = "none";
+}
 
 
 
