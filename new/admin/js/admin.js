@@ -591,6 +591,7 @@ window.editProduct = (productId) => {
         console.error("Product not found!");
         return;
     }
+    console.log("product:", product);
 
     // Set basic product fields
     document.getElementById("product-id").value = productId;
