@@ -342,14 +342,16 @@ async function uploadItem() {
     console.log("📤 Uploading Item:", itemData);
 
     try {
-        let jsonProductData = JSON.stringify(itemData, null, 2);
+/*         let jsonProductData = JSON.stringify(itemData, null, 2);
 
         // Save product data to JSON file (if function exists)
         if (typeof saveVideosToJson === "function") {
             await saveVideosToJson(jsonProductData, true);
         } else {
             console.warn("⚠ `saveVideosToJson` function not found.");
-        }
+
+            
+        } */
 
         // Save to Firebase Firestore (Ensure `db` is initialized)
         if (typeof addDoc === "function" && typeof db !== "undefined") {
