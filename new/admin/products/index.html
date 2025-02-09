@@ -151,26 +151,30 @@
             </div>
         
 
+            <div class="section">
+                <label>
+                    <input type="checkbox" id="product-variety"> Multiple Variants
+                </label>
+            </div>
+            
+            <!-- Product Variations Table -->
             <div id="variety-section" class="section" style="display: none;">
-                <h3>Variety Differentiators</h3>
-                
-<!-- Checkbox for Multiple Variants -->
-<label>
-    Multiple Variants <input type="checkbox" id="product-variety">
-</label>
-
-
-
-    <label for="product-varietyAttributes">What makes this product different?</label>
-    <select id="product-varietyAttributes" multiple>
-        <option value="size">Size</option>
-        <option value="color">Color</option>
-        <option value="material">Material</option>
-        <option value="fit">Fit</option>
-        <option value="style">Style</option>
-    </select>
-</div>
-
+                <h3>Product Variants</h3>
+                <table id="variety-table">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button type="button" onclick="addVariationRow()">Add Variant</button>
+            </div>
+            
 
 
 

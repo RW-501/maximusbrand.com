@@ -660,24 +660,10 @@ safeSetMultiSelect("product-connectivity", product.connectivity);
 safeSetMultiSelect("product-fileFormat", product.fileFormat);
 
 document.getElementById("product-variety").checked = product.isVariety || false;
-// safeSetMultiSelect("product-size", product.size);
-// safeSetMultiSelect("product-color", product.color);
+ safeSetMultiSelect("product-size", product.size);
+ safeSetMultiSelect("product-color", product.color);
 
 
-if (product.isVariety) {
-    document.getElementById("variety-section").style.display = "block";
-    
-    // Ensure varietyAttributes exist
-    let differentiators = product.varietyAttributes || [];
-    safeSetMultiSelect("product-varietyAttributes", differentiators);
-
-    // Set relevant fields based on varietyAttributes
-    if (differentiators.includes("size")) safeSetMultiSelect("product-size", product.size);
-    if (differentiators.includes("color")) safeSetMultiSelect("product-color", product.color);
-    if (differentiators.includes("material")) safeSetMultiSelect("product-material", product.material);
-} else {
-    document.getElementById("variety-section").style.display = "none";
-}
 
 
 
@@ -728,6 +714,72 @@ if (product.isVariety) {
 
 
 
+document.getElementById("product-variety").addEventListener("change", function () {
+    document.getElementById("variety-section").style.display = this.checked ? "block" : "none";
+});
+
+let varietyList = []; // Global array to store variations
+
+function addVariationRow(variant = {}) {
+    let tableBody = document.querySelector("#variety-table tbody");
+
+    let row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>
+            <select class="variant-size">
+                <option value="">Select Size</option>
+                <option value="Small" ${variant.size === "Small" ? "selected" : ""}>Small</option>
+                <option value="Medium" ${variant.size === "Medium" ? "selected" : ""}>Medium</option>
+                <option value="Large" ${variant.size === "Large" ? "selected" : ""}>Large</option>
+                <option value="XL" ${variant.size === "XL" ? "selected" : ""}>XL</option>
+            </select>
+        </td>
+        <td>
+            <select class="variant-color">
+                <option value="">Select Color</option>
+                <option value="Black" ${variant.color === "Black" ? "selected" : ""}>Black</option>
+                <option value="White" ${variant.color === "White" ? "selected" : ""}>White</option>
+                <option value="Red" ${variant.color === "Red" ? "selected" : ""}>Red</option>
+            </select>
+        </td>
+        <td><input type="number" class="variant-price" value="${variant.price || ""}" placeholder="Price"></td>
+        <td><input type="number" class="variant-stock" value="${variant.stock || ""}" placeholder="Stock"></td>
+        <td><button type="button" onclick="removeVariationRow(this)">Remove</button></td>
+    `;
+
+    tableBody.appendChild(row);
+}
+window.addVariationRow = addVariationRow;
+
+/**
+ * Remove a variant row
+ */
+function removeVariationRow(button) {
+    button.closest("tr").remove();
+}
+window.removeVariationRow = removeVariationRow;
+
+/**
+ * Save Variants into `varietyList`
+ */
+function saveVariants() {
+    varietyList = [];
+
+    document.querySelectorAll("#variety-table tbody tr").forEach(row => {
+        let size = row.querySelector(".variant-size").value;
+        let color = row.querySelector(".variant-color").value;
+        let price = parseFloat(row.querySelector(".variant-price").value) || 0;
+        let stock = parseInt(row.querySelector(".variant-stock").value) || 0;
+
+        if (size && color) {
+            varietyList.push({ size, color, price, stock });
+        }
+    });
+
+    console.log("Saved Variants:", varietyList);
+}
+window.saveVariants = saveVariants;
 
 
 
