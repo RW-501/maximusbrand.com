@@ -98,7 +98,7 @@ async function loadProducts() {
 }
 
 
-let variety = []; // Store selected variants
+let varietyList = []; // Global array to store variations
 let relatedProducts = []; // Store selected variants
 
 function getProductData(){
@@ -160,7 +160,7 @@ function getProductData(){
         status:  document.getElementById("product-status")?.value || "active",
 
         isVariety: document.getElementById("product-variety")?.checked || false,
-        variety: variety,
+        variety: varietyList,
 
         relatedProducts: relatedProducts,
 
@@ -663,6 +663,14 @@ document.getElementById("product-variety").checked = product.isVariety || false;
  safeSetMultiSelect("product-size", product.size);
  safeSetMultiSelect("product-color", product.color);
 
+ document.getElementById("variety-section").style.display = product.isVariety ? "block" : "none";
+
+ let tableBody = document.querySelector("#variety-table tbody");
+ tableBody.innerHTML = ""; // Clear previous rows
+
+ if (product.variety && product.variety.length > 0) {
+     product.variety.forEach(variant => addVariationRow(variant));
+ }
 
 
 
@@ -718,7 +726,6 @@ document.getElementById("product-variety").addEventListener("change", function (
     document.getElementById("variety-section").style.display = this.checked ? "block" : "none";
 });
 
-let varietyList = []; // Global array to store variations
 
 function addVariationRow(variant = {}) {
     let tableBody = document.querySelector("#variety-table tbody");
