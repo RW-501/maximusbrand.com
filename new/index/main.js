@@ -148,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("scripts/json/mainProducts.json")
         .then(response => response.json())
         .then(products => displayProducts(products));
+        
         console.log('response  ', response);
 
     function displayProducts(products) {
