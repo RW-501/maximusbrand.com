@@ -275,7 +275,7 @@ function showPopup(index) {
     const popupContent = `
         <div class="popup">
             <h2>Upload Item (${index + 1}/${inventoryData.length})</h2>
-            <label>Title: <input type="text" id="product-name" value="${item.Title || ""}"></label>
+            <label>Title: <input type="text" id="product-name" value="${item.Title || item["Title"] || ""}"></label>
             <label>SKU: <input type="text" id="product-sku" value="${item["Custom label (SKU)"] || ""}"></label>
             <label>Price: <input type="number" id="product-price" value="${item["Start price"] ||
                  item["Auction Buy It Now price"] || 0}"></label>
