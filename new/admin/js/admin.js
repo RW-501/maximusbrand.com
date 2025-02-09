@@ -357,6 +357,8 @@ async function uploadItem() {
         if (typeof addDoc === "function" && typeof db !== "undefined") {
             await addDoc(collection(db, "mainProducts"), itemData);
             console.log("✅ Item added to Firestore");
+            loadProducts();
+
         } else {
             console.warn("⚠ `addDoc` function or `db` is not defined.");
         }
