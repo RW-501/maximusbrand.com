@@ -215,7 +215,6 @@ let productData = getProductData();
 
 
 
-
 document.getElementById("fileInput").addEventListener("change", handleFileUpload);
 
 let inventoryData = [];
@@ -228,7 +227,12 @@ function handleFileUpload(event) {
     const reader = new FileReader();
     reader.onload = function (e) {
         const csvData = e.target.result;
+        console.log("🔍 Raw CSV Data:\n", csvData); // Log raw CSV data before parsing
+
         inventoryData = parseCSV(csvData);
+
+        console.log("✅ Parsed Inventory Data:", inventoryData); // Log parsed JSON
+
         if (inventoryData.length > 0) {
             currentIndex = 0;
             showPopup(currentIndex);
@@ -240,13 +244,23 @@ function handleFileUpload(event) {
 // 📌 Parse CSV File
 function parseCSV(csv) {
     const rows = csv.split("\n").map(row => row.split(","));
-    const headers = rows.shift().map(header => header.trim());
+    if (rows.length < 2) {
+        console.error("🚨 CSV Parsing Error: No valid data found.");
+        return [];
+    }
 
-    return rows.map(row => {
+    const headers = rows.shift().map(header => header.trim());
+    console.log("📌 CSV Headers:", headers); // Log headers for debugging
+
+    return rows.map((row, rowIndex) => {
         let item = {};
         headers.forEach((header, index) => {
             item[header] = row[index] ? row[index].trim() : "";
         });
+
+        // Log each row to ensure correct parsing
+        console.log(`📝 Row ${rowIndex + 1}:`, item);
+
         return item;
     });
 }
@@ -255,6 +269,8 @@ function parseCSV(csv) {
 function showPopup(index) {
     if (index < 0 || index >= inventoryData.length) return;
     const item = inventoryData[index];
+
+    console.log(`📌 Displaying Item ${index + 1}:`, item); // Log item being displayed
 
     const popupContent = `
         <div class="popup">
@@ -293,7 +309,7 @@ function uploadItem() {
         color: document.getElementById("product-color").value,
     };
 
-    console.log("Uploading Item:", itemData);
+    console.log("📤 Uploading Item:", itemData);
     alert("Item uploaded successfully!");
 
     nextItem();
@@ -317,6 +333,13 @@ function prevItem() {
 function closePopup() {
     document.getElementById("popup-container").style.display = "none";
 }
+
+
+
+
+
+
+
 
 
 
