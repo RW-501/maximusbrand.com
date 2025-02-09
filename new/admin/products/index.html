@@ -151,16 +151,26 @@
             </div>
         
 
-            <div class="section">
-                <h3>Variety</h3>
+            <div id="variety-section" class="section" style="display: none;">
+                <h3>Variety Differentiators</h3>
                 
 <!-- Checkbox for Multiple Variants -->
 <label>
     Multiple Variants <input type="checkbox" id="product-variety">
 </label>
-            <div id="variety-differences" class="variety-section"></div>
 
-        </div>
+
+
+    <label for="product-varietyAttributes">What makes this product different?</label>
+    <select id="product-varietyAttributes" multiple>
+        <option value="size">Size</option>
+        <option value="color">Color</option>
+        <option value="material">Material</option>
+        <option value="fit">Fit</option>
+        <option value="style">Style</option>
+    </select>
+</div>
+
 
 
 

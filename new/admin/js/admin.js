@@ -660,13 +660,26 @@ safeSetMultiSelect("product-connectivity", product.connectivity);
 safeSetMultiSelect("product-fileFormat", product.fileFormat);
 
 document.getElementById("product-variety").checked = product.isVariety || false;
-safeSetMultiSelect("product-size", product.size);
-safeSetMultiSelect("product-color", product.color);
+// safeSetMultiSelect("product-size", product.size);
+// safeSetMultiSelect("product-color", product.color);
 
- // If product has varieties, compare and show differences
- if (product.isVariety && product.variety.length > 0) {
-    showVarietyDifferences(product);
+
+if (product.isVariety) {
+    document.getElementById("variety-section").style.display = "block";
+    
+    // Ensure varietyAttributes exist
+    let differentiators = product.varietyAttributes || [];
+    safeSetMultiSelect("product-varietyAttributes", differentiators);
+
+    // Set relevant fields based on varietyAttributes
+    if (differentiators.includes("size")) safeSetMultiSelect("product-size", product.size);
+    if (differentiators.includes("color")) safeSetMultiSelect("product-color", product.color);
+    if (differentiators.includes("material")) safeSetMultiSelect("product-material", product.material);
+} else {
+    document.getElementById("variety-section").style.display = "none";
 }
+
+
 
     // Set single select dropdowns
     document.getElementById("product-fit").value = product.fit || "";
@@ -715,56 +728,6 @@ safeSetMultiSelect("product-color", product.color);
 
 
 
-
-
-
-/**
- * Compare each variety with the main product and display differences.
- */
-function showVarietyDifferences(product) {
-    let varietyContainer = document.getElementById("variety-differences");
-    varietyContainer.innerHTML = "<h3>Variety Differences</h3>";
-
-    product.variety.forEach(variant => {
-        let differences = compareProducts(product, variant);
-        let varietyItem = document.createElement("div");
-        varietyItem.classList.add("variety-item");
-
-        varietyItem.innerHTML = `
-            <h4>${variant.name || "Variant"}</h4>
-            <ul>
-                ${differences.map(diff => `<li><strong>${diff.key}:</strong> ${diff.main} → ${diff.variant}</li>`).join("")}
-            </ul>
-        `;
-        varietyContainer.appendChild(varietyItem);
-    });
-}
-
-/**
- * Compares two products and returns the differences.
- */
-function compareProducts(mainProduct, variantProduct) {
-    let differences = [];
-    let keysToCompare = ["price", "stock", "size", "color", "material"];
-
-    keysToCompare.forEach(key => {
-        let mainValue = mainProduct[key];
-        let variantValue = variantProduct[key];
-
-        if (Array.isArray(mainValue)) mainValue = mainValue.join(", ");
-        if (Array.isArray(variantValue)) variantValue = variantValue.join(", ");
-
-        if (mainValue !== variantValue) {
-            differences.push({
-                key: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter
-                main: mainValue || "N/A",
-                variant: variantValue || "N/A"
-            });
-        }
-    });
-
-    return differences;
-}
 
 
 
