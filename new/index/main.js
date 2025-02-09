@@ -221,6 +221,7 @@ function addToCart(productId) {
             updateCartUI();
         });
 }
+window.addToCart = addToCart;
 
 function updateCartUI() {
     let cartList = document.getElementById("tn_Class_CartItems");
