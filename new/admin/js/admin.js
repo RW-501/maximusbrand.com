@@ -314,6 +314,7 @@ function uploadItem() {
 
     nextItem();
 }
+window.uploadItem = uploadItem;
 
 // 📌 Navigate Items
 function nextItem() {
@@ -322,19 +323,22 @@ function nextItem() {
         showPopup(currentIndex);
     }
 }
+window.nextItem = nextItem;
+
 function prevItem() {
     if (currentIndex > 0) {
         currentIndex--;
         showPopup(currentIndex);
     }
 }
+window.prevItem = prevItem;
 
 // 📌 Close Pop-Up
 function closePopup() {
     document.getElementById("popup-container").style.display = "none";
 }
 
-
+window.closePopup = closePopup;
 
 
 
