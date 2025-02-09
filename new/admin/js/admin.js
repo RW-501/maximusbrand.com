@@ -706,7 +706,7 @@ safeSetMultiSelect("product-color", product.color);
     document.getElementById("product-note").value = product.note || "";
 
     // Handle variety selection
-    loadSelectedVariants(product.variety);
+    loadSelectedProducts(product.relatedProducts);
 
     // Load media (images/videos)
     loadMediaPreview(product.media || []);
@@ -820,18 +820,22 @@ function setMultiSelect(elementId, values) {
 /**
  * Loads selected variants in the variant section.
  */
-function loadSelectedVariants(variants) {
-    let selectedVariants = document.getElementById("selected-variants");
-    selectedVariants.innerHTML = ""; // Clear previous variants
+function loadSelectedProducts(relatedProducts) {
+    let selectedProducts = document.getElementById("selected-related-products");
+    selectedProducts.innerHTML = ""; // Clear previous variants
 
-    if (!variants || variants.length === 0) return;
+    if (!relatedProducts || relatedProducts.length === 0) return;
 
-    variants.forEach(variant => {
-        let variantItem = document.createElement("div");
-        variantItem.innerHTML = `<img src="${variant.image}" width="50"> ${variant.name}`;
-        selectedVariants.appendChild(variantItem);
+    relatedProducts.forEach(product => {
+        let productItem = document.createElement("div");
+        productItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
+        selectedProducts.appendChild(productItem);
     });
 }
+
+
+
+
 
 /**
  * Loads media preview (images & videos).
