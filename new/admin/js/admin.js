@@ -99,6 +99,7 @@ async function loadProducts() {
 
 
 let variety = []; // Store selected variants
+let relatedProducts = []; // Store selected variants
 
 function getProductData(){
 
@@ -124,7 +125,7 @@ function getProductData(){
         uniqueViews: 0,
         lastViewed: null,
         timeSpent: 0,
-        
+
         rating: 0,
 
         media: mediaList.map(media => media.url), // Store media URLs
@@ -160,6 +161,9 @@ function getProductData(){
 
         isVariety: document.getElementById("product-variety")?.checked || false,
         variety: variety,
+
+        relatedProducts: relatedProducts,
+
         isMultipleItems: document.getElementById("product-multiple")?.checked || false,
         ratings: {
             average: 0,
@@ -533,7 +537,7 @@ async function updateFile(url, encodedContent, sha, token) {
 
 document.getElementById("product-variety").addEventListener("change", function () {
     if (this.checked) {
-        openVariantPopup();
+       // openVariantPopup();
     } else {
         variety = []; // Clear selected variants if unchecked
         document.getElementById("selected-variants").innerHTML = "";
@@ -541,40 +545,50 @@ document.getElementById("product-variety").addEventListener("change", function (
 });
 
 
-function openVariantPopup() {
+document.getElementById("product-related").addEventListener("change", function () {
+    if (this.checked) {
+        openRelatedProductsPopup();
+    } else {
+        relatedProducts = []; // Clear selected variants if unchecked
+        document.getElementById("selected-related-products").innerHTML = "";
+    }
+});
+
+
+function openRelatedProductsPopup() {
 
     
 
-    const variantList = document.getElementById("variant-list");
-    variantList.innerHTML = ""; // Clear previous list
+    const relatedProductsList = document.getElementById("related-products-list");
+    relatedProductsList.innerHTML = ""; // Clear previous list
 
     allProducts.forEach(product => {
         let listItem = document.createElement("li");
         listItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
         listItem.onclick = function () {
-            selectVariant(product);
+            selectRelatedProducts(product);
         };
-        variantList.appendChild(listItem);
+        relatedProductsList.appendChild(listItem);
     });
 
-    document.getElementById("variant-popup").style.display = "block";
+    document.getElementById("related-products-popup").style.display = "block";
 }
-window.openVariantPopup = openVariantPopup;
+window.openRelatedProductsPopup = openRelatedProductsPopup;
 
-function closeVariantPopup() {
-    document.getElementById("variant-popup").style.display = "none";
+function closeRelatedProductsPopup() {
+    document.getElementById("related-products-popup").style.display = "none";
 }
 
-window.closeVariantPopup = closeVariantPopup;
+window.closeRelatedProductsPopup = closeRelatedProductsPopup;
 
-function selectVariant(product) {
-    if (!variety.some(v => v.id === product.id)) {
-        variety.push(product);
+function selectRelatedProducts(product) {
+    if (!relatedProducts.some(v => v.id === product.id)) {
+        relatedProducts.push(product);
 
-        let selectedVariants = document.getElementById("selected-variants");
-        let variantItem = document.createElement("div");
-        variantItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
-        selectedVariants.appendChild(variantItem);
+        let selectedProducts = document.getElementById("selected-related-products");
+        let relatedItem = document.createElement("div");
+        relatedItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
+        selectedProducts.appendChild(relatedItem);
     }
 }
 
