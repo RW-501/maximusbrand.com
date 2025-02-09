@@ -119,9 +119,14 @@ function getProductData(){
         description: document.getElementById("product-description").value,
         highlights: document.getElementById("product-highlights")?.value.split(",") || [],
        
-        sold: parseInt(document.getElementById("product-sold")?.value) || 0,
+
         views: 0,
         uniqueViews: 0,
+        lastViewed: null,
+        timeSpent: 0,
+        
+        rating: 0,
+
         media: mediaList.map(media => media.url), // Store media URLs
         tags: document.getElementById("product-tags")?.value.split(",") || [],
         brand: document.getElementById("product-brand")?.value || "",
@@ -152,6 +157,7 @@ function getProductData(){
         
         isPresale: document.getElementById("product-presale")?.checked || false,
         status:  document.getElementById("product-status")?.value || "active",
+
         isVariety: document.getElementById("product-variety")?.checked || false,
         variety: variety,
         isMultipleItems: document.getElementById("product-multiple")?.checked || false,
@@ -166,8 +172,7 @@ function getProductData(){
         },
         itemStoredLocation: document.getElementById("product-storage")?.value || "",
         sourceProduct: document.getElementById("product-source")?.value || "",
-        lastViewed: null,
-        timeSpent: 0,
+
         meta: {
             SKU: document.getElementById("product-sku")?.value || "",
             barcode: document.getElementById("product-barcode")?.value || "",
@@ -610,7 +615,10 @@ window.editProduct = (productId) => {
     document.getElementById("product-quantity").value = product.quantity || "";
     document.getElementById("product-sold").value = product.sold || "";
 
-    // Handle multi-select fields (tags, size, color, material, season)
+
+
+
+
 
  // Helper function to safely call setMultiSelect only if data exists
  function safeSetMultiSelect(elementId, values) {
@@ -628,15 +636,19 @@ window.editProduct = (productId) => {
 
 // Only call setMultiSelect if the property exists and is not empty
 safeSetMultiSelect("product-tags", product.tags);
-safeSetMultiSelect("product-size", product.size);
-safeSetMultiSelect("product-color", product.color);
 safeSetMultiSelect("product-material", product.material);
 safeSetMultiSelect("product-season", product.season);
 safeSetMultiSelect("product-connectivity", product.connectivity);
 safeSetMultiSelect("product-fileFormat", product.fileFormat);
 
+document.getElementById("product-variety").checked = product.isVariety || false;
+safeSetMultiSelect("product-size", product.size);
+safeSetMultiSelect("product-color", product.color);
 
-
+ // If product has varieties, compare and show differences
+ if (product.isVariety && product.variety.length > 0) {
+    showVarietyDifferences(product);
+}
 
     // Set single select dropdowns
     document.getElementById("product-fit").value = product.fit || "";
@@ -653,7 +665,6 @@ safeSetMultiSelect("product-fileFormat", product.fileFormat);
     document.getElementById("product-customizable").checked = product.isCustomizable || false;
     document.getElementById("product-digital").checked = product.isDigital || false;
     document.getElementById("product-presale").checked = product.isPresale || false;
-    document.getElementById("product-variety").checked = product.isVariety || false;
     document.getElementById("product-multiple").checked = product.isMultipleItems || false;
     document.getElementById("product-freeShipping").checked = product.shipping?.freeShipping || false;
 
@@ -682,6 +693,65 @@ safeSetMultiSelect("product-fileFormat", product.fileFormat);
     // Load media (images/videos)
     loadMediaPreview(product.media || []);
 };
+
+
+
+
+
+
+
+/**
+ * Compare each variety with the main product and display differences.
+ */
+function showVarietyDifferences(product) {
+    let varietyContainer = document.getElementById("variety-differences");
+    varietyContainer.innerHTML = "<h3>Variety Differences</h3>";
+
+    product.variety.forEach(variant => {
+        let differences = compareProducts(product, variant);
+        let varietyItem = document.createElement("div");
+        varietyItem.classList.add("variety-item");
+
+        varietyItem.innerHTML = `
+            <h4>${variant.name || "Variant"}</h4>
+            <ul>
+                ${differences.map(diff => `<li><strong>${diff.key}:</strong> ${diff.main} → ${diff.variant}</li>`).join("")}
+            </ul>
+        `;
+        varietyContainer.appendChild(varietyItem);
+    });
+}
+
+/**
+ * Compares two products and returns the differences.
+ */
+function compareProducts(mainProduct, variantProduct) {
+    let differences = [];
+    let keysToCompare = ["price", "stock", "size", "color", "material"];
+
+    keysToCompare.forEach(key => {
+        let mainValue = mainProduct[key];
+        let variantValue = variantProduct[key];
+
+        if (Array.isArray(mainValue)) mainValue = mainValue.join(", ");
+        if (Array.isArray(variantValue)) variantValue = variantValue.join(", ");
+
+        if (mainValue !== variantValue) {
+            differences.push({
+                key: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter
+                main: mainValue || "N/A",
+                variant: variantValue || "N/A"
+            });
+        }
+    });
+
+    return differences;
+}
+
+
+
+
+
 
 /**
  * Helper function to set multi-select values.
