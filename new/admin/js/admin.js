@@ -568,7 +568,7 @@ function openRelatedProductsPopup() {
         listItem.onclick = function () {
             selectRelatedProducts(product);
 
-            console.log.("selected product:", product);
+            console.log("selected product:", product);
 
         };
         relatedProductsList.appendChild(listItem);
