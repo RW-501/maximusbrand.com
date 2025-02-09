@@ -190,6 +190,8 @@ return productData;
 
 }
 
+createSizeDropdown("product-size");
+createColorDropdown("product-color");
 
 // Add / Update Product
 productForm.addEventListener("submit", async (event) => {
@@ -734,23 +736,13 @@ function addVariationRow(variant = {}) {
 
     row.innerHTML = `
         <td>
-            <select class="variant-size">
-                <option value="">Select Size</option>
-                <option value="Small" ${variant.size === "Small" ? "selected" : ""}>Small</option>
-                <option value="Medium" ${variant.size === "Medium" ? "selected" : ""}>Medium</option>
-                <option value="Large" ${variant.size === "Large" ? "selected" : ""}>Large</option>
-                <option value="XL" ${variant.size === "XL" ? "selected" : ""}>XL</option>
-            </select>
+            <select class="variant-size"> </select>
         </td>
         <td>
             <select class="variant-color">
-                <option value="">Select Color</option>
-                <option value="Black" ${variant.color === "Black" ? "selected" : ""}>Black</option>
-                <option value="White" ${variant.color === "White" ? "selected" : ""}>White</option>
-                <option value="Red" ${variant.color === "Red" ? "selected" : ""}>Red</option>
-            </select>
+                <option value="">Select Color</option></select>
         </td>
-        <td><input type="number" class="variant-price" value="${variant.price || ""}" placeholder="Price"></td>
+        <td><input type="text" class="variant-price" value="${variant.price || ""}" placeholder="Price"></td>
         <td><input type="number" class="variant-stock" value="${variant.stock || ""}" placeholder="Stock"></td>
         <td><button type="button" onclick="removeVariationRow(this)">Remove</button></td>
     `;
@@ -758,6 +750,10 @@ function addVariationRow(variant = {}) {
     tableBody.appendChild(row);
 }
 window.addVariationRow = addVariationRow;
+createSizeDropdown("variant-size");
+createColorDropdown("variant-color");
+
+
 
 /**
  * Remove a variant row
@@ -923,7 +919,7 @@ function formatNumberInput(value) {
 }
 
 // Apply formatting on input fields
-document.querySelectorAll("#product-price, #product-discount, #product-multiple-discount, #product-stock, #product-quantity, #product-sold").forEach(input => {
+document.querySelectorAll(".variant-price, #product-price, #product-discount, #product-multiple-discount, #product-stock, #product-quantity, #product-sold").forEach(input => {
     input.addEventListener("input", (event) => {
         let formattedValue = formatNumberInput(event.target.value);
         event.target.value = event.target.placeholder.includes("%") ? formattedValue + "%" : formattedValue;
