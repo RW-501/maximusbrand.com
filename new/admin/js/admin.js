@@ -277,12 +277,13 @@ function showPopup(index) {
             <h2>Upload Item (${index + 1}/${inventoryData.length})</h2>
             <label>Title: <input type="text" id="product-name" value="${item.Title || ""}"></label>
             <label>SKU: <input type="text" id="product-sku" value="${item["Custom label (SKU)"] || ""}"></label>
-            <label>Price: <input type="number" id="product-price" value="${item["Start price"] || 0}"></label>
+            <label>Price: <input type="number" id="product-price" value="${item["Start price"] ||
+                 item["Auction Buy It Now price"] || 0}"></label>
             <label>Stock: <input type="number" id="product-stock" value="${item["Available quantity"] || 0}"></label>
             <label>Sold: <input type="number" id="product-sold" value="${item["Sold quantity"] || 0}"></label>
             <label>Category: <input type="text" id="product-category" value="${item["eBay category 1 name"] || ""}"></label>
             <label>Condition: <input type="text" id="product-condition" value="${item["Condition"] || ""}"></label>
-            <label>Color: <input type="text" id="product-color" value="${item["Variation details"]?.replace("Color=", "") || ""}"></label>
+            <label>Color: <input type="text" id="product-color" value="${item["Variation details"] || ""}"></label>
 
             <div class="popup-buttons">
                 <button onclick="uploadItem()">Upload</button>
