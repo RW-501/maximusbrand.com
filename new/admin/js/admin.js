@@ -281,8 +281,32 @@ function showPopup(index) {
                  item["Auction Buy It Now price"] || 0}"></label>
             <label>Stock: <input type="number" id="product-stock" value="${item["Available quantity"] || 0}"></label>
             <label>Sold: <input type="number" id="product-sold" value="${item["Sold quantity"] || 0}"></label>
-            <label>Category: <input type="text" id="product-category" value="${item["eBay category 1 name"] || ""}"></label>
-            <label>Condition: <input type="text" id="product-condition" value="${item["Condition"] || ""}"></label>
+                 
+            <div class="section">
+                <h3>Category & Subcategory</h3>
+                <label for="product-category">Category</label>
+                <select id="product-category"  value="${item["eBay category 1 name"] || ""}">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Home & Kitchen">Home & Kitchen</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Toys & Games">Toys & Games</option>
+                    <option value="Automotive">Automotive</option>
+                    <option value="Digital">Digital</option>
+                    <option value="Customizable">Customizable</option>
+                </select>
+            
+                <label for="product-subCategory">Subcategory</label>
+                <select id="product-subCategory" required>
+                    <option value="" disabled selected>Select Subcategory</option>
+                </select>
+            </div>
+           
+           
+           
+            <label>Description: <textarea type="text" id="product-description" value="${item["Condition"] || ""}"></textarea></label>
             <label>Color: <input type="text" id="product-color" value="${item["Variation details"] || ""}"></label>
 
             <div class="popup-buttons">
@@ -298,7 +322,7 @@ function showPopup(index) {
 }
 
 // 📌 Upload Item
-function uploadItem() {
+async function uploadItem() {
     const itemData = {
         name: document.getElementById("product-name").value,
         sku: document.getElementById("product-sku").value,
@@ -306,15 +330,43 @@ function uploadItem() {
         stock: parseInt(document.getElementById("product-stock").value) || 0,
         sold: parseInt(document.getElementById("product-sold").value) || 0,
         category: document.getElementById("product-category").value,
-        condition: document.getElementById("product-condition").value,
+        subCategory: document.getElementById("product-subCategory").value,
         color: document.getElementById("product-color").value,
+
+        collection: "MaximusBrand",
+        description:  document.getElementById("product-description").value,
+        status: "0000",
+
     };
 
     console.log("📤 Uploading Item:", itemData);
-    alert("Item uploaded successfully!");
 
-    nextItem();
+    try {
+        let jsonProductData = JSON.stringify(itemData, null, 2);
+
+        // Save product data to JSON file (if function exists)
+        if (typeof saveVideosToJson === "function") {
+            await saveVideosToJson(jsonProductData, true);
+        } else {
+            console.warn("⚠ `saveVideosToJson` function not found.");
+        }
+
+        // Save to Firebase Firestore (Ensure `db` is initialized)
+        if (typeof addDoc === "function" && typeof db !== "undefined") {
+            await addDoc(collection(db, "mainProducts"), itemData);
+            console.log("✅ Item added to Firestore");
+        } else {
+            console.warn("⚠ `addDoc` function or `db` is not defined.");
+        }
+
+        showToast("Item uploaded successfully!");
+        nextItem();
+    } catch (error) {
+        console.error("🚨 Error uploading item:", error);
+        showToast("Error uploading item!", "error");
+    }
 }
+
 window.uploadItem = uploadItem;
 
 // 📌 Navigate Items
