@@ -567,6 +567,9 @@ function openRelatedProductsPopup() {
         listItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
         listItem.onclick = function () {
             selectRelatedProducts(product);
+
+            console.log.("selected product:", product);
+
         };
         relatedProductsList.appendChild(listItem);
     });
