@@ -123,11 +123,7 @@ const firebaseConfig = {
             localStorage.setItem('userLoggedIn', false);
     
     
-            const allUserBtns = document.querySelectorAll('.side-user-btn');
-            allUserBtns.forEach((btns) => {
-              if (btns) btns.style.display = 'none';
-            });
-        
+            
             const joinArea = document.getElementById('btn-join-area');
             if (joinArea) joinArea.style.display = 'block';
           }
@@ -152,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("scripts/json/mainProducts.json")
         .then(response => response.json())
         .then(products => displayProducts(products));
+        console.log('response  ', response);
 
     function displayProducts(products) {
         let productGrid = document.getElementById("tn_ID_ProductGrid");
