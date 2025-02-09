@@ -587,6 +587,7 @@ window.closeRelatedProductsPopup = closeRelatedProductsPopup;
 function selectRelatedProducts(product) {
     if (!relatedProducts.some(v => v.id === product.id)) {
         relatedProducts.push(product);
+        console.log("selected relatedProducts:", relatedProducts);
 
         let selectedProducts = document.getElementById("selected-related-products");
         let relatedItem = document.createElement("div");
