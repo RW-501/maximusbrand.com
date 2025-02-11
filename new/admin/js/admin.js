@@ -872,10 +872,34 @@ function updateRelatedProductsSelect(selectElementId) {
 
     updatedProducts.forEach(product => {
         let relatedItem = document.createElement("div");
-        relatedItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
+        relatedItem.classList.add("related-item");
+
+        // Construct the HTML for the related item with an image, name, and remove button
+        relatedItem.innerHTML = `
+            <img src="${product.image}" width="50"> 
+            ${product.name}
+            <button class="remove-btn" data-id="${product.id}">Remove</button>
+        `;
+
+        // Append the related item to the display container
         selectedProducts.appendChild(relatedItem);
+
+        // Attach event listener to the remove button
+        relatedItem.querySelector(".remove-btn").addEventListener("click", function() {
+            removeRelatedProduct(product.id);
+        });
     });
 }
+
+// Function to remove a related product
+function removeRelatedProduct(productId) {
+    // Remove the product from the relatedProducts array
+    relatedProducts = relatedProducts.filter(product => product.id !== productId);
+
+    // Re-run the update function to refresh the displayed products
+    updateRelatedProductsSelect("related-products-select");
+}
+
 
 // Attach an event listener to the select element to trigger updates
 document.getElementById("related-products-select").addEventListener("change", function() {
