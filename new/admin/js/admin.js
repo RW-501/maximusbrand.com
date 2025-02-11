@@ -261,7 +261,7 @@ const cleanArrayInput = (id) => {
 
 
 // Example Usage: Displaying price in UI
-document.getElementById("product-price-display").textContent = productData.price;
+//document.getElementById("product-price-display").textContent = productData.price;
 
     const varietyList = Array.isArray(varietyList) ? varietyList : [];
     const relatedProducts = Array.isArray(relatedProducts) ? relatedProducts : [];
