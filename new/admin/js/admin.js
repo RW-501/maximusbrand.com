@@ -821,9 +821,9 @@ safeSetMultiSelect("product-season", product.season);
 safeSetMultiSelect("product-connectivity", product.connectivity);
 safeSetMultiSelect("product-fileFormat", product.fileFormat);
 
-document.getElementById("product-variety").checked = product.isVariety || false;
  safeSetMultiSelect("product-size", product.size);
  safeSetMultiSelect("product-color", product.color);
+ document.getElementById("product-variety").checked = product.isVariety || false;
 
  document.getElementById("variety-section").style.display = product.isVariety ? "block" : "none";
 

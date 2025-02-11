@@ -149,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(products => displayProducts(products));
         
-        console.log('response  ', response);
 
     function displayProducts(products) {
         let productGrid = document.getElementById("tn_ID_ProductGrid");
@@ -265,22 +264,7 @@ function trackEvent(type, productId) {
 
 window.trackEvent = trackEvent;
 
-paypal.Buttons({
-    createOrder: function(data, actions) {
-        return actions.order.create({
-            purchase_units: [{
-                amount: { value: calculateCartTotal() }
-            }]
-        });
-    },
-    onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-            alert("Transaction completed by " + details.payer.name.given_name);
-            localStorage.removeItem("cart");
-            updateCartUI();
-        });
-    }
-}).render("#paypal-button-container");
+
 
 
 
