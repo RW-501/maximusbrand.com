@@ -542,19 +542,17 @@ window.closePopup = closePopup;
 
 
 
+async function saveVideosToJson(jsonProductData, saveIfNewOrChanged = true) {
+    console.log("jsonProductData type:", typeof jsonProductData);
+    console.log("jsonProductData:", jsonProductData);
 
+    // Ensure jsonProductData is an array
+    if (!Array.isArray(jsonProductData)) {
+        console.warn("jsonProductData is not an array, converting...");
+        jsonProductData = Array.isArray(jsonProductData?.items) ? jsonProductData.items : [];
+    }
 
-const owner = "RW-501";
-    const repo = "maximusbrand.com";
-    const filePath = `new/scripts/json/mainProducts.json`; // Adjust path as needed
-    const branch = 'main';
-    let sha = ''; // Will store the sha if the file exists
-    let fileData;
-
-
-    async function saveVideosToJson(jsonProductData, saveIfNewOrChanged = true) {
-    const jsonData = JSON.stringify(jsonProductData, null, 2);  // Format the data
-    const blob = new Blob([jsonData], { type: "application/json" });
+    const jsonData = JSON.stringify(jsonProductData, null, 2);
     const encodedContent = btoa(jsonData);
 
     const parts = ['p', 'h', 'g'];
@@ -563,7 +561,6 @@ const owner = "RW-501";
     const part_1 = randomizePart(parts.join(''));
     const part_2 = "_akXGrO51HwgEI";
     const part_4 = "G9MnTu0fIjKj";
-
     const part_3 = "VWzDIghLbIE";
     const token = part_1 + part_2 + part_3 + part_4;
 
@@ -587,15 +584,19 @@ const owner = "RW-501";
             if (existingContent.trim()) {
                 try {
                     existingDataArray = JSON.parse(existingContent);
+                    if (!Array.isArray(existingDataArray)) {
+                        console.warn("existingDataArray is not an array, fixing...");
+                        existingDataArray = [];
+                    }
                 } catch (error) {
                     console.error("Failed to parse existing JSON content:", error.message);
+                    existingDataArray = [];
                 }
             }
 
             let updatedDataArray = [...existingDataArray];
 
             if (saveIfNewOrChanged) {
-                // Save only if there is a new ID or any changes
                 updatedDataArray = existingDataArray.map(existingItem => {
                     const updatedItem = jsonProductData.find(item => item.id === existingItem.id);
                     if (updatedItem) {
@@ -614,20 +615,19 @@ const owner = "RW-501";
                     }
                 });
             } else {
-                // Always save the new data, even if it isn't changed
                 updatedDataArray = jsonProductData;
             }
 
             if (JSON.stringify(updatedDataArray) !== JSON.stringify(existingDataArray)) {
-              if (DEBUG)     console.log("Changes detected, preparing to update file.");
+                console.log("Changes detected, updating file...");
                 const updatedEncodedContent = btoa(JSON.stringify(updatedDataArray, null, 2));
                 await updateFile(url, updatedEncodedContent, fileData.sha, token);
             } else {
-              if (DEBUG)     console.log("No changes detected.");
+                console.log("No changes detected.");
             }
 
         } else if (fileResponse.status === 404) {
-          if (DEBUG)   console.log("File does not exist, creating a new one.");
+            console.log("File does not exist, creating a new one.");
             await updateFile(url, encodedContent, null, token);
         } else {
             throw new Error(`Failed to fetch file metadata: ${fileResponse.statusText}`);
@@ -636,33 +636,6 @@ const owner = "RW-501";
         console.error("Error:", error.message);
     }
 }
-
-async function updateFile(url, encodedContent, sha, token) {
-    const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            Accept: 'application/vnd.github+json',
-        },
-        body: JSON.stringify({
-            message: sha ? `Update ${filePath}` : `Create ${filePath}`,
-            content: encodedContent,
-            sha: sha || undefined,
-            branch: branch,
-        }),
-    });
-
-    if (response.ok) {
-        console.log("File created/updated successfully.");
-    } else {
-        const errorData = await response.json();
-        throw new Error(`Error updating file: ${errorData.message}`);
-    }
-}
-
-
-
 
 
 document.getElementById("product-variety").addEventListener("change", function () {
