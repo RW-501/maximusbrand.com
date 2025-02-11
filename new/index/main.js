@@ -271,5 +271,122 @@ window.trackEvent = trackEvent;
 
 
 
+function showToast(message, type = "info", duration = 3000) {
+  // Define icon types
+  const icons = {
+      success: "fa-check-circle",
+      error: "fa-times-circle",
+      warning: "fa-exclamation-triangle",
+      info: "fa-info-circle"
+  };
+
+  // Ensure type is valid, fallback to "info"
+  const iconClass = icons[type] || icons.info;
+
+  // Create toast container if not exists
+  let toastContainer = document.getElementById("toast-container");
+  if (!toastContainer) {
+      toastContainer = document.createElement("div");
+      toastContainer.id = "toast-container";
+      toastContainer.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 9999;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      `;
+      document.body.appendChild(toastContainer);
+  }
+
+  // Create toast element
+  const toast = document.createElement("div");
+  toast.className = `toast-message ${type}`;
+  toast.innerHTML = `
+      <i class="fas ${iconClass}"></i> ${message}
+      <button class="toast-close">&times;</button>
+  `;
+
+  // Style toast
+  toast.style.cssText = `
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #fff;
+      min-width: 250px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: fadeIn 0.3s ease-out;
+  `;
+
+  // Style by type
+  const colors = {
+      success: "#28a745",
+      error: "#dc3545",
+      warning: "#ffc107",
+      info: "#007bff"
+  };
+  toast.style.backgroundColor = colors[type] || colors.info;
+
+  // Close button styles
+  const closeButton = toast.querySelector(".toast-close");
+  closeButton.style.cssText = `
+      border: none;
+      background: transparent;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      position: absolute;
+      top: 8px;
+      right: 12px;
+  `;
+
+  // Close toast on button click
+  closeButton.addEventListener("click", () => {
+      toast.style.animation = "fadeOut 0.3s ease-out";
+      setTimeout(() => toast.remove(), 300);
+  });
+
+  // Auto-remove toast after duration
+  setTimeout(() => {
+      toast.style.animation = "fadeOut 0.3s ease-out";
+      setTimeout(() => toast.remove(), 300);
+  }, duration);
+
+  // Append toast to container
+  toastContainer.appendChild(toast);
+}
+
+// CSS Animations (can be moved to a CSS file)
+const style = document.createElement("style");
+style.innerHTML = `
+  @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(10px); }
+  }
+
+  .toast-message {
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+`;
+document.head.appendChild(style);
+window.showToast = showToast;
+
+
+
+
+
+
+
+
     // Update year dynamically
     document.getElementById("tn_ID_Year").textContent = new Date().getFullYear();
