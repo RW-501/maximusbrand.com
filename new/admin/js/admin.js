@@ -229,97 +229,144 @@ async function loadProducts() {
 let varietyList = []; // Global array to store variations
 let relatedProducts = []; // Store selected variants
 
-function getProductData(){
+function getProductData() {
+    const image = Array.isArray(mediaList) && mediaList.length > 0 ? mediaList[0].url : null;
+    const mediaGallery = Array.isArray(mediaList) ? mediaList.map(media => media.url) : [];
+
+    const formatNumberInput = (value) => isNaN(parseFloat(value)) ? 0 : parseFloat(value);
+    const cleanInput = (id) => document.getElementById(id)?.value.trim() || "";
+    const cleanArrayInput = (id) => document.getElementById(id)?.value.split(",").map(item => item.trim()).filter(item => item) || [];
+
+    const varietyList = Array.isArray(varietyList) ? varietyList : [];
+    const relatedProducts = Array.isArray(relatedProducts) ? relatedProducts : [];
 
     const productData = {
+        image: image,
+        mediaGallery: mediaGallery,
 
-        price: formatNumberInput(document.getElementById("product-price").value),
-        discount: formatNumberInput(document.getElementById("product-discount").value),
-        multipleItemDiscount: formatNumberInput(document.getElementById("product-multiple-discount").value),
-        stock: formatNumberInput(document.getElementById("product-stock").value),
-        quantity: formatNumberInput(document.getElementById("product-quantity").value),
-        sold: formatNumberInput(document.getElementById("product-sold").value),
+        price: formatNumberInput(cleanInput("product-price")),
+        discount: formatNumberInput(cleanInput("product-discount")),
+        multipleItemDiscount: formatNumberInput(cleanInput("product-multiple-discount")),
+        stock: formatNumberInput(cleanInput("product-stock")),
+        quantity: formatNumberInput(cleanInput("product-quantity")),
+        sold: formatNumberInput(cleanInput("product-sold")),
 
-        name: document.getElementById("product-name").value,
-        searchableName: generateSearchableName(document.getElementById("product-name").value),
-        collection: document.getElementById("product-collection").value || null,
-        category: document.getElementById("product-category").value,
-        subCategory: document.getElementById("product-subCategory")?.value || "",
-        description: document.getElementById("product-description").value,
-        highlights: document.getElementById("product-highlights")?.value.split(",") || [],
-       
+        name: cleanInput("product-name"),
+        searchableName: generateSearchableName(cleanInput("product-name")),
+        collection: cleanInput("product-collection") || null,
+        category: cleanInput("product-category"),
+        subCategory: cleanInput("product-subCategory"),
+        description: cleanInput("product-description"),
+        highlights: cleanArrayInput("product-highlights"),
 
         views: 0,
         uniqueViews: 0,
         lastViewed: null,
         timeSpent: 0,
-
         rating: 0,
 
-        media: mediaList.map(media => media.url), // Store media URLs
-        tags: document.getElementById("product-tags")?.value.split(",") || [],
-        brand: document.getElementById("product-brand")?.value || "",
-        size: document.getElementById("product-size")?.value.split(",") || [],
-        color: document.getElementById("product-color")?.value.split(",") || [],
-        material: document.getElementById("product-material")?.value.split(",") || [],
-        fit: document.getElementById("product-fit")?.value || "",
-        gender: document.getElementById("product-gender")?.value || "",
-        style: document.getElementById("product-style")?.value || "",
-        season: document.getElementById("product-season")?.value.split(",") || [],
+        tags: cleanArrayInput("product-tags"),
+        brand: cleanInput("product-brand"),
+        size: cleanArrayInput("product-size"),
+        color: cleanArrayInput("product-color"),
+        material: cleanArrayInput("product-material"),
+        fit: cleanInput("product-fit"),
+        gender: cleanInput("product-gender"),
+        style: cleanInput("product-style"),
+        season: cleanArrayInput("product-season"),
 
-        isFeatured: document.getElementById("product-featured")?.checked || false,
-        isBestseller: document.getElementById("product-bestseller")?.checked || false,
+        isFeatured: document.getElementById("product-featured")?.checked ?? false,
+        isBestseller: document.getElementById("product-bestseller")?.checked ?? false,
 
-        isCustomizable: document.getElementById("product-customizable")?.checked || false,
-        estimatedCustomizationTime: document.getElementById("product-custom-time")?.value || "",
-        customizationOptions: document.getElementById("product-custom-options")?.value.split(",") || [],
-        
-        batteryLife: document.getElementById("product-battery")?.value || "",
-        chargingTime: document.getElementById("product-charging")?.value || "",
-        wirelessRange: document.getElementById("product-wireless")?.value || "",
-        warranty: document.getElementById("product-warranty")?.value || "",
-        connectivity: document.getElementById("product-connectivity")?.value.split(",") || [],
+        isCustomizable: document.getElementById("product-customizable")?.checked ?? false,
+        estimatedCustomizationTime: cleanInput("product-custom-time"),
+        customizationOptions: cleanArrayInput("product-custom-options"),
 
-        isDigital: document.getElementById("product-digital")?.checked || false,
-        downloadURL: document.getElementById("product-download")?.value || "",
-        fileFormat: document.getElementById("product-fileFormat")?.value.split(",") || [],
-        
-        isPresale: document.getElementById("product-presale")?.checked || false,
-        status:  document.getElementById("product-status")?.value || "active",
+        batteryLife: cleanInput("product-battery"),
+        chargingTime: cleanInput("product-charging"),
+        wirelessRange: cleanInput("product-wireless"),
+        warranty: cleanInput("product-warranty"),
+        connectivity: cleanArrayInput("product-connectivity"),
 
-        isVariety: document.getElementById("product-variety")?.checked || false,
+        isDigital: document.getElementById("product-digital")?.checked ?? false,
+        downloadURL: cleanInput("product-download"),
+        fileFormat: cleanArrayInput("product-fileFormat"),
+
+        isPresale: document.getElementById("product-presale")?.checked ?? false,
+        status: cleanInput("product-status") || "active",
+
+        isVariety: document.getElementById("product-variety")?.checked ?? false,
         variety: varietyList,
-
         relatedProducts: relatedProducts,
 
-        isMultipleItems: document.getElementById("product-multiple")?.checked || false,
+        isMultipleItems: document.getElementById("product-multiple")?.checked ?? false,
         ratings: {
             average: 0,
             reviews: []
         },
-        shipping: {
-            freeShipping: document.getElementById("product-freeShipping")?.checked || false,
-            shipsFrom: document.getElementById("product-shipsFrom")?.value || "",
-            estimatedDelivery: document.getElementById("product-delivery")?.value || ""
-        },
-        itemStoredLocation: document.getElementById("product-storage")?.value || "",
-        sourceProduct: document.getElementById("product-source")?.value || "",
 
-        meta: {
-            SKU: document.getElementById("product-sku")?.value || "",
-            barcode: document.getElementById("product-barcode")?.value || "",
-            ASIN: document.getElementById("product-asin")?.value || "",
-            UPC: document.getElementById("product-upc")?.value || ""
+        shipping: {
+            freeShipping: document.getElementById("product-freeShipping")?.checked ?? false,
+            shipsFrom: cleanInput("product-shipsFrom"),
+            estimatedDelivery: cleanInput("product-delivery")
         },
-        note: document.getElementById("product-note")?.value || ""
+        itemStoredLocation: cleanInput("product-storage"),
+        sourceProduct: cleanInput("product-source"),
+
+        // New fields for Dropshipping
+        supplierName: cleanInput("product-supplier-name"),
+        supplierLink: cleanInput("product-supplier-link"),
+        dropshippingFees: formatNumberInput(cleanInput("product-dropshipping-fees")),
+
+        // Performance metrics (Sales Conversion Rate, etc.)
+        salesConversionRate: formatNumberInput(cleanInput("product-sales-conversion-rate")),
+        customerRating: formatNumberInput(cleanInput("product-customer-rating")),  // Customer rating from reviews
+
+        // SEO fields
+        seoTitle: cleanInput("product-seo-title"),
+        seoDescription: cleanInput("product-seo-description"),
+        seoKeywords: cleanArrayInput("product-seo-keywords"),
+        canonicalURL: cleanInput("product-canonical-url"),
+
+        // Meta (product identifiers)
+        meta: {
+            SKU: cleanInput("product-sku"),
+            barcode: cleanInput("product-barcode"),
+            ASIN: cleanInput("product-asin"),
+            UPC: cleanInput("product-upc")
+        },
+        note: cleanInput("product-note")
     };
 
-return productData;
-
+    return productData;
 }
+
 
 createSizeDropdown("product-size");
 createColorDropdown("product-color");
+
+
+
+
+
+
+
+
+
+
+// Get references to the submit button and the custom trigger button
+const submitButton = document.getElementById('submit');
+const triggerButton = document.getElementById('click-submit-btn');
+
+// Function to trigger the submit button click
+function triggerSubmit() {
+    submitButton.click();  // Programmatically trigger the submit button's click
+}
+
+// Add event listener to the custom button
+triggerButton.addEventListener('click', triggerSubmit);
+
+
 
 // Add / Update Product
 productForm.addEventListener("submit", async (event) => {

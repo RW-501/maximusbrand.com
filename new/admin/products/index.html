@@ -87,6 +87,18 @@
         <button id="update-btn" style="display: none;">Update Product</button>
         </div>
 
+
+
+
+
+
+
+<!-- Button to trigger the submit action programmatically -->
+<button id="click-submit-btn">Submit Form</button>
+
+
+
+
         <table id="product-table">
             <thead>
                 <tr>
@@ -455,6 +467,47 @@
 <div id="selected-related-products"></div>
 </div>
 
+  <!-- SEO Fields -->
+  <div class="section">
+    <h3>SEO Information</h3>
+
+    <label for="product-seo-title">SEO Title:</label>
+    <input type="text" id="product-seo-title" placeholder="Enter SEO title for search engines">
+
+    <label for="product-seo-description">SEO Description:</label>
+    <textarea id="product-seo-description" placeholder="Enter SEO description"></textarea>
+
+    <label for="product-seo-keywords">SEO Keywords (comma-separated):</label>
+    <input type="text" id="product-seo-keywords" placeholder="Enter SEO keywords">
+    
+    <label for="product-canonical-url">Canonical URL:</label>
+    <input type="text" id="product-canonical-url" placeholder="Enter canonical URL">
+</div>
+
+<!-- Dropshipping Fields -->
+<div class="section">
+    <h3>Dropshipping Information</h3>
+
+    <label for="product-supplier-name">Supplier Name:</label>
+    <input type="text" id="product-supplier-name" placeholder="Enter supplier name">
+
+    <label for="product-supplier-link">Supplier Product Link:</label>
+    <input type="url" id="product-supplier-link" placeholder="Enter supplier product page link">
+
+    <label for="product-dropshipping-fees">Dropshipping Fees ($):</label>
+    <input type="number" id="product-dropshipping-fees" placeholder="Enter dropshipping fees">
+</div>
+
+<!-- Performance Metrics -->
+<div class="section">
+    <h3>Product Performance</h3>
+
+    <label for="product-sales-conversion-rate">Sales Conversion Rate (%):</label>
+    <input type="number" id="product-sales-conversion-rate" placeholder="Enter conversion rate">
+
+    <label for="product-customer-rating">Customer Rating (1-5):</label>
+    <input type="number" id="product-customer-rating" min="1" max="5" placeholder="Enter customer rating">
+</div>
 
 
 <div class="section">

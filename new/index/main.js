@@ -178,11 +178,10 @@ function viewProduct(productId) {
     let modal = document.getElementById("tn_ID_ProductModal");
     let modalContent = document.getElementById("tn_ID_ModalContent");
 
-    // Fetch product from Firebase Firestore
-    db.collection("mainProducts").doc(productId.toString()).get()
-        .then((doc) => {
-            if (doc.exists) {
-                let product = doc.data();
+    fetch("scripts/json/mainProducts.json")
+        .then(response => response.json())
+        .then(products => {
+            let product = products.find(p => p.id === productId);
 
                 // Check stock availability
                 let stockStatus = product.stock > 0
@@ -198,15 +197,10 @@ function viewProduct(productId) {
                 `;
 
                 modal.style.display = "block";
-            } else {
-                alert("Product not found.");
-            }
-        })
-        .catch((error) => {
-            console.error("Error fetching product:", error);
-            alert("Error fetching product details.");
-        });
-}
+  
+    
+      });
+    }
 
 window.viewProduct = viewProduct;
 

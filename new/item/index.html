@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" id="seo-description" content="Product details, ratings, and reviews for better purchase decisions">
+    <meta name="keywords" id="seo-keywords" content="products, shopping, ratings, reviews, add to cart, wishlist">
+    <meta name="robots" content="index, follow">
+    <title id="seo-title">Product Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; }
+        .product-detail { display: flex; gap: 20px; width: 70%; }
+        .product-image { width: 50%; max-width: 600px; }
+        .product-info { width: 45%; }
+        .price { font-size: 1.5rem; color: #e60000; margin: 10px 0; }
+        .description { font-size: 1.1rem; color: #555; line-height: 1.6; margin-bottom: 15px; }
+        .low-stock { color: #ff0000; font-weight: bold; }
+        .product-buttons { margin-top: 20px; }
+        .button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; margin: 5px; border-radius: 5px; }
+        .button:hover { background-color: #0056b3; }
+        .social-share button { background-color: #3b5998; border: none; color: white; padding: 10px 20px; border-radius: 5px; margin-right: 10px; }
+        .social-share button:hover { background-color: #2d4373; }
+        .sticky-sidebar { position: sticky; top: 20px; border: 1px solid #ddd; padding: 15px; background-color: white; width: 200px; border-radius: 5px; }
+        .related-products { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 40px; width: 100%; }
+        .related-product { width: 23%; background-color: white; border: 1px solid #ddd; padding: 10px; border-radius: 5px; text-align: center; }
+        .related-product img { width: 100%; height: auto; }
+        .ratings { font-size: 1.2rem; margin-top: 10px; }
+        .ratings span { color: #ff9900; }
+        .reviews { margin-top: 10px; }
+        .review { margin-bottom: 10px; }
+        .countdown { font-size: 1.5rem; color: #ff0000; font-weight: bold; margin-top: 20px; }
+        .breadcrumb { margin-bottom: 20px; }
+        .breadcrumb a { text-decoration: none; color: #007bff; }
+        .breadcrumb a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a> > 
+            <a href="#" id="category-breadcrumb">Category</a> > 
+            <a href="#" id="subcategory-breadcrumb">Subcategory</a> > 
+            <span id="product-name-breadcrumb">Product Name</span>
+        </nav>
+
+        <!-- Product Detail Section -->
+        <div class="product-detail" id="product-detail">
+            <div class="product-image" id="product-image">
+                <div class="image-popover">
+                    <img src="" alt="Product Image" id="main-product-image" aria-describedby="popover-content">
+                    <div class="popover-content" id="popover-content">Zoomed Image</div>
+                </div>
+            </div>
+            <div class="product-info">
+                <h2 id="product-name" aria-label="Product name">Product Name</h2>
+                <p class="price" id="product-price">$0.00</p>
+                <p class="description" id="product-description" aria-label="Product description">Product Description</p>
+                <p id="low-stock" class="low-stock" aria-live="assertive"></p> <!-- Low stock alert -->
+                <div class="product-buttons">
+                    <button class="button" id="add-to-cart-btn" aria-label="Add product to cart">Add to Cart</button>
+                    <button class="button" id="save-to-wishlist-btn" aria-label="Save product to wishlist">Save to Wishlist</button>
+                </div>
+                <div class="social-share">
+                    <button id="share-facebook" aria-label="Share on Facebook">Share on Facebook</button>
+                    <button id="share-twitter" aria-label="Share on Twitter">Share on Twitter</button>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div id="countdown-timer" class="countdown"></div>
+            </div>
+            
+            <!-- Sticky Sidebar -->
+            <div class="sticky-sidebar">
+                <h3>Product Features</h3>
+                <ul id="product-features"></ul>
+            </div>
+        </div>
+
+        <!-- Customer Reviews Section -->
+        <div class="reviews" id="customer-reviews">
+            <h3>Customer Reviews</h3>
+            <div id="reviews-list"></div>
+            <textarea id="review-input" placeholder="Write a review..." rows="4"></textarea>
+            <button id="submit-review-btn">Submit Review</button>
+        </div>
+
+        <!-- Related Products Section -->
+        <div class="related-products" id="related-products"></div>
+    </div>
+
+    <script>
+
+        
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js';
+// Firestore imports
+import {
+  getFirestore,
+  doc, arrayRemove,
+  getDoc, serverTimestamp,
+  query, startAfter,
+  updateDoc, orderBy,
+  setDoc, limit, 
+  addDoc, deleteDoc,writeBatch ,
+  getDocs, increment,
+  where, arrayUnion,onSnapshot ,
+  collection
+} from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js';
+
+
+// Analytics import
+import { initializeAnalytics } from 'https://maximusbrand.com/new/scripts/js/auth.js';
+
+
+const DEBUG = false;
+if (DEBUG) console.log("Module Debug on");
+ 
+// Initialize Firebase
+let auth;
+let db;
+let storage;
+let analytics;
+let userId;
+let batch;
+
+    
+// Initialize Cart
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+userId = localStorage.getItem('userID');
+
+        
+// Add to Cart Button
+document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+    if (!userId) {
+        showLoginPopup();  // Show login if not logged in
+    } else {
+        // Add product to cart
+        const product = getProductData();  // Get product data dynamically
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Product added to cart!');
+    }
+});
+
+// Save to Wishlist Button
+document.getElementById('save-to-wishlist-btn').addEventListener('click', () => {
+    if (!userId) {
+        showLoginPopup();  // Show login if not logged in
+    } else {
+        // Save product to wishlist
+        const product = getProductData();  // Get product data dynamically
+        const wishlistRef = doc(db, "Users", userId);
+        updateDoc(wishlistRef, {
+            wishlist: arrayUnion(product)  // Save to Firestore wishlist
+        });
+        alert('Product saved to wishlist!');
+    }
+});
+
+// Update Cart from User Data
+function updateCartFromUser(userId) {
+    const userRef = doc(db, "Users", userId);
+    getDoc(userRef).then((docSnapshot) => {
+        if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            cart = userData.cart || [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Cart updated from your account!');
+        } else {
+            console.log('No such user data found');
+        }
+    }).catch((error) => {
+        console.error("Error fetching user data: ", error);
+    });
+}
+
+
+// Function to fetch product data and populate product details dynamically
+function getProductData() {
+    const productId = new URLSearchParams(window.location.search).get('id'); // Get the product ID from the URL
+
+    // Fetch product data from JSON
+    fetch('https://maximusbrand.com/new/scripts/json/mainProducts.json')
+        .then(response => response.json())
+        .then(products => {
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                // Populate the product data dynamically
+                populateProductData(product);
+                loadRelatedProducts(product.category); // Load related products based on the product category
+                handleLowStock(product.stock); // Handle low stock alert
+                handleDiscountTimer(product.discount); // Handle discount timer
+                displayCustomerReviews(product); // Display customer reviews
+                updateBreadcrumbNav(product); // Update breadcrumb navigation
+            } else {
+                alert('Product not found!');
+            }
+        })
+        .catch(error => console.error('Error fetching product data:', error));
+}
+
+// Function to populate product data dynamically
+function populateProductData(product) {
+    // Display product data
+    document.getElementById('product-name').textContent = product.name;
+    document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
+    document.getElementById('product-description').textContent = product.description;
+    document.getElementById('main-product-image').src = product.image;
+    document.getElementById('popover-content').textContent = `Zoomed Image: ${product.name}`;
+
+    // Handle low stock alert
+    handleLowStock(product.stock);
+
+    // Populate product features dynamically based on category (e.g., clothes, electronics)
+    let productFeaturesHTML = '';
+    if (product.category === 'Clothing') {
+        productFeaturesHTML = `
+            <li>Size: ${product.size ? product.size.join(', ') : 'N/A'}</li>
+            <li>Color: ${product.color ? product.color.join(', ') : 'N/A'}</li>
+            <li>Material: ${product.material ? product.material.join(', ') : 'N/A'}</li>
+            <li>Fit: ${product.fit || 'N/A'}</li>
+            <li>Gender: ${product.gender || 'N/A'}</li>
+        `;
+    } else if (product.category === 'Electronics') {
+        productFeaturesHTML = `
+            <li>Battery Life: ${product.batteryLife || 'N/A'}</li>
+            <li>Charging Time: ${product.chargingTime || 'N/A'}</li>
+            <li>Wireless Range: ${product.wirelessRange || 'N/A'}</li>
+            <li>Warranty: ${product.warranty || 'N/A'}</li>
+        `;
+    }
+
+    // Sticky Sidebar Product Features
+    document.getElementById('product-features').innerHTML = productFeaturesHTML;
+
+    // Handle Discount Timer
+    handleDiscountTimer(product.discount);
+
+    // Update SEO fields dynamically
+    document.title = product.seoTitle || product.name;
+    document.querySelector("meta[name='description']").setAttribute("content", product.seoDescription);
+    document.querySelector("meta[name='keywords']").setAttribute("content", product.seoKeywords.join(", "));
+
+    // Set Breadcrumb Nav
+    updateBreadcrumbNav(product);
+}
+
+// Handle Low Stock Alert
+function handleLowStock(quantity) {
+    const lowStockAlert = document.getElementById('low-stock');
+    if (quantity < 3) {
+        lowStockAlert.textContent = "Low in stock!";
+        lowStockAlert.style.color = "red";
+    } else {
+        lowStockAlert.textContent = "";
+    }
+}
+
+// Handle Discount Timer for Discount/Offer
+function handleDiscountTimer(discount) {
+    const discountElement = document.getElementById('discount-timer');
+    if (discount > 0) {
+        const discountEndTime = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)); // 1 day from now
+        const timerInterval = setInterval(() => {
+            const remainingTime = discountEndTime - new Date();
+            if (remainingTime <= 0) {
+                clearInterval(timerInterval);
+                discountElement.textContent = "Offer has expired!";
+            } else {
+                const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                discountElement.textContent = `Discount ends in ${hours}h ${minutes}m`;
+            }
+        }, 60000); // Update every minute
+    }
+}
+
+// Load Related Products based on Category
+function loadRelatedProducts(category) {
+    fetch('https://maximusbrand.com/new/scripts/json/mainProducts.json')
+        .then(response => response.json())
+        .then(products => {
+            const related = products.filter(p => p.category === category);
+            const relatedProductsDiv = document.getElementById('related-products');
+            relatedProductsDiv.innerHTML = ''; // Clear existing related products
+
+            related.forEach(product => {
+                const relatedProduct = document.createElement('div');
+                relatedProduct.classList.add('related-product');
+                relatedProduct.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h4>${product.name}</h4>
+                    <p>$${product.price.toFixed(2)}</p>
+                    <button class="button">View Product</button>
+                `;
+                relatedProduct.querySelector('button').addEventListener('click', () => {
+                    window.location.href = `item?id=${product.id}`; // Redirect to related product page
+                });
+                relatedProductsDiv.appendChild(relatedProduct);
+            });
+        });
+}
+
+// Update Breadcrumb Navigation
+function updateBreadcrumbNav(product) {
+    document.getElementById('category-breadcrumb').textContent = product.category;
+    document.getElementById('subcategory-breadcrumb').textContent = product.subCategory;
+    document.getElementById('product-name-breadcrumb').textContent = product.name;
+}
+
+        // Handle Low Stock Alert
+        function handleLowStock(quantity) {
+            const lowStockAlert = document.getElementById('low-stock');
+            if (quantity < 3) {
+                lowStockAlert.textContent = "Low in stock!";
+            }
+        }
+
+        // Handle Discount Timer for Discount/Offer
+        function handleDiscountTimer(discount) {
+            if (discount > 0) {
+                const countdownElement = document.getElementById('countdown-timer');
+                const discountEndTime = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)); // 1 day from now
+                const timerInterval = setInterval(() => {
+                    const remainingTime = discountEndTime - new Date();
+                    if (remainingTime <= 0) {
+                        clearInterval(timerInterval);
+                        countdownElement.textContent = "Offer has expired!";
+                    } else {
+                        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                        countdownElement.textContent = `Discount ends in ${hours}h ${minutes}m`;
+                    }
+                }, 60000); // Update every minute
+            }
+        }
+
+        // Display Customer Reviews
+        function displayCustomerReviews(product) {
+            const reviewsList = document.getElementById('reviews-list');
+            reviewsList.innerHTML = ''; // Clear existing reviews
+
+            product.ratings.reviews.forEach(review => {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.classList.add('review');
+                reviewDiv.innerHTML = `
+                    <p><strong>${review.author}</strong>: ${review.comment}</p>
+                    <p>Rating: ${'★'.repeat(review.rating)}</p>
+                `;
+                reviewsList.appendChild(reviewDiv);
+            });
+
+            document.getElementById('submit-review-btn').addEventListener('click', () => {
+                const newReview = {
+                    author: "Anonymous", // Replace with actual user data
+                    comment: document.getElementById('review-input').value,
+                    rating: 5
+                };
+                product.ratings.reviews.push(newReview);
+                displayCustomerReviews(product); // Refresh reviews
+                alert("Review submitted!");
+            });
+        }
+
+        // Load Related Products based on Category
+        function loadRelatedProducts(category) {
+            fetch('https://maximusbrand.com/new/scripts/json/mainProducts.json')
+                .then(response => response.json())
+                .then(products => {
+                    const related = products.filter(p => p.category === category);
+                    const relatedProductsDiv = document.getElementById('related-products');
+                    relatedProductsDiv.innerHTML = ''; // Clear existing related products
+
+                    related.forEach(product => {
+                        const relatedProduct = document.createElement('div');
+                        relatedProduct.classList.add('related-product');
+                        relatedProduct.innerHTML = `
+                            <img src="${product.image}" alt="${product.name}">
+                            <h4>${product.name}</h4>
+                            <p>$${product.price.toFixed(2)}</p>
+                            <button class="button">View Product</button>
+                        `;
+                        relatedProduct.querySelector('button').addEventListener('click', () => {
+                            window.location.href = `product-detail.html?id=${product.id}`; // Redirect to related product page
+                        });
+                        relatedProductsDiv.appendChild(relatedProduct);
+                    });
+                });
+        }
+
+        // Update Breadcrumb Navigation
+        function updateBreadcrumbNav(product) {
+            document.getElementById('category-breadcrumb').textContent = product.category;
+            document.getElementById('subcategory-breadcrumb').textContent = product.subCategory;
+            document.getElementById('product-name-breadcrumb').textContent = product.name;
+        }
+
+        // Share on Facebook
+        document.getElementById('share-facebook').addEventListener('click', () => {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, '_blank');
+        });
+
+        // Share on Twitter
+        document.getElementById('share-twitter').addEventListener('click', () => {
+            window.open(`https://twitter.com/intent/tweet?url=${window.location.href}&text=${document.getElementById('product-name').textContent}`, '_blank');
+        });
+    </script>
+</body>
+</html>
