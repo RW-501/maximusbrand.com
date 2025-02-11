@@ -1,3 +1,190 @@
+const style = document.createElement('style');
+style.innerHTML = `
+  html {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+`;
+document.head.appendChild(style);
+
+window.addEventListener('load', function() {
+    // Wait for 2 seconds before starting the fade-in effect
+    setTimeout(function() {
+        document.documentElement.style.visibility = 'visible';
+        document.documentElement.style.opacity = '1';  // Fade in effect
+    }, 1000); // 2000ms = 2 seconds
+});
+
+
+
+
+const DEBUG = true;
+        const loadedScripts = new Set();
+        let totalFileSize = 0;
+        let loadCount = 0;
+
+        const currentPath = window.location.pathname;
+        const currentUrl = window.location.href;
+
+        if (DEBUG) {
+            console.log(`CurrentPath: ${currentPath}`);
+            console.log("currentUrl   ", currentUrl);
+        }
+
+        /**
+         * Logs the execution time and file size of a script and tracks overall page load statistics.
+         * @param {string} scriptName - Name or URL of the script.
+         * @param {number} startTime - The script's load start time.
+         * @param {string} fileSize - The file size of the script in KB.
+         */
+        function logExecutionTime(scriptName, startTime, fileSize) {
+            if (DEBUG) {
+                const endTime = performance.now();
+                const executionTime = endTime - startTime;
+                console.log(
+                    `${scriptName} initialized. Execution Time: ${executionTime.toFixed(2)} ms. File Size: ${fileSize}. Load Count: ${loadCount++}`
+                );
+            }
+
+            if (fileSize !== "unknown" && fileSize !== "not available") {
+                totalFileSize += parseFloat(fileSize);
+            }
+
+            if (loadCount === "end") {
+                const pageEndTime = performance.now();
+                const pageLoadTime = (pageEndTime - pageStartTime) / 1000;
+                console.log(`Total Page Load Time: ${pageLoadTime.toFixed(2)} seconds.`);
+                console.log(`Total Page Size: ${totalFileSize.toFixed(2)} KB.`);
+            }
+        }
+
+        /**
+         * Dynamically loads a script with optional attributes and callback function.
+         * @param {string} src - URL of the script.
+         * @param {Object} options - Attributes for the script (async, defer, type).
+         * @param {function} callback - Callback executed after the script loads.
+         */
+        async function loadScript(src, { async = false, defer = false, type = 'text/javascript' } = {}, callback) {
+            if (loadedScripts.has(src)) {
+                console.log(`Script already loaded: ${src}`);
+                if (callback) callback();
+                return;
+            }
+
+            const startTime = performance.now();
+            let fileSize = "unknown";
+
+            try {
+                const response = await fetch(src, { method: 'HEAD' });
+                if (response.ok) {
+                    fileSize = response.headers.get('Content-Length');
+                    if (fileSize) {
+                        fileSize = `${(fileSize / 1024).toFixed(2)} KB`;
+                    } else {
+                        fileSize = "not available";
+                    }
+                } else {
+                    console.warn(`Unable to fetch file size for: ${src}`);
+                }
+            } catch (error) {
+                console.error(`Error fetching file size for ${src}:`, error);
+            }
+
+            const script = document.createElement('script');
+            script.src = src;
+            script.type = type;
+            script.async = async;
+            script.defer = defer;
+            script.onload = () => {
+                loadedScripts.add(src);
+                logExecutionTime(src, startTime, fileSize);
+                if (callback) callback();
+            };
+            script.onerror = () => {
+                console.error(`Error loading script: ${src}`);
+            };
+
+            document.head.appendChild(script);
+        }
+
+        /**
+         * Waits until a specific DOM element is available, then executes a callback function.
+         * @param {string} selector - CSS selector for the target element.
+         * @param {function} callback - Callback executed when the element becomes available.
+         */
+        function waitForElement(selector, callback) {
+            // Check if the element already exists
+            const element = document.querySelector(selector);
+            if (element) {
+                callback();
+            } else {
+                // If the element doesn't exist, set up a MutationObserver
+                const observer = new MutationObserver((mutations, obs) => {
+                    // Check if the element appears
+                    const element = document.querySelector(selector);
+                    if (element) {
+                        obs.disconnect();  // Disconnect the observer once the element is found
+                        callback();
+                    }
+                });
+
+                // Observe changes to the document body, including all child nodes and subtree
+                observer.observe(document.body, { childList: true, subtree: true });
+            }
+        }
+
+        /**
+         * Dynamically loads a stylesheet into the document.
+         * @param {string} href - URL of the stylesheet.
+         */
+        function loadStylesheet(href) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = href;
+            document.head.appendChild(link);
+        }
+
+        // Function to load external HTML files into the page
+        function loadHTML(url, targetId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(targetId).innerHTML = data;
+                })
+                .catch(error => console.error('Error loading HTML:', error));
+        }
+
+        // Call the function to insert the navbar and footer into the page
+        window.addEventListener('DOMContentLoaded', (event) => {
+            loadHTML('https://maximusbrand.com/new/scripts/js/navBar.html', 'navbar');
+            loadHTML('https://maximusbrand.com/new/scripts/js/footer.html', 'footer');
+        });
+
+        // Load jQuery
+        loadScript('https://code.jquery.com/jquery-3.5.1.slim.min.js', { async: false }, () => { 
+            logExecutionTime('jquery', performance.now());
+        });
+
+        // Load Popper.js
+        loadScript('https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js', { async: false }, () => {
+            logExecutionTime('schema', performance.now());
+        });
+
+        // Load Bootstrap CSS
+        loadStylesheet("https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
+        logExecutionTime('Bootstrap CSS', performance.now());
+
+        // Google Fonts for font styles
+        loadStylesheet("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+        logExecutionTime('Google Fonts for font styles', performance.now());
+
+        // FontAwesome for icons
+        loadStylesheet("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+        logExecutionTime('FontAwesome for icons', performance.now());
+
+
+
 // Authentication imports
 import {
     getAuth,
@@ -300,4 +487,25 @@ const styleSheet = document.createElement("style");
 styleSheet.type = "text/css";
 styleSheet.innerText = popupStyles;
 document.head.appendChild(styleSheet);
+
+
+
+
+
+
+// Function to load HTML content from a URL and insert it into a specific element
+function loadHTML(url, targetId) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById(targetId).innerHTML = data;
+        })
+        .catch(error => console.error('Error loading HTML:', error));
+}
+
+// Call the function to insert the navbar and footer into the page
+window.addEventListener('DOMContentLoaded', (event) => {
+    loadHTML('https://maximusbrand.com/new/scripts/js/navBar.html', 'navbar');
+    loadHTML('https://maximusbrand.com/new/scripts/js/footer.html', 'footer');
+});
 
