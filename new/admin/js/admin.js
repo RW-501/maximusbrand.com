@@ -479,7 +479,7 @@ async function uploadItem() {
         rating: 0,
         collection: "MaximusBrand",
         description:  document.getElementById("product-description").value,
-        status: "0000",
+        status: "pending",
 
     };
 
