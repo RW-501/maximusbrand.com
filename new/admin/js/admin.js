@@ -851,6 +851,52 @@ document.getElementById("product-variety").checked = product.isVariety || false;
 
 
 
+async function fetchJsonFile() {
+    const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filePath}`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Failed to load JSON: ${response.statusText}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching JSON:", error.message);
+        return [];
+    }
+}
+
+async function checkProducts() {
+    const products = await fetchJsonFile();
+    const productInfoDiv = document.getElementById("product-info");
+
+    if (products.length === 0) {
+        productInfoDiv.innerHTML = "<p>No products found.</p>";
+        return;
+    }
+
+    let output = `<p>Total Products: ${products.length}</p>`;
+    output += "<table border='1'><tr><th>ID</th><th>Name</th><th>Price</th><th>Quantity</th></tr>";
+
+    products.forEach(product => {
+        output += `<tr>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>$${product.price}</td>
+            <td>${product.stock}</td>
+        </tr>`;
+    });
+
+    output += "</table>";
+    productInfoDiv.innerHTML = output;
+}
+
+async function updateProducts() {
+    await loadProducts();
+    await saveVideosToJson(allProducts);
+    alert("Products updated successfully!");
+}
+
+document.getElementById("check-products").addEventListener("click", checkProducts);
+document.getElementById("update-products").addEventListener("click", updateProducts);
+
 
 document.getElementById("product-variety").addEventListener("change", function () {
     document.getElementById("variety-section").style.display = this.checked ? "block" : "none";
