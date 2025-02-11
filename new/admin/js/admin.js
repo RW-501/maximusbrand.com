@@ -363,6 +363,7 @@ const cleanArrayInput = (id) => {
         },
         note: cleanInput("product-note")
     };
+    console.log("Saved productData:", productData);
 
     return productData;
 }
