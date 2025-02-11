@@ -803,27 +803,75 @@ window.editProduct = (productId) => {
  // Helper function to safely call setMultiSelect only if data exists
  function safeSetMultiSelect(elementId, values) {
     if (!Array.isArray(values)) {
-        values = typeof values === "string" ? values.split(",").map(v => v.trim()) : []; // Convert to array if it's a string
+        values = typeof values === "string" ? values.split(",").map(v => v.trim()) : [];
     }
 
     if (values.length > 0 && values[0] !== "") {
         setMultiSelect(elementId, values);
+        updateSelectedChoices(elementId, values); // Update the display area for selected choices
     } else {
         console.warn(`Skipping ${elementId}, no valid values found.`);
     }
 }
 
+// Function to update the selected choices display under the multi-select
+function updateSelectedChoices(elementId, values) {
+    let containerId = elementId + "-selected"; 
+    let container = document.getElementById(containerId);
 
-// Only call setMultiSelect if the property exists and is not empty
+    // Create the display container if it doesn't exist
+    if (!container) {
+        container = document.createElement("div");
+        container.id = containerId;
+        container.className = "selected-choices-container";
+        document.getElementById(elementId).parentNode.appendChild(container);
+    }
+
+    // Clear the container before updating
+    container.innerHTML = "";
+
+    values.forEach(value => {
+        let choiceElement = document.createElement("span");
+        choiceElement.className = "selected-choice";
+        choiceElement.textContent = value;
+        choiceElement.setAttribute("data-value", value);
+
+        // Click event to remove selection
+        choiceElement.addEventListener("click", function() {
+            removeSelectedChoice(elementId, value);
+        });
+
+        container.appendChild(choiceElement);
+    });
+}
+
+// Function to remove an item when clicked
+function removeSelectedChoice(elementId, value) {
+    let currentValues = getMultiSelectValues(elementId); // Get current selections
+    let updatedValues = currentValues.filter(item => item !== value); // Remove the clicked item
+
+    setMultiSelect(elementId, updatedValues); // Update the multi-select
+    updateSelectedChoices(elementId, updatedValues); // Update the display
+}
+
+// Utility function to get selected multi-select values
+function getMultiSelectValues(elementId) {
+    let select = document.getElementById(elementId);
+    return Array.from(select.selectedOptions).map(option => option.value);
+}
+
+// Apply safeSetMultiSelect to multiple fields
 safeSetMultiSelect("product-tags", product.tags);
 safeSetMultiSelect("product-material", product.material);
 safeSetMultiSelect("product-season", product.season);
 safeSetMultiSelect("product-connectivity", product.connectivity);
 safeSetMultiSelect("product-fileFormat", product.fileFormat);
+safeSetMultiSelect("product-size", product.size);
+safeSetMultiSelect("product-color", product.color);
 
- safeSetMultiSelect("product-size", product.size);
- safeSetMultiSelect("product-color", product.color);
- document.getElementById("product-variety").checked = product.isVariety || false;
+
+
+document.getElementById("product-variety").checked = product.isVariety || false;
 
  document.getElementById("variety-section").style.display = product.isVariety ? "block" : "none";
 
