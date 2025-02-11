@@ -592,7 +592,7 @@ window.closePopup = closePopup;
 
 const owner = "RW-501"; 
 const repo = "maximusbrand.com";
-const filePath = new/scripts/json/mainProducts.json; // Adjust path as needed
+const filePath = `new/scripts/json/mainProducts.json`; // Adjust path as needed
 const branch = 'main';
 let sha = ''; // Will store the sha if the file exists
 let fileData;
