@@ -858,10 +858,32 @@ window.editProduct = (productId) => {
 
 
 
+// Function to handle updating selected related products
+function updateRelatedProductsSelect(selectElementId) {
+    let selectElement = document.getElementById(selectElementId);
+    let selectedValues = Array.from(selectElement.selectedOptions).map(option => option.value);
 
+    // Update the related products display and the relatedProducts array
+    let updatedProducts = relatedProducts.filter(product => selectedValues.includes(product.id.toString())); // Assuming product.id is a string
 
- // Helper function to safely call setMultiSelect only if data exists
- function safeSetMultiSelect(elementId, values) {
+    // Update DOM display of related products
+    let selectedProducts = document.getElementById("selected-related-products");
+    selectedProducts.innerHTML = ""; // Clear existing content
+
+    updatedProducts.forEach(product => {
+        let relatedItem = document.createElement("div");
+        relatedItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
+        selectedProducts.appendChild(relatedItem);
+    });
+}
+
+// Attach an event listener to the select element to trigger updates
+document.getElementById("related-products-select").addEventListener("change", function() {
+    updateRelatedProductsSelect("related-products-select");
+});
+
+// Helper function to safely call setMultiSelect only if data exists
+function safeSetMultiSelect(elementId, values) {
     if (!Array.isArray(values)) {
         values = typeof values === "string" ? values.split(",").map(v => v.trim()) : [];
     }
@@ -928,6 +950,7 @@ safeSetMultiSelect("product-connectivity", product.connectivity);
 safeSetMultiSelect("product-fileFormat", product.fileFormat);
 safeSetMultiSelect("product-size", product.size);
 safeSetMultiSelect("product-color", product.color);
+
 
 
 
