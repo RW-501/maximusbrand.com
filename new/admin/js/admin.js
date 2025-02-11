@@ -722,6 +722,32 @@ async function saveVideosToJson(jsonProductData, saveIfNewOrChanged = true) {
     }
 }
 
+async function updateFile(url, encodedContent, sha, token) {
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            Accept: 'application/vnd.github+json',
+        },
+        body: JSON.stringify({
+            message: sha ? `Update ${filePath}` : `Create ${filePath}`,
+            content: encodedContent,
+            sha: sha || undefined,
+            branch: branch,
+        }),
+    });
+
+    if (response.ok) {
+        console.log("File created/updated successfully.");
+    } else {
+        const errorData = await response.json();
+        throw new Error(`Error updating file: ${errorData.message}`);
+    }
+}
+
+
+
 
 document.getElementById("product-variety").addEventListener("change", function () {
     if (this.checked) {
