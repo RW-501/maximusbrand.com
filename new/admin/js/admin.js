@@ -226,16 +226,42 @@ async function loadProducts() {
 }
 
 
+function updateCartTotal() {
+    const cartTotalElement = document.getElementById('cart-total');
+    let total = cart.reduce((sum, item) => sum + formatNumberInput(item.price) - formatNumberInput(item.discount || 0), 0);
+    
+    cartTotalElement.textContent = formatCurrency(total);
+}
+
+
 let varietyList = []; // Global array to store variations
 let relatedProducts = []; // Store selected variants
 
 function getProductData() {
     const image = Array.isArray(mediaList) && mediaList.length > 0 ? mediaList[0].url : null;
     const mediaGallery = Array.isArray(mediaList) ? mediaList.map(media => media.url) : [];
+// Utility function to format numbers correctly as "$0.00"
+const formatCurrency = (value) => {
+    let num = parseFloat(value);
+    return isNaN(num) ? "$0.00" : `$${num.toFixed(2)}`;
+};
 
-    const formatNumberInput = (value) => isNaN(parseFloat(value)) ? 0 : parseFloat(value);
-    const cleanInput = (id) => document.getElementById(id)?.value.trim() || "";
-    const cleanArrayInput = (id) => document.getElementById(id)?.value.split(",").map(item => item.trim()).filter(item => item) || [];
+// Utility function to clean and format numerical input
+const formatNumberInput = (value) => isNaN(parseFloat(value)) ? 0 : parseFloat(value);
+
+// Utility function to clean string input fields
+const cleanInput = (id) => document.getElementById(id)?.value.trim() || "";
+
+// Utility function to clean array input fields (comma-separated values)
+const cleanArrayInput = (id) => {
+    const value = document.getElementById(id)?.value.trim();
+    return value ? value.split(",").map(item => item.trim()).filter(item => item) : [];
+};
+
+
+
+// Example Usage: Displaying price in UI
+document.getElementById("product-price-display").textContent = productData.price;
 
     const varietyList = Array.isArray(varietyList) ? varietyList : [];
     const relatedProducts = Array.isArray(relatedProducts) ? relatedProducts : [];
@@ -244,9 +270,9 @@ function getProductData() {
         image: image,
         mediaGallery: mediaGallery,
 
-        price: formatNumberInput(cleanInput("product-price")),
-        discount: formatNumberInput(cleanInput("product-discount")),
-        multipleItemDiscount: formatNumberInput(cleanInput("product-multiple-discount")),
+        price: formatCurrency(cleanInput("product-price")),
+        discount: formatCurrency(cleanInput("product-discount")),
+        multipleItemDiscount: formatCurrency(cleanInput("product-multiple-discount")),
         stock: formatNumberInput(cleanInput("product-stock")),
         quantity: formatNumberInput(cleanInput("product-quantity")),
         sold: formatNumberInput(cleanInput("product-sold")),
