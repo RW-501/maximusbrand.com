@@ -471,7 +471,12 @@ async function uploadItem() {
         category: document.getElementById("product-category").value,
         subCategory: document.getElementById("product-subCategory").value,
         color: document.getElementById("product-color").value,
+        views: 0,
+        uniqueViews: 0,
+        lastViewed: null,
+        timeSpent: 0,
 
+        rating: 0,
         collection: "MaximusBrand",
         description:  document.getElementById("product-description").value,
         status: "0000",
