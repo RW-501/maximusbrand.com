@@ -797,12 +797,20 @@ function closeRelatedProductsPopup() {
 }
 
 window.closeRelatedProductsPopup = closeRelatedProductsPopup;
-
 function selectRelatedProducts(product) {
+    // Check if product id already exists in relatedProducts
     if (!relatedProducts.some(v => v.id === product.id)) {
-        relatedProducts.push(product);
+        // Push only the necessary fields to relatedProducts
+        relatedProducts.push({
+            id: product.id,
+            image: product.image,
+            price: product.price,
+            discount: product.discount,
+            name: product.name
+        });
         console.log("selected relatedProducts:", relatedProducts);
 
+        // Append to the DOM
         let selectedProducts = document.getElementById("selected-related-products");
         let relatedItem = document.createElement("div");
         relatedItem.innerHTML = `<img src="${product.image}" width="50"> ${product.name}`;
