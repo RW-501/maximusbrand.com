@@ -4,14 +4,146 @@
     "description": "",
     "price": 8.99,
     "category": "Clothing",
-    "subCategory": "",
+    "subCategory": "Underwear",
     "name": "Woman's One Size G-String 3  Pack Cotton Thong Panties Sexy Underwear Lingerie",
-    "color": "Packs=1x Red",
+    "color": [
+      ""
+    ],
     "sku": "",
     "sold": 0,
-    "status": "0000",
+    "status": "active",
     "stock": 0,
-    "collection": "MaximusBrand"
+    "collection": "MaximusBrand",
+    "isVariety": false,
+    "rating": 0,
+    "brand": "",
+    "customizationOptions": [
+      ""
+    ],
+    "sourceProduct": "",
+    "size": [
+      ""
+    ],
+    "multipleItemDiscount": 0,
+    "isFeatured": true,
+    "fit": "",
+    "searchableName": [
+      "woman's",
+      "one",
+      "size",
+      "g-string",
+      "3",
+      "",
+      "pack",
+      "cotton",
+      "thong",
+      "panties",
+      "sexy",
+      "underwear",
+      "lingerie"
+    ],
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDelivery": "3-5 days",
+      "shipsFrom": "Dallas, Texas, USA"
+    },
+    "fileFormat": [
+      ""
+    ],
+    "isPresale": false,
+    "connectivity": [
+      ""
+    ],
+    "chargingTime": "",
+    "relatedProducts": [
+      {
+        "subCategory": "",
+        "sold": 0,
+        "name": "Summer Sexy Tank Top Semi See-through  - Small Medium Large XL",
+        "id": "6scOHdfhLyRTkLzMZGfy",
+        "stock": 0,
+        "color": "Sizes=S",
+        "category": "Clothing",
+        "status": "0000",
+        "description": "",
+        "price": 9.99,
+        "collection": "MaximusBrand",
+        "sku": ""
+      },
+      {
+        "sold": 0,
+        "subCategory": "",
+        "collection": "MaximusBrand",
+        "status": "0000",
+        "stock": 0,
+        "name": "Summer Sexy Tank Top Semi See-through  - Small Medium Large XL",
+        "description": "",
+        "price": 9.99,
+        "id": "EUwirkgOdXJLhT7seD4r",
+        "color": "",
+        "sku": "",
+        "category": "Clothing"
+      },
+      {
+        "sku": "",
+        "price": 9.99,
+        "sold": 0,
+        "color": "",
+        "status": "0000",
+        "id": "MchEWK9vbg0m9UnxnQXd",
+        "collection": "MaximusBrand",
+        "description": "",
+        "name": " Black Lives Matter Flag BLM 3x5 FT Flag BLM USA",
+        "stock": 0,
+        "subCategory": "",
+        "category": "Home & Kitchen"
+      }
+    ],
+    "isBestseller": false,
+    "gender": "",
+    "quantity": 0,
+    "note": "",
+    "isCustomizable": false,
+    "isDigital": false,
+    "discount": 0,
+    "estimatedCustomizationTime": "",
+    "warranty": "",
+    "batteryLife": "",
+    "views": 0,
+    "highlights": [
+      ""
+    ],
+    "tags": [
+      ""
+    ],
+    "media": [
+      "https://firebasestorage.googleapis.com/v0/b/technoob-86ddf.firebasestorage.app/o/products%2Fil_794xN.2745722894_m2av.jpg?alt=media&token=db5da431-ee2e-4994-8601-c76dd1864f75"
+    ],
+    "ratings": {
+      "average": 0,
+      "reviews": []
+    },
+    "season": [
+      "Summer"
+    ],
+    "itemStoredLocation": "",
+    "meta": {
+      "barcode": "",
+      "UPC": "",
+      "SKU": "",
+      "ASIN": ""
+    },
+    "isMultipleItems": false,
+    "uniqueViews": 0,
+    "material": [
+      "Cotton"
+    ],
+    "wirelessRange": "",
+    "lastViewed": null,
+    "downloadURL": "",
+    "timeSpent": 0,
+    "variety": [],
+    "style": ""
   },
   {
     "id": "5cYdZWv9pZZwuwmJFLZD",
