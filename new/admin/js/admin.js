@@ -1,3 +1,131 @@
+
+const sizeOptions = [
+    { value: "XS", label: "XS (Extra Small)" },
+    { value: "S", label: "S (Small)" },
+    { value: "M", label: "M (Medium)" },
+    { value: "L", label: "L (Large)" },
+    { value: "XL", label: "XL (Extra Large)" },
+    { value: "2XL", label: "2XL (XX-Large)" },
+    { value: "3XL", label: "3XL (XXX-Large)" },
+    { value: "4XL", label: "4XL (XXXX-Large)" },
+    { value: "5XL", label: "5XL (XXXXX-Large)" },
+    "divider",
+    { value: "0", label: "0 (Women's)" },
+    { value: "2", label: "2 (Women's)" },
+    { value: "4", label: "4 (Women's)" },
+    { value: "6", label: "6 (Women's)" },
+    { value: "8", label: "8 (Women's)" },
+    { value: "10", label: "10 (Women's)" },
+    { value: "12", label: "12 (Women's)" },
+    { value: "14", label: "14 (Women's)" },
+    { value: "16", label: "16 (Women's)" },
+    { value: "18", label: "18 (Women's)" },
+    "divider",
+    { value: "28", label: "28 (Men's Pants)" },
+    { value: "30", label: "30 (Men's Pants)" },
+    { value: "32", label: "32 (Men's Pants)" },
+    { value: "34", label: "34 (Men's Pants)" },
+    { value: "36", label: "36 (Men's Pants)" },
+    { value: "38", label: "38 (Men's Pants)" },
+    { value: "40", label: "40 (Men's Pants)" },
+    { value: "42", label: "42 (Men's Pants)" },
+    { value: "44", label: "44 (Men's Pants)" },
+    "divider",
+    { value: "Toddler-2T", label: "2T (Toddler)" },
+    { value: "Toddler-3T", label: "3T (Toddler)" },
+    { value: "Toddler-4T", label: "4T (Toddler)" },
+    { value: "Toddler-5T", label: "5T (Toddler)" },
+    { value: "Kids-XS", label: "XS (Kids)" },
+    { value: "Kids-S", label: "S (Kids)" },
+    { value: "Kids-M", label: "M (Kids)" },
+    { value: "Kids-L", label: "L (Kids)" },
+    { value: "Kids-XL", label: "XL (Kids)" }
+];
+
+
+
+function createSizeDropdown(elementId) {
+    const select = document.getElementById(elementId);
+    if (!select) return;
+
+    select.innerHTML = ""; // Clear existing options
+
+    sizeOptions.forEach(option => {
+        if (option === "divider") {
+            const divider = document.createElement("option");
+            divider.disabled = true;
+            divider.textContent = "──────────";
+            select.appendChild(divider);
+        } else {
+            const optionElement = document.createElement("option");
+            optionElement.value = option.value;
+            optionElement.textContent = option.label;
+            select.appendChild(optionElement);
+        }
+    });
+}
+
+
+const colorOptions = [
+    { value: "Black", label: "Black", bgColor: "black", textColor: "white" },
+    { value: "White", label: "White", bgColor: "white", textColor: "black" },
+    { value: "Red", label: "Red", bgColor: "red", textColor: "white" },
+    { value: "Blue", label: "Blue", bgColor: "blue", textColor: "white" },
+    { value: "Green", label: "Green", bgColor: "green", textColor: "white" },
+    { value: "Yellow", label: "Yellow", bgColor: "yellow", textColor: "black" },
+    { value: "Purple", label: "Purple", bgColor: "purple", textColor: "white" },
+    { value: "Orange", label: "Orange", bgColor: "orange", textColor: "black" },
+    { value: "Pink", label: "Pink", bgColor: "pink", textColor: "black" },
+    { value: "Brown", label: "Brown", bgColor: "brown", textColor: "white" },
+    { value: "Gray", label: "Gray", bgColor: "gray", textColor: "white" },
+    { value: "Silver", label: "Silver", bgColor: "silver", textColor: "black" },
+    { value: "Gold", label: "Gold", bgColor: "gold", textColor: "black" },
+    { value: "Beige", label: "Beige", bgColor: "beige", textColor: "black" },
+    { value: "Teal", label: "Teal", bgColor: "teal", textColor: "white" },
+    { value: "Navy", label: "Navy", bgColor: "navy", textColor: "white" },
+    { value: "Maroon", label: "Maroon", bgColor: "maroon", textColor: "white" },
+    { value: "Olive", label: "Olive", bgColor: "olive", textColor: "white" },
+    { value: "Cyan", label: "Cyan", bgColor: "cyan", textColor: "black" },
+    { value: "Magenta", label: "Magenta", bgColor: "magenta", textColor: "white" },
+    { value: "Lavender", label: "Lavender", bgColor: "lavender", textColor: "black" },
+    { value: "Turquoise", label: "Turquoise", bgColor: "turquoise", textColor: "black" }
+];
+
+
+
+
+function createColorDropdown(elementId) {
+    const select = document.getElementById(elementId);
+    if (!select) return;
+
+    select.innerHTML = ""; // Clear existing options
+
+    // Add default option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    defaultOption.textContent = "Select Color";
+    select.appendChild(defaultOption);
+
+    // Populate color options
+    colorOptions.forEach(color => {
+        const option = document.createElement("option");
+        option.value = color.value;
+        option.textContent = color.label;
+        option.style.backgroundColor = color.bgColor;
+        option.style.color = color.textColor;
+        select.appendChild(option);
+    });
+}
+
+
+
+
+
+
+
+
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js';
 import {
   getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc
