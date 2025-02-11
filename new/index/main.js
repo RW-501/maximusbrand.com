@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h3>${product.name}</h3>
                 <p>$${(product.price - (product.price * product.discount / 100)).toFixed(2)} 
                    <span class="old-price">$${product.price.toFixed(2)}</span></p>
+                <button onclick="quickProductView(${product.id})">Quick View</button>
                 <button onclick="viewProduct(${product.id})">View</button>
                 <button onclick="addToCart(${product.id})">Add to Cart</button>
             `;
@@ -174,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-function viewProduct(productId) {
+function quickProductView(productId) {
     let modal = document.getElementById("tn_ID_ProductModal");
     let modalContent = document.getElementById("tn_ID_ModalContent");
 
@@ -202,7 +203,18 @@ function viewProduct(productId) {
       });
     }
 
-window.viewProduct = viewProduct;
+    window.quickProductView = quickProductView;
+
+
+
+
+    function viewProduct(productId) {
+      window.location = `https://maximusbrand.com/new/item${productId}`;
+      }
+  
+
+
+    window.viewProduct = viewProduct;
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
