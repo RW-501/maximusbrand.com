@@ -1399,7 +1399,8 @@ async function handleMediaUpload(event, type) {
 }
 
 // Add Media Preview
-function addMediaToPreview(url, type) {
+// Add Media to Preview with Main Image Indicator
+function addMediaToPreview(url, type) { 
     const mediaItem = document.createElement("div");
     mediaItem.classList.add("media-item");
     mediaItem.setAttribute("draggable", "true");
@@ -1410,11 +1411,19 @@ function addMediaToPreview(url, type) {
         mediaItem.innerHTML = `<video src="${url}" controls></video><button class="remove-media">✖</button>`;
     }
 
+    // If it's the first image, mark it as the main image
+    if (mediaList.length === 0 && type === "image") {
+        mediaItem.innerHTML += `<span class="main-image-label">Main</span>`;
+    }
+
     mediaList.push({ url, type });
     mediaPreview.appendChild(mediaItem);
 
     addDragAndDrop();
     addRemoveButton(mediaItem, url);
+
+    // Update UI to reflect the main image when it changes
+    updateMainImageIndicator();
 }
 
 // Drag & Drop Reordering
@@ -1444,6 +1453,9 @@ function addDragAndDrop() {
                 } else {
                     parent.insertBefore(draggedItem, item.nextSibling);
                 }
+
+                // Update the main image if needed after reordering
+                updateMainImageIndicator();
             }
         });
 
@@ -1456,7 +1468,32 @@ function addRemoveButton(mediaItem, url) {
     mediaItem.querySelector(".remove-media").addEventListener("click", () => {
         mediaItem.remove();
         mediaList = mediaList.filter(media => media.url !== url);
+
+        // Update main image if the removed item was the main one
+        updateMainImageIndicator();
     });
+}
+
+// Update the Main Image Indicator
+function updateMainImageIndicator() {
+    const mediaItems = document.querySelectorAll(".media-item");
+    
+    // Reset all "Main" labels
+    mediaItems.forEach(item => {
+        let mainLabel = item.querySelector(".main-image-label");
+        if (mainLabel) {
+            mainLabel.remove();
+        }
+    });
+
+    // Set the "Main" label on the first image (if it exists)
+    let firstImage = Array.from(mediaItems).find(item => item.querySelector("img"));
+    if (firstImage) {
+        const mainLabel = document.createElement("span");
+        mainLabel.classList.add("main-image-label");
+        mainLabel.textContent = "Main";
+        firstImage.appendChild(mainLabel);
+    }
 }
 
 
