@@ -1038,7 +1038,9 @@ document.getElementById("product-variety").checked = product.isVariety || false;
     loadSelectedProducts(product.relatedProducts);
 
     // Load media (images/videos)
-    loadMediaPreview(product.media || []);
+    let mediaGallery = [product.image, ...product.mediaGallery];
+
+    loadMediaPreview(mediaGallery || []);
 };
 
 
