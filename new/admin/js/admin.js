@@ -1400,6 +1400,8 @@ function loadMediaPreview(mediaList) {
     
         if (url.includes(".mp4")) {
             mediaItem.innerHTML = `<video width="100" controls><source src="${url}" type="video/mp4"></video><button class="remove-media">✖</button>`;
+            mediaList.push({ url, type: 'video' });
+
         } else {
             mediaItem.innerHTML = `<img src="${url}" width="100"><button class="remove-media">✖</button>`;
         
@@ -1407,10 +1409,12 @@ function loadMediaPreview(mediaList) {
     if (mediaList.length === 0) {
         mediaItem.innerHTML += `<span class="main-image-label">Main</span>`;
     }
+
+    mediaList.push({ url, type: 'image' });
+
 }
 
 
-mediaList.push({ url, type });
 
         mediaPreview.appendChild(mediaItem);
         addRemoveButton(mediaItem, url);
