@@ -162,15 +162,33 @@ button:hover {
 
 .media-item .remove-media {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    right: 1%;
+    bottom: 1%;
     background: red;
     color: white;
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+.hidden {
+    display: none;
 }
 
+
+.main-image-label {
+    display: block;
+    width: max-content;
+    position: absolute;
+    z-index: 2000;
+    color: #535353;
+    height: max-content;
+    font-size: 1rem;
+    font-weight: 800;
+    top: 1%;
+    right: 1%;
+}
 .popup {
     display: none;
     position: fixed;
