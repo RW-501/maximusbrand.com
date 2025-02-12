@@ -164,10 +164,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h3>${product.name}</h3>
                 <p>$${(product.price - (product.price * product.discount / 100)).toFixed(2)} 
                    <span class="old-price">$${product.price.toFixed(2)}</span></p>
-                <button onclick="quickProductView(${product.id})">Quick View</button>
-                <button onclick="viewProduct(${product.id})">View</button>
-                <button onclick="addToCart(${product.id})">Add to Cart</button>
-            `;
+  <button onclick="quickProductView('${product.id}')">Quick View</button>
+<button onclick="viewProduct('${product.id}')">View</button>
+<button onclick="addToCart('${product.id}')">Add to Cart</button>
+          `;
             productGrid.appendChild(productCard);
         });
     }
@@ -185,7 +185,7 @@ function quickProductView(productId) {
 
                 // Check stock availability
                 let stockStatus = product.stock > 0
-                    ? `<button onclick="addToCart(${productId})">Add to Cart</button>`
+                    ? `<button onclick="addToCart('${productId}')">Add to Cart</button>`
                     : `<p style="color:red;">Out of Stock</p>`;
 
                 modalContent.innerHTML = `
