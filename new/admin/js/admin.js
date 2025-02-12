@@ -1399,9 +1399,9 @@ function loadMediaPreview(mediaList) {
         mediaItem.setAttribute("draggable", "true");
     
         if (url.includes(".mp4")) {
-            mediaItem.innerHTML = `<video width="100" controls><source src="${url}" type="video/mp4"></video>`;
+            mediaItem.innerHTML = `<video width="100" controls><source src="${url}" type="video/mp4"></video><button class="remove-media">✖</button>`;
         } else {
-            mediaItem.innerHTML = `<img src="${url}" width="100">`;
+            mediaItem.innerHTML = `<img src="${url}" width="100"><button class="remove-media">✖</button>`;
         
            // If it's the first image, mark it as the main image
     if (mediaList.length === 0) {
@@ -1409,12 +1409,14 @@ function loadMediaPreview(mediaList) {
     }
 }
         mediaPreview.appendChild(mediaItem);
-        addDragAndDrop();
         addRemoveButton(mediaItem, url);
     
+    });
+    addDragAndDrop();
+
         // Update UI to reflect the main image when it changes
         updateMainImageIndicator();
-    });
+
 }
 // Add Media to Preview with Main Image Indicator
 function addMediaToPreview(url, type) { 
