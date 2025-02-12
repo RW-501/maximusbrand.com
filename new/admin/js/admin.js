@@ -241,7 +241,7 @@ function getProductData() {
     const image = Array.isArray(mediaList) && mediaList.length > 0 ? mediaList[0].url : null;
     const mediaGallery = Array.isArray(mediaList) ? mediaList.map(media => media.url) : [];
 
-    console.log("getProductData mediaGallery:", mediaGallery);
+    console.log("getProductData image:", image);
     console.log("getProductData mediaGallery:", mediaGallery);
 
     // Utility function to format numbers correctly as "$0.00"
