@@ -890,7 +890,7 @@ function updateRelatedProductsSelect(selectElementId) {
             removeRelatedProduct(product.id);
         });
     });
-}
+
 
 // Function to remove a related product
 function removeRelatedProduct(productId) {
@@ -906,6 +906,10 @@ function removeRelatedProduct(productId) {
 document.getElementById("related-products-select").addEventListener("change", function() {
     updateRelatedProductsSelect("related-products-select");
 });
+}
+
+
+
 
 // Helper function to safely call setMultiSelect only if data exists
 function safeSetMultiSelect(elementId, values) {
