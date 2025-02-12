@@ -238,7 +238,7 @@ let varietyList = []; // Global array to store variations
 let relatedProducts = []; // Store selected variants
 
 function getProductData() {
-    const image = Array.isArray(mediaList) && mediaList.length > 0 ? mediaList[0].url : null;
+    const image = Array.isArray(mediaList) && mediaList.length >= 0 ? mediaList[0].url : null;
     const mediaGallery = Array.isArray(mediaList) ? mediaList.map(media => media.url) : [];
 
     console.log("getProductData image:", image);
@@ -1406,7 +1406,7 @@ function loadMediaPreview(mediaList) {
     
         if (url.includes(".mp4")) {
             mediaItem.innerHTML = `<video width="100" controls><source src="${url}" type="video/mp4"></video><button class="remove-media">✖</button>`;
-            mediaList.push( url, 'video' );
+            mediaList.push({ url, type: 'video' });
 
         } else {
             mediaItem.innerHTML = `<img src="${url}" width="100"><button class="remove-media">✖</button>`;
@@ -1416,7 +1416,7 @@ function loadMediaPreview(mediaList) {
         mediaItem.innerHTML += `<span class="main-image-label">Main</span>`;
     }
 
-    mediaList.push( url, 'image' );
+    mediaList.push({ url, type: 'image' });
 
 }
 
@@ -1451,7 +1451,7 @@ function addMediaToPreview(url, type) {
         mediaItem.innerHTML += `<span class="main-image-label">Main</span>`;
     }
 
-    mediaList.push( url, type );
+    mediaList.push({ url, type });
     mediaPreview.appendChild(mediaItem);
 
     addDragAndDrop();
