@@ -240,7 +240,11 @@ let relatedProducts = []; // Store selected variants
 function getProductData() {
     const image = Array.isArray(mediaList) && mediaList.length > 0 ? mediaList[0].url : null;
     const mediaGallery = Array.isArray(mediaList) ? mediaList.map(media => media.url) : [];
-// Utility function to format numbers correctly as "$0.00"
+
+    console.log("getProductData mediaGallery:", mediaGallery);
+    console.log("getProductData mediaGallery:", mediaGallery);
+
+    // Utility function to format numbers correctly as "$0.00"
 const formatCurrency = (value) => {
     let num = parseFloat(value);
     return isNaN(num) ? "$0.00" : `$${num.toFixed(2)}`;
@@ -271,8 +275,8 @@ const cleanArrayInput = (id) => {
         mediaGallery: mediaGallery,
 
         price: formatCurrency(cleanInput("product-price")),
-        discount: formatCurrency(cleanInput("product-discount")),
-        multipleItemDiscount: formatCurrency(cleanInput("product-multiple-discount")),
+        discount: formatNumberInput(cleanInput("product-discount")),
+        multipleItemDiscount: formatNumberInput(cleanInput("product-multiple-discount")),
         stock: formatNumberInput(cleanInput("product-stock")),
         quantity: formatNumberInput(cleanInput("product-quantity")),
         sold: formatNumberInput(cleanInput("product-sold")),
@@ -1416,6 +1420,7 @@ function loadMediaPreview(mediaList) {
 
 }
 
+console.log("load mediaList:", mediaList);
 
 
         mediaPreview.appendChild(mediaItem);
@@ -1454,6 +1459,8 @@ function addMediaToPreview(url, type) {
 
     // Update UI to reflect the main image when it changes
     updateMainImageIndicator();
+    console.log("add mediaList:", mediaList);
+
 }
 
 // Drag & Drop Reordering
