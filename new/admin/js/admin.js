@@ -1408,6 +1408,10 @@ function loadMediaPreview(mediaList) {
         mediaItem.innerHTML += `<span class="main-image-label">Main</span>`;
     }
 }
+
+
+mediaList.push({ url, type });
+
         mediaPreview.appendChild(mediaItem);
         addRemoveButton(mediaItem, url);
     
