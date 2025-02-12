@@ -1221,25 +1221,6 @@ function loadSelectedProducts(relatedProducts) {
 
 
 
-/**
- * Loads media preview (images & videos).
- */
-function loadMediaPreview(mediaList) {
-    let mediaPreview = document.getElementById("media-preview");
-    mediaPreview.innerHTML = ""; // Clear previous media
-
-    mediaList.forEach(url => {
-        let mediaItem = document.createElement("div");
-        if (url.includes(".mp4")) {
-            mediaItem.innerHTML = `<video width="100" controls><source src="${url}" type="video/mp4"></video>`;
-        } else {
-            mediaItem.innerHTML = `<img src="${url}" width="100">`;
-        }
-        mediaPreview.appendChild(mediaItem);
-    });
-}
-
-
 
 // Function to load category-specific inputs dynamically
 document.addEventListener("DOMContentLoaded", function () {
@@ -1403,14 +1384,46 @@ async function handleMediaUpload(event, type) {
     );
 }
 
-// Add Media Preview
+
+
+/**
+ * Loads media preview (images & videos).
+ */
+function loadMediaPreview(mediaList) {
+    let mediaPreview = document.getElementById("media-preview");
+    mediaPreview.innerHTML = ""; // Clear previous media
+
+    mediaList.forEach(url => {
+        let mediaItem = document.createElement("div");
+        mediaItem.classList.add("media-item");
+        mediaItem.setAttribute("draggable", "true");
+    
+        if (url.includes(".mp4")) {
+            mediaItem.innerHTML = `<video width="100" controls><source src="${url}" type="video/mp4"></video>`;
+        } else {
+            mediaItem.innerHTML = `<img src="${url}" width="100">`;
+        
+           // If it's the first image, mark it as the main image
+    if (mediaList.length === 0) {
+        mediaItem.innerHTML += `<span class="main-image-label">Main</span>`;
+    }
+}
+        mediaPreview.appendChild(mediaItem);
+        addDragAndDrop();
+        addRemoveButton(mediaItem, url);
+    
+        // Update UI to reflect the main image when it changes
+        updateMainImageIndicator();
+    });
+}
 // Add Media to Preview with Main Image Indicator
 function addMediaToPreview(url, type) { 
+    
     const mediaItem = document.createElement("div");
     mediaItem.classList.add("media-item");
     mediaItem.setAttribute("draggable", "true");
 
-    if (type === "image") {
+    if (type === "image" ||  (!url.includes(".mp4")) ){
         mediaItem.innerHTML = `<img src="${url}" alt="Uploaded Image"><button class="remove-media">✖</button>`;
     } else {
         mediaItem.innerHTML = `<video src="${url}" controls></video><button class="remove-media">✖</button>`;
