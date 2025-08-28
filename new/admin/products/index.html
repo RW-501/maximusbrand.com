@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Maximus Brand</title>
+    <script type="module" src="../js/admin.js"></script>
+    <link rel="stylesheet" href="../css/admin.css">
+
+
+    <style>
+
+.selected-choices-container {
+    margin-top: 10px;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.selected-choice {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.selected-choice:hover {
+    background-color: #0056b3;
+}
+
+#popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: white;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
+.popup {
+    text-align: center;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: fit-content;
+    overflow: hidden;
+    overflow-y: auto;
+    width: 90%;
+    padding: 20px;
+
+
+    position: inherit;
+    transform: none;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+
+}
+
+}
+.popup label {
+    display: block;
+    margin-bottom: 10px;
+}
+.popup-buttons {
+    margin-top: 20px;
+}
+.popup-buttons button {
+    margin: 5px;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div id="admin-login">
+        <h2>Admin Login</h2>
+        <button id="google-login">Login with Google</button>
+    </div>
+
+    <div id="admin-panel" style="display: none;">
+        <h1>Product Management</h1>
+        <button id="logout-btn">Logout</button>
+
+        <h2>Products</h2>
+
+        <div class="section">
+        <button id="check-products">Check Products</button>
+        <button id="update-products">Update Products</button>
+        <div id="product-info"></div>
+        </div>
+
+        <div class="section">
+        <input type="file" id="fileInput" accept=".csv">
+        <div id="popup-container"></div>
+        <button id="update-btn" style="display: none;">Update Product</button>
+        </div>
+
+
+
+
+
+
+
+<!-- Button to trigger the submit action programmatically -->
+<button id="click-submit-btn">Submit Form</button>
+
+
+
+
+        <table id="product-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="product-list">
+                <!-- Products will load here dynamically -->
+            </tbody>
+        </table>
+
+        <h2>Add / Update Product</h2>
+        <form id="product-form">
+            <div class="section">
+                <h3>Basic Information</h3>
+                <input type="hidden" id="product-id">
+                <input type="text" id="product-name" placeholder="Product Name" required>
+                <label for="product-collection">Collection</label>
+                <select id="product-collection">
+                    <option value="">Select Collection (optional)</option>
+                    <option value="MaximusBrand">MaximusBrand</option>
+                    <option value="TechNoob">TechNoob</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <input type="text" id="product-tags" placeholder="Tags (comma-separated)">
+                <input type="text" id="product-brand" placeholder="Brand">
+                <input type="text" id="product-style" placeholder="Style">
+                <textarea id="product-description" placeholder="Product Description"></textarea>
+                <input type="text" id="product-highlights" placeholder="Highlights (comma-separated)">
+            </div>
+
+            <div class="section">
+                <h3>Category & Subcategory</h3>
+                <label for="product-category">Category</label>
+                <select id="product-category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Home & Kitchen">Home & Kitchen</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Toys & Games">Toys & Games</option>
+                    <option value="Automotive">Automotive</option>
+                    <option value="Digital">Digital</option>
+                    <option value="Customizable">Customizable</option>
+                </select>
+            
+                <label for="product-subCategory">Subcategory</label>
+                <select id="product-subCategory" required>
+                    <option value="" disabled selected>Select Subcategory</option>
+                </select>
+            </div>
+            
+            <div class="section">
+                <h3>Pricing & Stock</h3>
+                <input type="text" id="product-price" placeholder="Price ($)">
+                <input type="text" id="product-discount" placeholder="Discount (%)">
+                <input type="text" id="product-multiple-discount" placeholder="Multiple Item Discount (%)">
+                <input type="text" id="product-stock" placeholder="Stock Quantity">
+                <input type="text" id="product-quantity" placeholder="Total Quantity">
+                <input type="text" id="product-sold" placeholder="Sold Quantity">
+            </div>
+        
+
+            <div class="section">
+                <label>
+                    <input type="checkbox" id="product-variety"> Multiple Variants
+                </label>
+            </div>
+            
+            <!-- Product Variations Table -->
+            <div id="variety-section" class="section" style="display: none;">
+                <h3>Product Variants</h3>
+                <table id="variety-table">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button type="button" onclick="addVariationRow()">Add Variant</button>
+            </div>
+            
+
+
+
+
+            <div class="changeable-sections" id="clothing-section">
+                <h3>Size & Appearance</h3>
+                
+
+
+
+
+                <div class="section">
+                    <label for="product-gender">Gender</label>
+                    <select id="product-gender" >
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Unisex">Unisex</option>
+                    </select>
+                </div>
+                
+                <div class="section">
+                    <label for="product-size">Size</label>
+                    <select id="product-size" multiple></select>
+                </div>
+
+                <div class="section">
+                    <label for="product-fit">Fit</label>
+                    <select id="product-fit" >
+                        <option value="" disabled selected>Select Fit</option>
+                        <option value="Slim Fit">Slim Fit</option>
+                        <option value="Regular Fit">Regular Fit</option>
+                        <option value="Relaxed Fit">Relaxed Fit</option>
+                        <option value="Oversized Fit">Oversized Fit</option>
+                        <option value="Athletic Fit">Athletic Fit</option>
+                        <option value="Loose Fit">Loose Fit</option>
+                        <option value="Tailored Fit">Tailored Fit</option>
+                        <option value="Classic Fit">Classic Fit</option>
+                    </select>
+                </div>
+                
+                <div class="section">
+                    <label for="product-color">Color</label>
+                    <select id="product-color" multiple></select>
+                </div>
+
+                <div class="section">
+                    <label for="product-material">Material</label>
+                    <select id="product-material" multiple >
+                        <option value="Cotton">Cotton</option>
+                        <option value="Polyester">Polyester</option>
+                        <option value="Leather">Leather</option>
+                        <option value="Denim">Denim</option>
+                        <option value="Silk">Silk</option>
+                        <option value="Linen">Linen</option>
+                        <option value="Wool">Wool</option>
+                        <option value="Velvet">Velvet</option>
+                        <option value="Satin">Satin</option>
+                        <option value="Nylon">Nylon</option>
+                        <option value="Acrylic">Acrylic</option>
+                        <option value="Spandex">Spandex</option>
+                        <option value="Rayon">Rayon</option>
+                        <option value="Chiffon">Chiffon</option>
+                        <option value="Rubber">Rubber</option>
+                        <option value="Plastic">Plastic</option>
+                        <option value="Metal">Metal</option>
+                        <option value="Wood">Wood</option>
+                        <option value="Glass">Glass</option>
+                        <option value="Ceramic">Ceramic</option>
+                    </select>
+                </div>
+
+
+
+                <div class="section">
+                    <label for="product-season">Season</label>
+                    <select id="product-season" multiple required>
+                        <option value="" disabled>Select Season</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Fall">Fall</option>
+                        <option value="Winter">Winter</option>
+                        <option value="Christmas">Christmas</option>
+                        <option value="Halloween">Halloween</option>
+                        <option value="Valentine's Day">Valentine's Day</option>
+                        <option value="Easter">Easter</option>
+                        <option value="4th of July">4th of July</option>
+                        <option value="Thanksgiving">Thanksgiving</option>
+                        <option value="Back to School">Back to School</option>
+                    </select>
+                </div>
+                
+
+            </div>
+        
+            <div class="section changeable-sections" id="custom-section">
+                <h3>Customization</h3>
+                <label>Customizable <input type="checkbox" id="product-customizable"> </label>
+                <input type="text" id="product-custom-time" placeholder="Estimated Customization Time">
+                <input type="text" id="product-custom-options" placeholder="Customization Options (comma-separated)">
+            </div>
+        
+            <div class="changeable-sections" id="electronic-section">
+                <h3>Electronics Specifications</h3>
+            
+                <!-- Battery Life -->
+                <div class="section">
+                    <label for="product-battery">Battery Life</label>
+                    <select id="product-battery">
+                        <option value="" disabled selected>Select Battery Life</option>
+                        <option value="Up to 1 hour">Up to 1 hour</option>
+                        <option value="1-3 hours">1-3 hours</option>
+                        <option value="3-5 hours">3-5 hours</option>
+                        <option value="5-8 hours">5-8 hours</option>
+                        <option value="8-12 hours">8-12 hours</option>
+                        <option value="12+ hours">12+ hours</option>
+                        <option value="No Battery">No Battery</option>
+                    </select>
+                </div>
+            
+                <!-- Charging Time -->
+                <div class="section">
+                    <label for="product-charging">Charging Time</label>
+                    <select id="product-charging">
+                        <option value="" disabled selected>Select Charging Time</option>
+                        <option value="Less than 30 minutes">Less than 30 minutes</option>
+                        <option value="30 minutes - 1 hour">30 minutes - 1 hour</option>
+                        <option value="1-2 hours">1-2 hours</option>
+                        <option value="2-4 hours">2-4 hours</option>
+                        <option value="4+ hours">4+ hours</option>
+                        <option value="Not Rechargeable">Not Rechargeable</option>
+                    </select>
+                </div>
+            
+                <!-- Wireless Range -->
+                <div class="section">
+                    <label for="product-wireless">Wireless Range</label>
+                    <select id="product-wireless">
+                        <option value="" disabled selected>Select Wireless Range</option>
+                        <option value="Less than 5 ft">Less than 5 ft</option>
+                        <option value="5-10 ft">5-10 ft</option>
+                        <option value="10-20 ft">10-20 ft</option>
+                        <option value="20-50 ft">20-50 ft</option>
+                        <option value="50+ ft">50+ ft</option>
+                        <option value="Not Wireless">Not Wireless</option>
+                    </select>
+                </div>
+            
+                <!-- Warranty -->
+                <div class="section">
+                    <label for="product-warranty">Warranty</label>
+                    <select id="product-warranty">
+                        <option value="" disabled selected>Select Warranty</option>
+                        <option value="No Warranty">No Warranty</option>
+                        <option value="30 Days">30 Days</option>
+                        <option value="90 Days">90 Days</option>
+                        <option value="6 Months">6 Months</option>
+                        <option value="1 Year">1 Year</option>
+                        <option value="2 Years">2 Years</option>
+                        <option value="3+ Years">3+ Years</option>
+                    </select>
+                </div>
+            
+                <!-- Connectivity (Multi-Select) -->
+                <div class="section">
+                    <label for="product-connectivity">Connectivity</label>
+                    <select id="product-connectivity" multiple>
+                        <option value="Bluetooth">Bluetooth</option>
+                        <option value="WiFi">WiFi</option>
+                        <option value="USB">USB</option>
+                        <option value="Ethernet">Ethernet</option>
+                        <option value="NFC">NFC</option>
+                        <option value="HDMI">HDMI</option>
+                        <option value="Thunderbolt">Thunderbolt</option>
+                        <option value="3.5mm Jack">3.5mm Jack</option>
+                        <option value="Wireless Charging">Wireless Charging</option>
+                        <option value="RF (Radio Frequency)">RF (Radio Frequency)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Media</h3>
+                <button type="button" id="add-image-btn">Add Image</button>
+                <button type="button" id="add-video-btn">Add Video</button>
+                <input type="file" id="product-image" accept="image/*"  class="hidden" hidden>
+                <input type="file" id="product-video" accept="video/*" class="hidden" hidden>
+                <div id="media-preview" class="media-container">
+                    <p>Drag and drop to reorder media</p>
+                </div>
+            </div>
+        
+            <div class="changeable-sections" id="digital-section">
+                <h3>Digital Products</h3>
+            
+                <!-- Digital Product Checkbox -->
+                <label>
+                    Digital Product  <input type="checkbox" id="product-digital"> 
+                </label>
+            
+                <!-- Download URL -->
+                <div class="section">
+                    <label for="product-download">Download URL</label>
+                    <input type="text" id="product-download" placeholder="Enter Download URL">
+                </div>
+            
+                <!-- File Format Multi-Select Dropdown -->
+                <div class="section">
+                    <label for="product-fileFormat">File Format</label>
+                    <select id="product-fileFormat" multiple>
+                        <option value="PDF">PDF (.pdf)</option>
+                        <option value="DOCX">Word Document (.docx)</option>
+                        <option value="TXT">Text File (.txt)</option>
+                        <option value="ZIP">Compressed Archive (.zip)</option>
+
+                        <option value="MP3">Audio File (.mp3)</option>
+                        <option value="WAV">Audio File (.wav)</option>
+                        <option value="MP4">Video File (.mp4)</option>
+                        <option value="MOV">Video File (.mov)</option>
+                        <option value="AVI">Video File (.avi)</option>
+                        <option value="PNG">Image File (.png)</option>
+                        <option value="JPG">Image File (.jpg)</option>
+                        <option value="SVG">Vector Image (.svg)</option>
+                        <option value="PSD">Photoshop File (.psd)</option>
+                        <option value="AI">Illustrator File (.ai)</option>
+                        <option value="EPS">Vector Graphic (.eps)</option>
+                        <option value="EXE">Executable File (.exe)</option>
+                        <option value="DMG">Mac App Installer (.dmg)</option>
+                        <option value="ISO">Disc Image (.iso)</option>
+                        <option value="CSV">Spreadsheet (.csv)</option>
+                        <option value="JSON">Data File (.json)</option>
+                        <option value="XML">Data File (.xml)</option>
+                        <option value="HTML">Web File (.html)</option>
+                        <option value="CSS">Web Stylesheet (.css)</option>
+                        <option value="JS">JavaScript File (.js)</option>
+                        <option value="PPTX">PowerPoint File (.pptx)</option>
+                        <option value="XLSX">Excel Spreadsheet (.xlsx)</option>
+                    </select>
+                </div>
+            </div>
+            
+        
+            <div class="section">
+                <h3>Options</h3>
+                <label>Presale <input type="checkbox" id="product-presale"> </label>
+
+                <label>Featured <input type="checkbox" id="product-featured"> </label>
+                <label>Bestseller <input type="checkbox" id="product-bestseller"> </label>
+                <label>Multiple Items <input type="checkbox" id="product-multiple"> </label>
+            </div>
+
+            
+            
+<!-- Popup for Selecting Variants -->
+<div id="related-products-popup" class="popup">
+    <div class="popup-content">
+        <h3>Select a Related Product</h3>
+        <ul id="related-products-list"></ul>
+        <button onclick="closeRelatedProductsPopup()">Close</button>
+    </div>
+</div>
+
+<div class="section">
+
+<label>
+    Related Products <input type="checkbox" id="product-related">
+</label>
+
+<!-- Selected Variants Display -->
+<div id="selected-related-products"></div>
+</div>
+
+  <!-- SEO Fields -->
+  <div class="section">
+    <h3>SEO Information</h3>
+
+    <label for="product-seo-title">SEO Title:</label>
+    <input type="text" id="product-seo-title" placeholder="Enter SEO title for search engines">
+
+    <label for="product-seo-description">SEO Description:</label>
+    <textarea id="product-seo-description" placeholder="Enter SEO description"></textarea>
+
+    <label for="product-seo-keywords">SEO Keywords (comma-separated):</label>
+    <input type="text" id="product-seo-keywords" placeholder="Enter SEO keywords">
+    
+    <label for="product-canonical-url">Canonical URL:</label>
+    <input type="text" id="product-canonical-url" placeholder="Enter canonical URL">
+</div>
+
+<!-- Dropshipping Fields -->
+<div class="section">
+    <h3>Dropshipping Information</h3>
+
+    <label for="product-supplier-name">Supplier Name:</label>
+    <input type="text" id="product-supplier-name" placeholder="Enter supplier name">
+
+    <label for="product-supplier-link">Supplier Product Link:</label>
+    <input type="url" id="product-supplier-link" placeholder="Enter supplier product page link">
+
+    <label for="product-dropshipping-fees">Dropshipping Fees ($):</label>
+    <input type="number" id="product-dropshipping-fees" placeholder="Enter dropshipping fees">
+</div>
+
+<!-- Performance Metrics -->
+<div class="section">
+    <h3>Product Performance</h3>
+
+    <label for="product-sales-conversion-rate">Sales Conversion Rate (%):</label>
+    <input type="number" id="product-sales-conversion-rate" placeholder="Enter conversion rate">
+
+    <label for="product-customer-rating">Customer Rating (1-5):</label>
+    <input type="number" id="product-customer-rating" min="1" max="5" placeholder="Enter customer rating">
+</div>
+
+
+<div class="section">
+                <h3>Shipping Information</h3>
+            
+                <label>
+                    Free Shipping <input type="checkbox" id="product-freeShipping">
+                </label>
+            
+                <label for="product-shipsFrom">Ships From</label>
+                <select id="product-shipsFrom" required>
+                    <option value="" disabled selected>Select Location</option>
+                    <option value="Dallas, Texas, USA">Dallas, Texas, USA</option>
+                    <option value="China">China</option>
+                    <option value="Taiwan">Taiwan</option>
+                    <option value="Digital">Digital</option>
+                    <option value="Other">Other</option>
+                </select>
+            
+                <label for="product-delivery">Estimated Delivery Time</label>
+                <select id="product-delivery" required>
+                    <option value="" disabled selected>Select Delivery Time</option>
+                    <option value="3-5 days">3-5 days</option>
+                    <option value="7 days">7 days</option>
+                    <option value="Less than 2 weeks">Less than 2 weeks</option>
+                    <option value="Less than 30 days">Less than 30 days</option>
+                    <option value="After Checkout">After Checkout</option>
+                </select>
+            </div>
+            
+        
+            <div class="section">
+                <h3>Storage & Source</h3>
+                <input type="text" id="product-storage" placeholder="Item Stored Location">
+                <input type="text" id="product-source" placeholder="Source (e.g. Maximus Store)">
+            </div>
+        
+            <div class="section">
+                <h3>Product Metadata</h3>
+                <input type="text" id="product-sku" placeholder="SKU">
+                <input type="text" id="product-barcode" placeholder="Barcode">
+                <input type="text" id="product-asin" placeholder="ASIN">
+                <input type="text" id="product-upc" placeholder="UPC">
+            </div>
+
+            <div class="section">
+                <label for="product-status">Status</label>
+                <select id="product-status" required>
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="active">Active</option>
+                    <option value="deactive">Inactive</option>
+                    <option value="deleted">Deleted</option>
+                    <option value="private">Private</option>
+                </select>
+            </div>
+            
+
+
+            <div class="section">
+                <h3>Additional Notes</h3>
+                <textarea id="product-note" placeholder="Special Notes"></textarea>
+            </div>
+        
+            <button type="submit">Save Product</button>
+        </form>
+        
+        
+    </div>
+
+</body>
+</html>

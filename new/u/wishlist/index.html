@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .wishlist-header { text-align: center; font-size: 1.8rem; margin-bottom: 20px; }
+        .wishlist-items { display: flex; flex-wrap: wrap; gap: 20px; }
+        .wishlist-item { width: 30%; background: white; padding: 15px; border: 1px solid #ddd; border-radius: 5px; text-align: center; }
+        .wishlist-item img { width: 100%; height: auto; }
+        .wishlist-item h3 { font-size: 1.2rem; margin: 10px 0; }
+        .wishlist-item .remove-btn { background: red; color: white; padding: 8px 12px; border: none; cursor: pointer; }
+        .social-share { margin: 20px 0; text-align: center; }
+        .social-share button { background: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; margin: 5px; }
+        .related-products { margin-top: 40px; }
+        .related-products h2 { text-align: center; }
+        .related-items { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .related-item { width: 23%; background: white; padding: 10px; border: 1px solid #ddd; text-align: center; border-radius: 5px; }
+        .related-item img { width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="wishlist-header">My Wishlist</h1>
+
+        <!-- Wishlist Items -->
+        <div class="wishlist-items" id="wishlist-items">
+            <!-- Items will be loaded dynamically -->
+        </div>
+
+        <!-- Social Share Buttons -->
+        <div class="social-share">
+            <button onclick="shareWishlist()">Share Wishlist</button>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-products">
+            <h2>Similar Items You May Like</h2>
+            <div class="related-items" id="related-items">
+                <!-- Related items will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userId = localStorage.getItem('userID');
+        let db;
+
+        // Firebase Imports
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js';
+        import { getFirestore, doc, updateDoc, getDoc, arrayRemove, arrayUnion, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js';
+        import { firebaseConfig } from 'https://maximusbrand.com/new/scripts/js/auth.js';
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+
+        // Fetch Wishlist Items
+        async function loadWishlist() {
+            if (!userId) return;
+            const userRef = doc(db, "Users", userId);
+            const userSnap = await getDoc(userRef);
+            if (userSnap.exists()) {
+                const wishlist = userSnap.data().wishlist || [];
+                displayWishlist(wishlist);
+            }
+        }
+
+        function displayWishlist(wishlist) {
+            const wishlistContainer = document.getElementById("wishlist-items");
+            wishlistContainer.innerHTML = "";
+
+            wishlist.forEach(product => {
+                const item = document.createElement("div");
+                item.classList.add("wishlist-item");
+                item.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p class="price">${product.price}</p>
+                    <button class="remove-btn" onclick="removeFromWishlist('${product.id}')">Remove</button>
+                `;
+                wishlistContainer.appendChild(item);
+            });
+        }
+
+        // Remove from Wishlist
+        async function removeFromWishlist(productId) {
+            if (!userId) return;
+            const userRef = doc(db, "Users", userId);
+            await updateDoc(userRef, { wishlist: arrayRemove({ id: productId }) });
+            loadWishlist();
+        }
+
+        // Share Wishlist
+        function shareWishlist() {
+            const shareURL = window.location.href;
+            navigator.clipboard.writeText(shareURL);
+            alert("Wishlist link copied to clipboard!");
+        }
+
+        // Load Related Products (Mock Data)
+        function loadRelatedProducts() {
+            const relatedContainer = document.getElementById("related-items");
+            const sampleProducts = [
+                { id: "101", name: "Related Product 1", image: "https://via.placeholder.com/150", price: "$15.99" },
+                { id: "102", name: "Related Product 2", image: "https://via.placeholder.com/150", price: "$19.99" },
+                { id: "103", name: "Related Product 3", image: "https://via.placeholder.com/150", price: "$12.99" },
+                { id: "104", name: "Related Product 4", image: "https://via.placeholder.com/150", price: "$17.99" },
+            ];
+            sampleProducts.forEach(product => {
+                const item = document.createElement("div");
+                item.classList.add("related-item");
+                item.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p class="price">${product.price}</p>
+                `;
+                relatedContainer.appendChild(item);
+            });
+        }
+
+        // Load Wishlist and Related Products on Page Load
+        document.addEventListener("DOMContentLoaded", () => {
+            loadWishlist();
+            loadRelatedProducts();
+        });
+    </script>
+
+</body>
+</html>

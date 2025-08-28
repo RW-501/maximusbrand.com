@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your past orders">
+    <title>My Orders</title>
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        h2 { text-align: center; }
+        .order-list { list-style: none; padding: 0; }
+        .order-item { padding: 15px; border-bottom: 1px solid #ddd; }
+        .order-item:last-child { border-bottom: none; }
+        .order-header { display: flex; justify-content: space-between; align-items: center; }
+        .status { font-weight: bold; }
+        .status-Ordered { color: blue; }
+        .status-Processed { color: orange; }
+        .status-Shipped { color: purple; }
+        .status-Completed { color: green; }
+        .actions { display: flex; gap: 10px; margin-top: 10px; }
+        .btn { padding: 5px 10px; border: none; cursor: pointer; }
+        .btn-referral { background-color: #28a745; color: white; }
+        .btn-faq { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>My Orders</h2>
+        <ul class="order-list" id="order-list"></ul>
+        <div class="actions">
+            <button class="btn btn-referral">Refer a Friend</button>
+            <button class="btn btn-faq">FAQ</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js';
+        import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js';
+        import { firebaseConfig } from 'https://maximusbrand.com/new/scripts/js/auth.js';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        function loadOrders(userId) {
+            const orderRef = doc(db, "UsersOrders", userId);
+            getDoc(orderRef).then(docSnap => {
+                if (docSnap.exists()) {
+                    const orders = docSnap.data().orders || [];
+                    const orderList = document.getElementById('order-list');
+                    orderList.innerHTML = "";
+
+                    if (orders.length === 0) {
+                        orderList.innerHTML = "<p>No orders found.</p>";
+                        return;
+                    }
+
+                    // Sort orders by date (newest first)
+                    orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                    orders.forEach(order => {
+                        const orderItem = document.createElement('li');
+                        orderItem.classList.add('order-item');
+
+                        orderItem.innerHTML = `
+                            <div class="order-header">
+                                <p><strong>Order Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+                                <p class="status status-${order.status}">${order.status}</p>
+                            </div>
+                            <p><strong>Name:</strong> ${order.name}</p>
+                            <p><strong>Address:</strong> ${order.address.replace(/\b(\w{1,4})\w+(\w{1,4})\b/g, "$1****$2")}</p>
+                            <p><strong>Items:</strong> ${order.items.length}</p>
+                            <p><strong>Total Price:</strong> $${order.total.toFixed(2)}</p>
+                            <div class="actions">
+                                ${order.status === "Ordered" ? `<button class="btn" onclick="cancelOrder('${order.id}')">Cancel Order</button>` : ''}
+                                <button class="btn">Track Order</button>
+                            </div>
+                        `;
+                        orderList.appendChild(orderItem);
+                    });
+                } else {
+                    document.getElementById('order-list').innerHTML = "<p>No orders found.</p>";
+                }
+            });
+        }
+
+        function cancelOrder(orderId) {
+            alert(`Order ${orderId} has been canceled!`);
+            // Add Firebase function to update order status to "Canceled"
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loadOrders(user.uid);
+            } else {
+                window.location.href = "/login.html";
+            }
+        });
+    </script>
+</body>
+</html>

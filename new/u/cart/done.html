@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Order Confirmation - Thank you for your purchase">
+    <meta name="keywords" content="order confirmation, purchase, receipt, PayPal">
+    <title>Order Confirmation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        .container { max-width: 900px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center; }
+        h2 { color: #333; }
+        .order-summary { margin: 20px 0; }
+        .order-items { list-style: none; padding: 0; text-align: left; }
+        .order-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd; align-items: center; }
+        .order-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; }
+        #total-amount { font-size: 1.5rem; font-weight: bold; margin-top: 15px; }
+        .thank-you { font-size: 1.2rem; color: green; margin-top: 20px; }
+        .back-home { display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .back-home:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Confirmation</h2>
+        <p>Thank you for your purchase! Below is the summary of your order.</p>
+        <div class="order-summary">
+            <ul class="order-items" id="order-items"></ul>
+            <p id="total-amount">Total: $0.00</p>
+        </div>
+        <p class="thank-you">We appreciate your business and hope to see you again!</p>
+        <a href="/" class="back-home">Back to Home</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let order = JSON.parse(localStorage.getItem('order')) || [];
+            let total = 0;
+            const orderList = document.getElementById('order-items');
+            orderList.innerHTML = "";
+
+            order.forEach(item => {
+                total += item.price - (item.discount || 0);
+                const orderItem = document.createElement('li');
+                orderItem.classList.add('order-item');
+                orderItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <span>${item.name}</span>
+                    <span>$${(item.price - (item.discount || 0)).toFixed(2)}</span>
+                `;
+                orderList.appendChild(orderItem);
+            });
+            document.getElementById('total-amount').textContent = `Total: $${total.toFixed(2)}`;
+            localStorage.removeItem('order'); // Clear order after displaying
+        });
+    </script>
+</body>
+</html>
